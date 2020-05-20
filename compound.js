@@ -11,7 +11,7 @@ backend({
 
 // Set a provider to use to talk to an Ethereum node
 // TODO: Handle other networks here
-provider('http://localhost:8545', {
+provider(env('provider', 'http://localhost:8545'), {
   from: env('pk') ? { pk: env('pk') } : { unlocked: 0 },
   gas: 6000000
 });
