@@ -1,0 +1,8 @@
+
+// Simple Price Oracle
+SimplePriceOracle#oracle [b73e68c] {
+  prices: {
+    cDAI: 0.005,
+    cETH: 1.0
+  }
+}

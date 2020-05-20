@@ -1,0 +1,6 @@
+
+// Dai override
+Erc20#dai [atari] {
+  contract: 'AtariToken' // Override contract
+  address: '0x1f5d94172e6363f7b4a334f86f86911de4d0b8c5'
+}

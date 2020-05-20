@@ -1,0 +1,152 @@
+
+// Underlyings
+Erc20#bat [compound-test] {
+  name: "Basic Attention Token"
+  symbol: "BAT"
+}
+
+Erc20#dai [compound-test] {
+  name: "Dai"
+  symbol: "DAI"
+}
+
+Erc20#rep [compound-test] {
+  name: "Augur"
+  symbol: "REP"
+}
+
+Erc20#sai [compound-test] {
+  name: "Sai"
+  symbol: "SAI"
+}
+
+Erc20#usdc [compound-test] {
+  name: "USD Coin"
+  symbol: "USDC"
+}
+
+Erc20#wbtc [compound-test] {
+  name: "Wrapped BTC"
+  symbol: "WBTC"
+}
+
+Erc20#zrx [compound-test] {
+  name: "0x Token"
+  symbol: "ZRX"
+}
+
+CErc20Delegate#cErc20Delegate [b73e68c] {}
+CErc20Delegate#cDaiDelegate [b73e68c] {}
+
+// CTokens
+CToken#cBAT [b73e68c] {
+  type: "erc20-delegator"
+  symbol: "cBAT"
+  name: "Compound BAT"
+  underlying: #bat
+  comptroller: #g0
+  delegate: #cErc20Delegate
+  interest_rate_model: #jump50
+  admin: $sender
+}
+
+CToken#cDAI [b73e68c] {
+  type: "erc20-delegator"
+  symbol: "cDAI"
+  name: "Compound DAI"
+  underlying: #dai
+  comptroller: #g0
+  delegate: #cDaiDelegate
+  interest_rate_model: #jump50
+  admin: $sender
+}
+
+CToken#cREP [b73e68c] {
+  type: "erc20-delegator"
+  symbol: "cDAI"
+  name: "Compound REP"
+  underlying: #rep
+  comptroller: #g0
+  delegate: #cErc20Delegate
+  interest_rate_model: #jump50
+  admin: $sender
+}
+
+CToken#cDAI [b73e68c] {
+  type: "erc20-delegator"
+  symbol: "cDAI"
+  name: "Compound SAI"
+  underlying: #sai
+  comptroller: #g0
+  delegate: #cErc20Delegate
+  interest_rate_model: #jump50
+  admin: $sender
+}
+
+CToken#cETH [b73e68c] {
+  type: "ceth"
+  symbol: "cETH"
+  name: "Compound ETH"
+  comptroller: #g0
+  interest_rate_model: #jump50
+  admin: $sender
+}
+
+CToken#cUSDC [b73e68c] {
+  type: "erc20-delegator"
+  symbol: "cUSDC"
+  name: "Compound USDC"
+  underlying: #usdc
+  comptroller: #g0
+  delegate: #cErc20Delegate
+  interest_rate_model: #jump50
+  admin: $sender
+}
+
+CToken#cWBTC [b73e68c] {
+  type: "erc20-delegator"
+  symbol: "cWBTC"
+  name: "Compound WBTC"
+  underlying: #wbtc
+  comptroller: #g0
+  delegate: #cErc20Delegate
+  interest_rate_model: #jump50
+  admin: $sender
+}
+
+CToken#cZRX [b73e68c] {
+  type: "erc20-delegator"
+  symbol: "cZRX"
+  name: "Compound ZRX"
+  underlying: #zrx
+  comptroller: #g0
+  delegate: #cErc20Delegate
+  interest_rate_model: #jump50
+  admin: $sender
+}
+
+// Comptroller
+Comptroller#g0 [b73e68c] {
+  oracle: #oracle
+  supported_markets: [
+    #cBAT,
+    #cDAI,
+    #cREP,
+    #cDAI,
+    #cETH,
+    #cUSDC,
+    #cWBTC,
+    #cZRX
+  ]
+}
+
+// Interest Rate Models
+
+// TODO: Fix this
+InterestRateModel#jump50 [b73e68c] {
+  type: 'jump-rate'
+  base_rate: 60
+  multiplier: 20
+  jump_multiplier: 30
+  kink: 90
+}

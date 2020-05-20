@@ -1,0 +1,12 @@
+
+Timelock#timelock [b73e68c] {
+  admin: #gov
+}
+
+GovernorAlpha#gov [b73e68c] {
+  comp: #comp
+}
+
+Comp#comp [b73e68c] {
+  // Comp holders?
+}
