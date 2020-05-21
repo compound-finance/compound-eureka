@@ -12,8 +12,15 @@ backend({
 // Set a provider to use to talk to an Ethereum node
 // TODO: Handle other networks here
 provider(env('provider', 'http://localhost:8545'), {
-  from: env('pk') ? { pk: env('pk') } : { unlocked: 0 },
-  gas: 6000000
+  sendOpts: {
+    from: env('pk') ? { pk: env('pk') } : { unlocked: 0 },
+    gas: 6000000
+  },
+  verificationOpts: network !== 'development' && env('etherscan') ? {
+    verify: true,
+    etherscanApiKey: env('etherscan'),
+    raiseOnError: true
+  } : {}
 });
 
 // Define our contract configuration
@@ -27,10 +34,10 @@ if (network !== 'mainnet') {
           key: 'ref',
           value: 'number'
         },
-        setter: async ({trx}, contract, address, prices) => {
+        setter: async ({trx}, oracle, prices) => {
           // TODO: Mutate prices as needed, versus always updating all of 'em
           return Promise.all(Object.entries(prices).map(([address, price]) => {
-            return trx(contract, address, 'setPrice', [address, price]);
+            return trx(oracle, 'setPrice', [address, price]);
           }));
         },
         getter: async (contract, props) => {
@@ -137,15 +144,15 @@ define('CToken', {
     name: 'string',
     admin: 'address',
     underlying: { ref: 'Erc20' },
-    comptroller: { ref: 'Comptroller' },
+    comptroller: { ref: 'Unitroller' },
     decimals: { type: 'number', default: 8 },
     delegate: { ref: 'CErc20Delegate' },
     become_implementation_data: { type: 'string', default: '0x' }, // TODO: 'bytes'?
     initial_exchange_rate: { type: 'number', default: 0.2e10 }, // TODO: Figure out default here
     interest_rate_model: {
       ref: 'InterestRateModel',
-      setter: async ({trx}, contract, address, newInterestRateModel) => {
-        return await trx(contract, address, '_setInterestRateModel', [newInterestRateModel]);
+      setter: async ({trx}, cToken, newInterestRateModel) => {
+        return await trx(cToken, '_setInterestRateModel', [newInterestRateModel]);
       }
     }
   },
@@ -178,13 +185,13 @@ define('CToken', {
     symbol: 'string',
     name: 'string',
     admin: 'address',
-    comptroller: { ref: 'Comptroller' },
+    comptroller: { ref: 'Unitroller' },
     decimals: { type: 'number', default: 8 },
     initial_exchange_rate: { type: 'number', default: 0.2e10 }, // TODO: Figure out default here
     interest_rate_model: {
       ref: 'InterestRateModel',
-      setter: async ({trx}, contract, address, newInterestRateModel) => {
-        return await trx(contract, address, '_setInterestRateModel', [newInterestRateModel]);
+      setter: async ({trx}, cEther, newInterestRateModel) => {
+        return await trx(cETher, '_setInterestRateModel', [newInterestRateModel]);
       }
     }
   },
@@ -202,31 +209,65 @@ define('CToken', {
 });
 
 define("Comptroller", {
+  build: async ({deploy}, contract, props) => deploy(contract)
+});
+
+define("Unitroller", {
   properties: {
     oracle: {
       ref: 'PriceOracle',
-      setter: async ({trx}, contract, address, ref) => {
-        // TODO: Constaint that sender must be admin?
-        return await trx(contract, address, 'setPriceOracle', [ref._address]);
+      deferred: true,
+      setter: async ({trx}, unitroller, oracle) => {
+        await trx(unitroller, '_setPriceOracle', [oracle], { proxy: 'Comptroller' });
+      }
+    },
+    implementation: {
+      ref: 'Comptroller',
+      deferred: true,
+      setter: async ({trx}, unitroller, comptroller) => {
+        await trx(unitroller, '_setPendingImplementation', [comptroller]);
+        await trx(comptroller, '_become', [unitroller]);
       }
     },
     supported_markets: {
       type: 'array',
       deferred: true,
-      setter: async ({read, trx}, contract, address, markets) => {
+      setter: async ({read, show, trx}, unitroller, markets, { properties }) => {
         return await markets.reduce(async (acc, market) => {
           await acc; // Force ordering
-
-          let marketData = await read(contract, address, 'markets', [market]);
+          
+          // TODO: Better handle proxy
+          let marketData = await read(unitroller, 'markets', [market], { proxy: 'Comptroller' });
 
           if (!marketData.isListed) {
-            return await trx(contract, address, '_supportMarket', [market]);
+            return await trx(unitroller, '_supportMarket', [market], { proxy: 'Comptroller' });
           } else {
-            console.log(`Market ${market} already listed`);
+            console.log(`Market ${show(market)} already listed`);
           }
         });
       }
     }
   },
-  build: async ({deploy}, contract, props) => deploy(contract)
+  build: async (actor, contract, {implementation, oracle, supported_markets}, { definition }) => {
+    let deployed = await actor.deploy(contract);
+
+    // We can't set these properties in the constructor, so they'll
+    // need to be set by calling the setters directly
+    if (implementation) {
+      console.log("Setting implementation...");
+      await definition.typeProperties.implementation.setter(actor, deployed, implementation);
+    }
+
+    if (supported_markets) {
+      console.log("Supporting markets...");
+      await definition.typeProperties.supported_markets.setter(actor, deployed, supported_markets);
+    }
+
+    if (oracle) {
+      console.log("Seting oracle...");
+      await definition.typeProperties.oracle.setter(actor, deployed, oracle);
+    }
+
+    return deployed;
+  }
 });

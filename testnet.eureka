@@ -2,7 +2,11 @@
 // Simple Price Oracle
 SimplePriceOracle#oracle [b73e68c] {
   prices: {
-    cDAI: 0.005,
-    cETH: 1.0
+    dai: 0.005,
+    eth: 1.0
   }
 }
+
+// Note: we're skipping PriceOracleProxy right now,
+//       as it has a circular dependency, which is legit
+//       really annoying, even in real life.

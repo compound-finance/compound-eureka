@@ -5,5 +5,8 @@
   "license": "MIT",
   "scripts": {
     "eureka": "node --experimental-vm-modules --unhandled-rejections=strict node_modules/@compound-finance/eureka/src/cli.mjs"
+  },
+  "dependencies": {
+    "request": "^2.88.2"
   }
 }
