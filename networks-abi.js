@@ -57,6 +57,12 @@ hook('state.save', async (state) => {
     };
   }, {});
 
+  // Comptroller is special
+  abis.Comptroller = [
+    ...abis.Unitroller,
+    ...abis.StdComptroller
+  ];
+
   let networkAbiFile = path.join(process.cwd(), 'networks', `${network}-abi.json`);
   await writeFile(networkAbiFile, JSON.stringify(abis, null, 2));
 
