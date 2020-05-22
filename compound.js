@@ -51,21 +51,66 @@ if (network !== 'mainnet') {
 
 define('InterestRateModel', {
   match: {
-    type: 'jump-rate-model'
+    properties: {
+      type: 'linear'
+    }
+  },
+  contract: 'WhitePaperInterestRateModel',
+  properties: {
+    type: 'string',
+    base: 'number',
+    slope: 'number'
+  },
+  build: ({deploy}, contract, {base, slope}) =>
+    deploy(contract, {
+      baseRatePerYear: base,
+      multiplierPerYear: slope
+    })
+});
+
+define('InterestRateModel', {
+  match: {
+    properties: {
+      type: 'jump'
+    }
   },
   contract: 'JumpRateModel',
   properties: {
-    base_rate: 'number',
-    multiplier: 'number',
-    jump_multiplier: 'number',
+    type: 'string',
+    base: 'number',
+    slope: 'number',
+    jump: 'number',
     kink: 'number'
   },
-  build: ({deploy}, contract, {base_rate, multiplier, jump_multiplier, kink}) =>
+  build: ({deploy}, contract, {base, slope, jump, kink}) =>
     deploy(contract, {
-      baseRatePerYear: base_rate,
-      multiplierPerYear: multiplier,
-      jumpMultiplierPerYear: jump_multiplier,
+      baseRatePerYear: base,
+      multiplierPerYear: slope,
+      jumpMultiplierPerYear: jump,
       kink_: kink
+    })
+});
+
+define('InterestRateModel', {
+  match: {
+    properties: {
+      type: 'dsr'
+    }
+  },
+  contract: 'DAIInterestRateModelV2',
+  properties: {
+    type: 'string',
+    jump: 'number',
+    kink: 'number',
+    pot: { ref: 'Pot' },
+    jug: { ref: 'Jug' }
+  },
+  build: ({deploy}, contract, {jump, kink, pot, jug}) =>
+    deploy(contract, {
+      jumpMultiplierPerYear: jump,
+      kink_: kink,
+      pot_: pot,
+      jug_: jug
     })
 });
 
@@ -133,9 +178,45 @@ define('CErc20Delegate', {
 define('CToken', {
   match: {
     properties: {
-      type: 'erc20-delegator'
-    },
-    default: true
+      type: 'immutable'
+    }
+  },
+  contract: 'CErc20Immutable',
+  properties: {
+    type: 'string',
+    symbol: 'string',
+    name: 'string',
+    admin: 'address',
+    underlying: { ref: 'Erc20' },
+    comptroller: { ref: 'Unitroller' },
+    decimals: { type: 'number', default: 8 },
+    initial_exchange_rate: { type: 'number', default: 0.2e10 }, // TODO: Figure out default here
+    interest_rate_model: {
+      ref: 'InterestRateModel',
+      setter: async ({trx}, cToken, newInterestRateModel) => {
+        return await trx(cToken, '_setInterestRateModel', [newInterestRateModel]);
+      }
+    }
+  },
+  build: async ({deploy}, contract, { symbol, name, decimals, admin, underlying, comptroller, interest_rate_model, initial_exchange_rate }) => {
+    return await deploy(contract, {
+      underlying_: underlying,
+      comptroller_: comptroller,
+      interestRateModel_: interest_rate_model,
+      initialExchangeRateMantissa_: initial_exchange_rate,
+      name_: name,
+      symbol_: symbol,
+      decimals_: decimals,
+      admin_: admin
+    });
+  }
+});
+
+define('CToken', {
+  match: {
+    properties: {
+      type: 'delegator'
+    }
   },
   contract: 'CErc20Delegator',
   properties: {
@@ -175,9 +256,8 @@ define('CToken', {
 define('CToken', {
   match: {
     properties: {
-      type: 'ceth'
-    },
-    default: true
+      type: 'cether'
+    }
   },
   contract: 'CEther',
   properties: {
@@ -206,6 +286,13 @@ define('CToken', {
       admin_: admin
     });
   }
+});
+
+define('Maximillion', {
+  properties: {
+    cEther: { ref: 'CToken' }
+  },
+  build: async ({deploy}, contract, { cEther }) => deploy(contract, [cEther])
 });
 
 define("Comptroller", {
@@ -270,4 +357,8 @@ define("Unitroller", {
 
     return deployed;
   }
+});
+
+define("CompoundLens", {
+  build: async ({deploy}, contract, props) => deploy(contract)
 });

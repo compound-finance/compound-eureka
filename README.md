@@ -24,7 +24,7 @@ This will make it significantly easier to pull updates during alpha development.
 To apply the Compound test-net for development, start ganache locally and then run:
 
 ```bash
-yarn eureka apply -c compound.js -c networks.js compound.eureka testnet.eureka
+yarn eureka apply -c compound.js -c networks.js -c networks-abi.js compound.eureka testnet.eureka
 ```
 
 This will create a local test-net for you. Take a look at `compound.eureka` and `testnet.eureka` for the configuration. `compound.js` contains information about how the contracts are structured. You will also notice the `.builds` directory contains the builds from Compound.
@@ -42,7 +42,7 @@ This will clear the development state so Eureka will start fresh.
 To apply the Compound test-net say for Ropsten, you will need to specify the network, set the provider and provide a private key. Make sure you have a private key available, e.g. in `$ethereum_private_key`. Then you can run:
 
 ```bash
-provider=https://ropsten-eth.compound.finance pk=$ethereum_private_key yarn eureka apply -n ropsten -c compound.js -c networks.js compound.eureka testnet.eureka
+provider=https://ropsten-eth.compound.finance pk=$ethereum_private_key yarn eureka apply -n ropsten -c compound.js -c networks.js -c networks-abi.js compound.eureka testnet.eureka
 ```
 
 For `ropsten.eureka`, we override Dai's underlying with a token from the test-net itself.

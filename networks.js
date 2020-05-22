@@ -1,41 +1,9 @@
 
-const refMap = {
-  zrx: "ZRX",
-  cUSDC: "cUSDC",
-  oracle: "PriceOracle",
-  xxx: "PriceOracleProxy",
-  max: "Maximillion",
-  cDAI: "cDAI",
-  lens: "CompoundLens",
-  dai: "DAI",
-  g0: "StdComptroller",
-  comptroller: "Unitroller",
-  xxx: "cDaiDelegate",
-  cBAT: "cBAT",
-  xxx: "DSR_Kink_9000bps_Jump_12000bps_AssumedRF_500bps",
-  xxx: "Base0bps_Slope2000bps",
-  bat: "BAT",
-  cErc20Delegate: "cErc20Delegate",
-  g1: "StdComptrollerG1",
-  cETH: "cETH",
-  xxx: "Base500bps_Slope1200bps",
-  cSAI: "cSAI",
-  timelock: "Timelock",
-  xxx: "Base200bps_Slope3000bps",
-  cREP: "cREP",
-  wbtc: "WBTC",
-  sai: "SAI",
-  rep: "REP",
-  cZRX: "cZRX",
-  cWBTC: "cWBTC",
-  usdc: "USDC",
-  xxx: "Base200bps_Slope222bps_Kink90_Jump10",
-};
-
-let multiRefMap = {
-  ...refMap,
-  comptroller: ["Comptroller", "Unitroller"]
-};
+const cTokenContracts = [
+  'CErc20Delegator',
+  'CEther',
+  'CErc20Immutable'
+];
 
 function asArray(arr) {
   return Array.isArray(arr) ? arr : [arr];
@@ -44,13 +12,15 @@ function asArray(arr) {
 function findAccount(accounts, account) {
   if (typeof(account) === 'string') {
     return account;
-  } else if (account.type === 'account') {
+  } else if (typeof(account) === 'object' && account.type === 'account') {
     let account_ = account.account;
     if (accounts.hasOwnProperty(account_)) {
       return accounts[account_];
     } else {
       throw new Error(`Cannot find account ${account_} in account list ${JSON.stringify(Object.keys(accounts))}`);
     }
+  } else {
+    throw new Error(`Cannot find account from ${JSON.stringify(account)}`);
   }
 }
 
@@ -59,9 +29,9 @@ function range(count) {
 }
 
 function toNumberString(number) {
-  if (number.type === 'number') {
+  if (typeof(number) === 'object' && number.type === 'number') {
     if (number.exp >= 0) {
-      return number.base.toString() + range(number.exp).map(() => '0');
+      return number.base.toString() + range(number.exp).map(() => '0').join('');
     }
   }
 
@@ -70,11 +40,13 @@ function toNumberString(number) {
 
 function tokenProperties({address, deployment, properties}, state, accounts) {
   let cTokenProps = {};
-  if (deployment.contract === 'ctoken') {
-    cTokenProps = {
-      underlying: state[properties.underlying].address,
+  if (cTokenContracts.includes(deployment.contract)) {
+    cTokenProps = {      
       initial_exchange_rate_mantissa: properties.initial_exchange_rate.toString(),
-      admin: findAccount(accounts, properties.account)
+      admin: findAccount(accounts, properties.admin)
+    }
+    if (properties.underlying) {
+      cTokenProps.underlying = state[properties.underlying.ref].address;
     }
   }
 
@@ -88,7 +60,7 @@ function tokenProperties({address, deployment, properties}, state, accounts) {
   }
 }
 
-function mapContracts(state, filter, map, singleton=false, allowMissing=false, multi=false) {
+function mapContracts(state, refMap, filter, map, singleton=false, allowMissing=false) {
   let stateEntries = Object.entries(state);
   let filteredEntries;
 
@@ -105,15 +77,9 @@ function mapContracts(state, filter, map, singleton=false, allowMissing=false, m
   }
 
   let mappedEntries = filteredEntries.map(([ref, contract]) => {
-    let useRefMap = multi ? multiRefMap : refMap;
-    let mappedRef = asArray(useRefMap.hasOwnProperty(ref) ? useRefMap[ref] : ref);
-    let mappedContract = map(contract);
-
-    return mappedRef.map((r) => [r, mappedContract]);
-  }).flat();
-  if (multi) {
-    console.log(mappedEntries)
-  }
+    let r = refMap.hasOwnProperty(ref) ? refMap[ref] : ref;
+    return [r, map(contract, ref)];
+  });
 
   if (singleton) {
     if (mappedEntries.length !== 1) {
@@ -131,33 +97,40 @@ function mapContracts(state, filter, map, singleton=false, allowMissing=false, m
 }
 
 hook('state.save', async (state) => {
-  // TODO: Save ABI file
-  // const readFile = (file) => util.promisify(fs.readFile)(file, 'utf8');
-  // const fileExists = util.promisify(fs.exists);
+  const readFile = (file) => util.promisify(fs.readFile)(file, 'utf8');
   const writeFile = util.promisify(fs.writeFile);
   let stateEntries = Object.entries(state);
 
+  let refMapFile = path.join(process.cwd(), 'refMap.json');
+  let refMap = JSON.parse(await readFile(refMapFile));
+
+  // TODO: This
   let cETH = '0xTODO CETH';
   let accounts = {
     sender: '0xADMIN'
   };
 
   // TODO: Handle imports like test-net DAI
-  let contractJson = mapContracts(state, null, ({address}) => address, false, false, true);
-  let blocksJson = mapContracts(state, null, ({deployment}) => deployment.block);
+  let contractsJson = mapContracts(state, refMap, null, ({address}) => address, false, false, true);
+  contractsJson.Comptroller = contractsJson.Unitroller; // Comptroller is special
+
+  let blocksJson = mapContracts(state, refMap, null, ({deployment}) => deployment.block);
 
   let priceOracleJson = mapContracts(
     state,
+    refMap,
     ['SimplePriceOracle'],
-    ({address}) => ({
-      description: "Price Oracle Description",
+    ({address, deployment}) => ({
+      description: `${deployment.contract}`,
       address
     }),
     true
   );
 
+  // TODO
   let priceOracleProxyJson = mapContracts(
     state,
+    refMap,
     ['PriceOracleProxy'],
     ({address}) => ({
       description: "Price Oracle Proxy Description",
@@ -173,9 +146,10 @@ hook('state.save', async (state) => {
 
   let maximillionJson = mapContracts(
     state,
+    refMap,
     'Maximillion',
     ({address}) => ({
-      description: 'Maximillion Description',
+      description: 'Maximillion',
       cEtherAddress: cETH,
       address
     }),
@@ -185,6 +159,7 @@ hook('state.save', async (state) => {
 
   let compoundLensJson = mapContracts(
     state,
+    refMap,
     'CompoundLens',
     ({deployment}) => ({
       name: 'CompoundLens',
@@ -196,6 +171,7 @@ hook('state.save', async (state) => {
 
   let unitrollerJson = mapContracts(
     state,
+    refMap,
     'Unitroller',
     ({address}) => ({
       description: 'Unitroller',
@@ -207,6 +183,7 @@ hook('state.save', async (state) => {
 
   let comptrollerJson = mapContracts(
     state,
+    refMap,
     'Comptroller',
     ({address, deployment}) => ({
       address,
@@ -215,64 +192,86 @@ hook('state.save', async (state) => {
     })
   );
 
+  // TODO
   let timelockJson = mapContracts(
     state,
+    refMap,
     'Timelock',
     ({address, deployment}) => ({
       address,
       contract: deployment.contract,
-      description: 'Timelock Description'
+      description: 'Timelock'
     })
   );
 
-  let constructorsJson = mapContracts(state, null, ({deployment}) => '0x' + deployment.constructorData);
+  let constructorsJson = mapContracts(state, refMap,null, ({deployment}) => '0x' + deployment.constructorData);
 
   let tokensJson = mapContracts(
     state,
-    ['Erc20', 'CErc20Delegator', 'CEther'],
+    refMap,
+    ['Erc20'].concat(cTokenContracts),
     (contract) => tokenProperties(contract, state, accounts)
   );
 
   let cTokenDelegateJson = mapContracts(
     state,
-    ['CErc20Delegate'], // etc
+    refMap,
+    cTokenContracts,
     ({address, deployment}) => ({
       address,
       contract: deployment.contract,
-      description: 'Delegate Description'
+      description: `Delegate ${deployment.contract}`
     })
   );
 
   let cTokensJson = mapContracts(
     state,
-    ['CErc20Delegator', 'CEther'], // etc
+    refMap,
+    ['CErc20Delegator', 'CEther', 'CErc20Immutable'],
     (contract) => tokenProperties(contract, state, accounts)
   );
 
   let interestRateModelJson = mapContracts(
     state,
-    ['JumpRateModel'], // etc
-    ({address, deployment, properties}) => {
-      let base = toNumberString(properties.base_rate);
-      let slope = toNumberString(properties.multiplier);
-      let kink = toNumberString(properties.kink);
-      let jump = toNumberString(properties.jump_multiplier);
+    refMap,
+    ['WhitePaperInterestRateModel', 'JumpRateModel', 'DAIInterestRateModelV2'],
+    ({address, deployment, properties}, ref) => {
+      let values = {
+        base: properties.base ? toNumberString(properties.base) : null,
+        slope: properties.slope ? toNumberString(properties.slope) : null,
+        jump: properties.jump ? toNumberString(properties.jump) : null,
+        kink: properties.kink ? toNumberString(properties.kink) : null,
+      };
+
+      values = Object.fromEntries(Object.entries(values).filter(([k, v]) => !!v));
+
+      let keyMap = {
+        base: 'baseRate',
+        slope: 'multiplier',
+        kink: 'kink',
+        jump: 'jump'
+      };
+
+      let description = Object.entries(values).reduce((acc, [key, value]) => {
+        if (keyMap[key]) {
+          return `${acc} ${keyMap[key]}=${value}`;
+        } else {
+          return acc;
+        }
+      }, `${deployment.contract} `);
 
       return {
-        name: "Interest Rate Model Name",
+        name: ref,
         contract: deployment.contract,
-        description: ` Description baseRate=${base} multiplier=${slope} kink=${kink} jump=${jump}`,
-        base: base,
-        slope: slope,
-        kink: kink,
-        jump: jump,
-        address
+        description,
+        address,
+        ...values,
       };
     }
   );
 
   let networksJson = {
-    'Contracts': contractJson,
+    'Contracts': contractsJson,
     'Blocks': blocksJson,
     'PriceOracle': priceOracleJson,
     'PriceOracleProxy': priceOracleProxyJson,

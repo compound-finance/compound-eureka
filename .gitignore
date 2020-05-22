@@ -1,2 +1,4 @@
 development-state.json
 node_modules
+networks/development.json
+networks/development-abi.json

@@ -1,9 +1,16 @@
 
 // Simple Price Oracle
 SimplePriceOracle#oracle [b73e68c] {
-  prices: {
+  prices: { // TODO: Set real prices
+    bat: 1.0,
     dai: 0.005,
-    eth: 1.0
+    eth: 1.0,
+    rep: 1.0,
+    sai: 1.0,
+    usdc: 1.0,
+    usdt: 1.0,
+    wbtc: 1.0,
+    zrx: 1.0
   }
 }
 

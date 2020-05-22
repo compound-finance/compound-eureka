@@ -1,4 +1,6 @@
 
+// TODO: Zer faucet
+
 // Underlyings
 Erc20#bat [compound-test] {
   name: "Basic Attention Token"
@@ -25,6 +27,11 @@ Erc20#usdc [compound-test] {
   symbol: "USDC"
 }
 
+Erc20#usdt [compound-test] {
+  name: "Tether"
+  symbol: "USDT"
+}
+
 Erc20#wbtc [compound-test] {
   name: "Wrapped BTC"
   symbol: "WBTC"
@@ -35,94 +42,111 @@ Erc20#zrx [compound-test] {
   symbol: "ZRX"
 }
 
+// CToken Delegate
 CErc20Delegate#cErc20Delegate [b73e68c] {}
-CErc20Delegate#cDaiDelegate [b73e68c] {}
 
 // CTokens
 CToken#cBAT [b73e68c] {
-  type: "erc20-delegator"
+  type: "immutable"
   symbol: "cBAT"
   name: "Compound BAT"
   underlying: #bat
   comptroller: #comptroller
   delegate: #cErc20Delegate
-  interest_rate_model: #jump50
+  interest_rate_model: #Base200bps_Slope3000bps
   admin: $sender
 }
 
+// Note: we are not using real Dai here-- see dai.eureka for MCD
 CToken#cDAI [b73e68c] {
-  type: "erc20-delegator"
+  type: "delegator"
   symbol: "cDAI"
   name: "Compound DAI"
   underlying: #dai
   comptroller: #comptroller
-  delegate: #cDaiDelegate
-  interest_rate_model: #jump50
+  delegate: #cErc20Delegate
+  interest_rate_model: #Base200bps_Slope1000bps
   admin: $sender
 }
 
 CToken#cREP [b73e68c] {
-  type: "erc20-delegator"
+  type: "immutable"
   symbol: "cDAI"
   name: "Compound REP"
   underlying: #rep
   comptroller: #comptroller
   delegate: #cErc20Delegate
-  interest_rate_model: #jump50
+  interest_rate_model: #Base200bps_Slope3000bps
   admin: $sender
 }
 
-CToken#cDAI [b73e68c] {
-  type: "erc20-delegator"
-  symbol: "cDAI"
+CToken#cSAI [b73e68c] {
+  type: "immutable"
+  symbol: "cSAI"
   name: "Compound SAI"
   underlying: #sai
   comptroller: #comptroller
   delegate: #cErc20Delegate
-  interest_rate_model: #jump50
+  interest_rate_model: #Base500bps_Slope1200bps
   admin: $sender
 }
 
 CToken#cETH [b73e68c] {
-  type: "ceth"
+  type: "cether"
   symbol: "cETH"
   name: "Compound ETH"
   comptroller: #comptroller
-  interest_rate_model: #jump50
+  interest_rate_model: #Base200bps_Slope1000bps
   admin: $sender
 }
 
 CToken#cUSDC [b73e68c] {
-  type: "erc20-delegator"
+  type: "immutable"
   symbol: "cUSDC"
   name: "Compound USDC"
   underlying: #usdc
   comptroller: #comptroller
   delegate: #cErc20Delegate
-  interest_rate_model: #jump50
+  interest_rate_model: #Base200bps_Slope1000bps
+  admin: $sender
+}
+
+CToken#cUSDT [b73e68c] {
+  type: "delegator"
+  symbol: "cUSDT"
+  name: "Compound USDT"
+  underlying: #usdt
+  comptroller: #comptroller
+  delegate: #cErc20Delegate
+  interest_rate_model: #Base200bps_Slope2000bps_Jump20000bps_Kink90
   admin: $sender
 }
 
 CToken#cWBTC [b73e68c] {
-  type: "erc20-delegator"
+  type: "immutable"
   symbol: "cWBTC"
   name: "Compound WBTC"
   underlying: #wbtc
   comptroller: #comptroller
   delegate: #cErc20Delegate
-  interest_rate_model: #jump50
+  interest_rate_model: #Base200bps_Slope3000bps
   admin: $sender
 }
 
 CToken#cZRX [b73e68c] {
-  type: "erc20-delegator"
+  type: "immutable"
   symbol: "cZRX"
   name: "Compound ZRX"
   underlying: #zrx
   comptroller: #comptroller
   delegate: #cErc20Delegate
-  interest_rate_model: #jump50
+  interest_rate_model: #Base200bps_Slope3000bps
   admin: $sender
+}
+
+// Maximillion
+Maximillion#max [b73e68c] {
+  cEther: #cETH
 }
 
 // Unitroller && Comptroller
@@ -135,21 +159,43 @@ Unitroller#comptroller [b73e68c] {
     #cBAT,
     #cDAI,
     #cREP,
-    #cDAI,
+    #cSAI,
     #cETH,
     #cUSDC,
+    #cUSDT,
     #cWBTC,
     #cZRX
   ]
 }
 
 // Interest Rate Models
+InterestRateModel#Base200bps_Slope1000bps [b73e68c] {
+  type: 'linear'
+  base: 200e14
+  slope: 1000e14
+}
 
-// TODO: Fix this
-InterestRateModel#jump50 [b73e68c] {
-  type: 'jump-rate'
-  base_rate: 60
-  multiplier: 20
-  jump_multiplier: 30
+InterestRateModel#Base500bps_Slope1200bps [b73e68c] {
+  type: 'linear'
+  base: 500e14
+  slope: 1200e14
+}
+
+InterestRateModel#Base200bps_Slope3000bps [b73e68c] {
+  type: 'linear'
+  base: 200e14
+  slope: 3000e14
+}
+
+InterestRateModel#Base200bps_Slope2000bps_Jump20000bps_Kink90 [b73e68c] {
+  type: 'jump'
+  base: 200e14
+  slope: 2000e14
+  jump: 20000e14
   kink: 90
 }
+
+// CompoundLens
+CompoundLens#lens [b73e68c] {}
+
+// TODO: g1 Comptroller
