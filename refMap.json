@@ -1,4 +1,5 @@
 {
+  "fauceteer": "Fauceteer",
   "zrx": "ZRX",
   "cUSDC": "cUSDC",
   "oracle": "PriceOracle",
@@ -23,5 +24,6 @@
   "rep": "REP",
   "cZRX": "cZRX",
   "cWBTC": "cWBTC",
-  "usdc": "USDC"
+  "usdc": "USDC",
+  "usdt": "USDT"
 }

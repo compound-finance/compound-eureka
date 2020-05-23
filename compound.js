@@ -153,20 +153,20 @@ define('Erc20', {
   build: async ({existing}, contract, props) => existing(contract, props.address)
 });
 
-// Make a new faucet token
+// Make a new standard token
 define('Erc20', {
   match: {
     default: true
   },
-  contract: 'FaucetToken',
+  contract: 'StandardToken',
   properties: {
     name: 'string',
     symbol: 'string',
-    initial_amount: { type: 'number', default: 10e10 },
+    total_supply: { type: 'number', default: 10e10 },
     decimals: { type: 'number', default: 18 }
   },
-  build: async ({deploy, console}, contract, {name, symbol, initial_amount, decimals}) => {
-    return deploy(contract, [initial_amount, name, decimals, symbol]);
+  build: async ({deploy, console}, contract, {name, symbol, total_supply, decimals}) => {
+    return deploy(contract, [total_supply, name, decimals, symbol]);
   }
 });
 
@@ -360,5 +360,9 @@ define("Unitroller", {
 });
 
 define("CompoundLens", {
+  build: async ({deploy}, contract, props) => deploy(contract)
+});
+
+define("Fauceteer", {
   build: async ({deploy}, contract, props) => deploy(contract)
 });

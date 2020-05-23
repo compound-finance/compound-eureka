@@ -4,9 +4,11 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "eureka": "node --experimental-vm-modules --unhandled-rejections=strict node_modules/@compound-finance/eureka/src/cli.mjs"
+    "eureka": "node --experimental-vm-modules --unhandled-rejections=strict node_modules/@compound-finance/eureka/src/cli.mjs",
+    "import-contract": "node --experimental-vm-modules --unhandled-rejections=strict ./import_contract.mjs"
   },
   "dependencies": {
     "request": "^2.88.2"
-  }
+  },
+  "devDependencies": {}
 }

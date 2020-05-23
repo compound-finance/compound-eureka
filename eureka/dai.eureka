@@ -1,0 +1,31 @@
+
+// Dai overrides
+CErc20Delegate#cDaiDelegate [b73e68c] {}
+
+Erc20#dai [atari] {
+  contract: 'AtariToken' // Override contract
+  address: '0x1f5d94172e6363f7b4a334f86f86911de4d0b8c5'
+}
+
+Pot#pot [dai] {}
+
+Jug#jug [dai] {}
+
+InterestRateModel#DSR_Kink_9000bps_Jump_12000bps_AssumedRF_20000bps [dai] {
+  type: 'dsr'
+  base: 9000e14
+  jump: 12000e14
+  pot: #pot
+  jug: #jug
+}
+
+CToken#cDAI [b73e68c] {
+  type: "erc20-delegator"
+  symbol: "cDAI"
+  name: "Compound DAI"
+  underlying: #dai
+  comptroller: #comptroller
+  delegate: #cDaiDelegate
+  interest_rate_model: #DSR_Kink_9000bps_Jump_12000bps_AssumedRF_20000bps
+  admin: $sender
+}

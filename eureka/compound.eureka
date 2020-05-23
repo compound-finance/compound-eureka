@@ -1,0 +1,245 @@
+
+Fauceteer#fauceteer [compound-test] {}
+
+// Underlyings
+
+// Main-net https://etherscan.io/token/0x0d8775f648430679a709e98d2b0cb6250d2887ef
+Erc20#bat [bat] {
+  type: "bat"
+  owner: #fauceteer
+}
+
+// Main-net https://etherscan.io/token/0x6b175474e89094c44da98b954eedeac495271d0f
+// Note: we're using a simple Erc-20 for Dai
+// See dai.eureka for real Dai version
+Erc20#dai [compound-test] {
+  name: "Dai"
+  symbol: "DAI"
+  decimals: 18
+  total_supply: 107584313e18
+  balances: {
+    fauceteer: 107584313e17
+  }
+}
+
+// Main-net https://etherscan.io/token/0x1985365e9f78359a9B6AD760e32412f4a445E862
+Erc20#rep [compound-test] {
+  name: "Augur"
+  symbol: "REP"
+  decimals: 18
+  total_supply: 11000000e18
+  balances: {
+    fauceteer: 11000000e17
+  }
+}
+
+// Main-net https://etherscan.io/token/0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359
+Erc20#sai [compound-test] {
+  name: "Sai"
+  symbol: "SAI"
+  decimals: 18
+  total_supply: 8299054e18
+  balances: {
+    fauceteer: 8299054e17
+  }
+}
+
+// Main-net https://etherscan.io/token/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48
+Erc20#usdc [compound-test] {
+  name: "USD Coin"
+  symbol: "USDC"
+  decimals: 6
+  total_supply: 732246278e6
+  balances: {
+    fauceteer: 732246278e5
+  }
+}
+
+// Main-net https://etherscan.io/token/0xdac17f958d2ee523a2206206994597c13d831ec7
+Erc20#usdt [usdt] {
+  type: 'usdt'
+  name: "Tether"
+  symbol: "USDT"
+  decimals: 6
+  total_supply: 5737970410e6
+  balances: {
+    fauceteer: 5737970410e5
+  }
+}
+
+// Main-net https://etherscan.io/token/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599
+Erc20#wbtc [compound-test] {
+  name: "Wrapped BTC"
+  symbol: "WBTC"
+  decimals: 8
+  total_supply: 3851e6
+  balances: {
+    fauceteer: 3851e5
+  }
+}
+
+// Main-net https://etherscan.io/token/0xe41d2489571d322189246dafa5ebde1f4699f498
+Erc20#zrx [zrx] {
+  type: 'zrx'
+  balances: {
+    fauceteer: 10e25
+  }
+}
+
+// CToken Delegate
+CErc20Delegate#cErc20Delegate [b73e68c] {}
+
+// CTokens
+CToken#cBAT [b73e68c] {
+  type: "immutable"
+  symbol: "cBAT"
+  name: "Compound BAT"
+  underlying: #bat
+  comptroller: #comptroller
+  delegate: #cErc20Delegate
+  interest_rate_model: #Base200bps_Slope3000bps
+  admin: $sender
+}
+
+// Note: we are not using real Dai here-- see dai.eureka for MCD
+CToken#cDAI [b73e68c] {
+  type: "delegator"
+  symbol: "cDAI"
+  name: "Compound DAI"
+  underlying: #dai
+  comptroller: #comptroller
+  delegate: #cErc20Delegate
+  interest_rate_model: #Base200bps_Slope1000bps
+  admin: $sender
+}
+
+CToken#cREP [b73e68c] {
+  type: "immutable"
+  symbol: "cDAI"
+  name: "Compound REP"
+  underlying: #rep
+  comptroller: #comptroller
+  delegate: #cErc20Delegate
+  interest_rate_model: #Base200bps_Slope3000bps
+  admin: $sender
+}
+
+CToken#cSAI [b73e68c] {
+  type: "immutable"
+  symbol: "cSAI"
+  name: "Compound SAI"
+  underlying: #sai
+  comptroller: #comptroller
+  delegate: #cErc20Delegate
+  interest_rate_model: #Base500bps_Slope1200bps
+  admin: $sender
+}
+
+CToken#cETH [b73e68c] {
+  type: "cether"
+  symbol: "cETH"
+  name: "Compound ETH"
+  comptroller: #comptroller
+  interest_rate_model: #Base200bps_Slope1000bps
+  admin: $sender
+}
+
+CToken#cUSDC [b73e68c] {
+  type: "immutable"
+  symbol: "cUSDC"
+  name: "Compound USDC"
+  underlying: #usdc
+  comptroller: #comptroller
+  delegate: #cErc20Delegate
+  interest_rate_model: #Base200bps_Slope1000bps
+  admin: $sender
+}
+
+CToken#cUSDT [b73e68c] {
+  type: "delegator"
+  symbol: "cUSDT"
+  name: "Compound USDT"
+  underlying: #usdt
+  comptroller: #comptroller
+  delegate: #cErc20Delegate
+  interest_rate_model: #Base200bps_Slope2000bps_Jump20000bps_Kink90
+  admin: $sender
+}
+
+CToken#cWBTC [b73e68c] {
+  type: "immutable"
+  symbol: "cWBTC"
+  name: "Compound WBTC"
+  underlying: #wbtc
+  comptroller: #comptroller
+  delegate: #cErc20Delegate
+  interest_rate_model: #Base200bps_Slope3000bps
+  admin: $sender
+}
+
+CToken#cZRX [b73e68c] {
+  type: "immutable"
+  symbol: "cZRX"
+  name: "Compound ZRX"
+  underlying: #zrx
+  comptroller: #comptroller
+  delegate: #cErc20Delegate
+  interest_rate_model: #Base200bps_Slope3000bps
+  admin: $sender
+}
+
+// Maximillion
+Maximillion#max [b73e68c] {
+  cEther: #cETH
+}
+
+// Unitroller and Comptroller
+Comptroller#g0 [b73e68c] {}
+
+Unitroller#comptroller [b73e68c] {
+  implementation: #g0
+  oracle: #oracle
+  supported_markets: [
+    #cBAT,
+    #cDAI,
+    #cREP,
+    #cSAI,
+    #cETH,
+    #cUSDC,
+    #cUSDT,
+    #cWBTC,
+    #cZRX
+  ]
+}
+
+// Interest Rate Models
+InterestRateModel#Base200bps_Slope1000bps [b73e68c] {
+  type: 'linear'
+  base: 200e14
+  slope: 1000e14
+}
+
+InterestRateModel#Base500bps_Slope1200bps [b73e68c] {
+  type: 'linear'
+  base: 500e14
+  slope: 1200e14
+}
+
+InterestRateModel#Base200bps_Slope3000bps [b73e68c] {
+  type: 'linear'
+  base: 200e14
+  slope: 3000e14
+}
+
+InterestRateModel#Base200bps_Slope2000bps_Jump20000bps_Kink90 [b73e68c] {
+  type: 'jump'
+  base: 200e14
+  slope: 2000e14
+  jump: 20000e14
+  kink: 90
+}
+
+// CompoundLens
+CompoundLens#lens [b73e68c] {}
+
+// TODO: g1 Comptroller
