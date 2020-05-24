@@ -20,7 +20,7 @@ Erc20#dai [compound-test] {
   decimals: 18
   total_supply: 107584313e18
   balances: {
-    fauceteer: 107584313e17
+    fauceteer: 107584313e18
   }
 }
 
@@ -31,7 +31,7 @@ Erc20#rep [compound-test] {
   decimals: 18
   total_supply: 11000000e18
   balances: {
-    fauceteer: 11000000e17
+    fauceteer: 11000000e18
   }
 }
 
@@ -42,7 +42,7 @@ Erc20#sai [compound-test] {
   decimals: 18
   total_supply: 8299054e18
   balances: {
-    fauceteer: 8299054e17
+    fauceteer: 8299054e18
   }
 }
 
@@ -53,7 +53,7 @@ Erc20#usdc [compound-test] {
   decimals: 6
   total_supply: 732246278e6
   balances: {
-    fauceteer: 732246278e5
+    fauceteer: 732246278e6
   }
 }
 
@@ -65,7 +65,7 @@ Erc20#usdt [usdt] {
   decimals: 6
   total_supply: 5737970410e6
   balances: {
-    fauceteer: 5737970410e5
+    fauceteer: 5737970410e6
   }
 }
 
@@ -76,7 +76,7 @@ Erc20#wbtc [compound-test] {
   decimals: 8
   total_supply: 3851e6
   balances: {
-    fauceteer: 3851e5
+    fauceteer: 3851e6
   }
 }
 
@@ -84,7 +84,7 @@ Erc20#wbtc [compound-test] {
 Erc20#zrx [zrx] {
   type: 'zrx'
   balances: {
-    fauceteer: 10e25
+    fauceteer: 10e26
   }
 }
 

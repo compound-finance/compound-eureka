@@ -1,7 +1,7 @@
 
 // Simple Price Oracle
 SimplePriceOracle#oracle [b73e68c] {
-  prices: { // TODO: Set real prices
+  prices: {
     #bat: 0.000999e18,
     #dai: 0.004824e18,
     #rep: 0.061329e18,

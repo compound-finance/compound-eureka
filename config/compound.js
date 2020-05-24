@@ -33,8 +33,7 @@ provider(env('provider', defaultProvider), {
 });
 
 // Define our contract configuration
-if (network !== 'mainnet') {
-  // Make sure we don't even define this on prod
+if (network !== 'mainnet') { // Skip these contracts on prod
   define("SimplePriceOracle", {
     properties: {
       prices: {
@@ -43,14 +42,20 @@ if (network !== 'mainnet') {
           key: 'ref',
           value: 'number'
         },
-        setter: async ({trx}, oracle, prices) => {
-          // TODO: Mutate prices as needed, versus always updating all of 'em
-          return Promise.all(Object.entries(prices).map(([address, price]) => {
-            return trx(oracle, 'setPrice', [address, price]);
-          }));
-        },
-        getter: async (contract, props) => {
-          // TODO: How do we iterate over known keys?
+        setter: async ({bn, read, trx}, oracle, prices) => {
+          return await Object.entries(prices).reduce(async (acc_, [asset, price_]) => {
+            let acc = await acc_;
+            let price = bn(price_);
+            let {'0': currentPrice_} = await read(oracle, 'assetPrices', [asset]);
+            let currentPrice = bn(currentPrice_);
+
+            if (currentPrice.eq(price)) {
+              console.log(`Price of ${asset} currently equal to expected price of ${price.toString()}`);
+            } else {
+              console.log(`Setting price of ${asset} from ${currentPrice.toString()} to ${price.toString()}`);
+              return await trx(oracle, 'setDirectPrice', [asset, price]);
+            }
+          }, Promise.resolve(null));
         }
       }
     },
