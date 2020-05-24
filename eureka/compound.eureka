@@ -6,7 +6,9 @@ Fauceteer#fauceteer [compound-test] {}
 // Main-net https://etherscan.io/token/0x0d8775f648430679a709e98d2b0cb6250d2887ef
 Erc20#bat [bat] {
   type: "bat"
-  owner: #fauceteer
+  balances: {
+    fauceteer: 5e27
+  }
 }
 
 // Main-net https://etherscan.io/token/0x6b175474e89094c44da98b954eedeac495271d0f
@@ -212,13 +214,13 @@ Unitroller#comptroller [b73e68c] {
   ]
 
   collateral_factors: {
-    cBAT: 60e16,
-    cDAI: 75e16,
-    cREP: 40e16,
-    cSAI: 65e16,
-    cETH: 75e16,
-    cUSDC: 75e16,
-    cZRX: 60e16
+    #cBAT: 60e16,
+    #cDAI: 75e16,
+    #cREP: 40e16,
+    #cSAI: 65e16,
+    #cETH: 75e16,
+    #cUSDC: 75e16,
+    #cZRX: 60e16
   }
 }
 

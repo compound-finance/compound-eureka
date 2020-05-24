@@ -5,7 +5,7 @@ let balanceSetter = async ({deref, encode, ethereum, read, trx}, contract, balan
 
     balance = encode(balance);
     let recipient = { type: 'ref', ref };
-    let currentBalance = await read(contract, 'balanceOf', [recipient]);
+    let {'0': currentBalance} = await read(contract, 'balanceOf', [recipient]);
     // TODO: Make better-- a lot better
     currentBalance = encode({type: 'number', hex: currentBalance});
 
@@ -95,16 +95,37 @@ define('Erc20', {
       type: 'string',
       default: { type: 'number', base: '18', exp: 0 },
       setter: async () => null
+    },
+    balances: {
+      deferred: true,
+      dictionary: {
+        key: 'ref',
+        value: 'number'
+      },
+      setter: balanceSetter
     }
   },
-  build: async ({deploy, console, ethereum}, contract, {owner}) => {
+  build: async (actor, contract, {balances}, {definition}) => {
+    let {deploy, console, ethereum} = actor;
     let _ethFundDeposit = "0x0000000000000000000000000000000000000000";
-    let _batFundDeposit = owner || ethereum.from;
+    let _batFundDeposit = ethereum.from;
     let _fundingStartBlock = 0;
     let _fundingEndBlock = 0;
 
     // Note: Etherscan doesn't support verification of Solidity 0.4.10
-    return deploy(contract, [_ethFundDeposit, _batFundDeposit, _fundingStartBlock, _fundingEndBlock], { verify: false });
+    let deployed = await deploy(contract, {
+      _ethFundDeposit,
+      _batFundDeposit,
+      _fundingStartBlock,
+      _fundingEndBlock
+    }, { verify: false });
+
+    if (balances) {
+      console.log(`Setting token balances for ${contract}...`);
+      await definition.typeProperties.balances.setter(actor, deployed, balances);
+    }
+
+    return deployed;
   }
 });
 

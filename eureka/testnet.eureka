@@ -2,15 +2,14 @@
 // Simple Price Oracle
 SimplePriceOracle#oracle [b73e68c] {
   prices: { // TODO: Set real prices
-    bat: 0.000999e18,
-    dai: 0.004824e18,
-    eth: 1e18,
-    rep: 0.061329e18,
-    sai: 0.005286e18,
-    usdc: 0.004779e30,
-    usdt: 0.004779e30,
-    wbtc: 44.166198e28,
-    zrx: 0.001608e18
+    #bat: 0.000999e18,
+    #dai: 0.004824e18,
+    #rep: 0.061329e18,
+    #sai: 0.005286e18,
+    #usdc: 0.004779e30,
+    #usdt: 0.004779e30,
+    #wbtc: 44.166198e28,
+    #zrx: 0.001608e18
   }
 }
 

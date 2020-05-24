@@ -298,8 +298,7 @@ define("Unitroller", {
           await acc; // Force ordering
 
           // TODO: Better handle proxy
-          let marketRef = { type: 'ref', ref: market }; // TODO: Make this better
-          let marketData = await read(unitroller, 'markets', [marketRef], { proxy: 'Comptroller' });
+          let marketData = await read(unitroller, 'markets', [market], { proxy: 'Comptroller' });
 
           // TODO: How do we compare these numbers? These base/exp numbers are getting in the way of being helpful...
           // Since now we really have 3-4 ways to represent numbers
@@ -307,7 +306,7 @@ define("Unitroller", {
           let current = bn(marketData.collateralFactorMantissa);
           let expected = bn(collateralFactor);
           if (!current.eq(expected)) {
-            return await trx(unitroller, '_setCollateralFactor', [marketRef, expected], { proxy: 'Comptroller' });
+            return await trx(unitroller, '_setCollateralFactor', [market, expected], { proxy: 'Comptroller' });
           } else {
             console.log(`Market ${show(market)} already has correct collateral factor`);
           }
@@ -315,7 +314,7 @@ define("Unitroller", {
       }
     }
   },
-  build: async (actor, contract, {implementation, oracle, supported_markets}, { definition }) => {
+  build: async (actor, contract, {implementation, oracle, supported_markets, collateral_factors}, { definition }) => {
     let deployed = await actor.deploy(contract);
 
     // We can't set these properties in the constructor, so they'll
