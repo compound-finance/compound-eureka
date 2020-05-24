@@ -210,6 +210,16 @@ Unitroller#comptroller [b73e68c] {
     #cWBTC,
     #cZRX
   ]
+
+  collateral_factors: {
+    cBAT: 60e16,
+    cDAI: 75e16,
+    cREP: 40e16,
+    cSAI: 65e16,
+    cETH: 75e16,
+    cUSDC: 75e16,
+    cZRX: 60e16
+  }
 }
 
 // Interest Rate Models

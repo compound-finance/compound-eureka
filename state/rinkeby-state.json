@@ -327,6 +327,43 @@
       "oracle": {
         "type": "ref",
         "ref": "oracle"
+      },
+      "collateral_factors": {
+        "cBAT": {
+          "type": "number",
+          "base": 60,
+          "exp": 16
+        },
+        "cDAI": {
+          "type": "number",
+          "base": 75,
+          "exp": 16
+        },
+        "cREP": {
+          "type": "number",
+          "base": 40,
+          "exp": 16
+        },
+        "cSAI": {
+          "type": "number",
+          "base": 65,
+          "exp": 16
+        },
+        "cETH": {
+          "type": "number",
+          "base": 75,
+          "exp": 16
+        },
+        "cUSDC": {
+          "type": "number",
+          "base": 75,
+          "exp": 16
+        },
+        "cZRX": {
+          "type": "number",
+          "base": 60,
+          "exp": 16
+        }
       }
     },
     "address": "0x2399B6797F69ce9c2B17A64CB38D45189B8a5DfE",

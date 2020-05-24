@@ -275,7 +275,7 @@ define("Unitroller", {
       setter: async ({read, show, trx}, unitroller, markets, { properties }) => {
         return await markets.reduce(async (acc, market) => {
           await acc; // Force ordering
-          
+
           // TODO: Better handle proxy
           let marketData = await read(unitroller, 'markets', [market], { proxy: 'Comptroller' });
 
@@ -283,6 +283,33 @@ define("Unitroller", {
             return await trx(unitroller, '_supportMarket', [market], { proxy: 'Comptroller' });
           } else {
             console.log(`Market ${show(market)} already listed`);
+          }
+        });
+      }
+    },
+    collateral_factors: {
+      dictionary: {
+        key: 'ref',
+        value: 'number'
+      },
+      deferred: true,
+      setter: async ({read, show, trx, bn}, unitroller, collateralFactors) => {
+        return await Object.entries(collateralFactors).reduce(async (acc, [market, collateralFactor]) => {
+          await acc; // Force ordering
+
+          // TODO: Better handle proxy
+          let marketRef = { type: 'ref', ref: market }; // TODO: Make this better
+          let marketData = await read(unitroller, 'markets', [marketRef], { proxy: 'Comptroller' });
+
+          // TODO: How do we compare these numbers? These base/exp numbers are getting in the way of being helpful...
+          // Since now we really have 3-4 ways to represent numbers
+
+          let current = bn(marketData.collateralFactorMantissa);
+          let expected = bn(collateralFactor);
+          if (!current.eq(expected)) {
+            return await trx(unitroller, '_setCollateralFactor', [marketRef, expected], { proxy: 'Comptroller' });
+          } else {
+            console.log(`Market ${show(market)} already has correct collateral factor`);
           }
         });
       }
@@ -301,6 +328,11 @@ define("Unitroller", {
     if (supported_markets) {
       console.log("Supporting markets...");
       await definition.typeProperties.supported_markets.setter(actor, deployed, supported_markets);
+    }
+
+    if (collateral_factors) {
+      console.log("Setting collateral factors...");
+      await definition.typeProperties.collateral_factors.setter(actor, deployed, collateral_factors);
     }
 
     if (oracle) {
