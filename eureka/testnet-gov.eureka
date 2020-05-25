@@ -1,0 +1,22 @@
+
+// Define global admin to actually be the timelock
+Account {
+  admin: #timelock
+}
+
+Timelock#timelock [compound-test] {
+  delay: 60 // 1 minute
+  admin: #gov
+}
+
+Governor#gov [compound-test] {
+  harness: true
+  comp: #comp
+  timelock: #timelock // Note: this is a circular-dep, right? I think we'll see!
+}
+
+Comp#comp [b73e68c] {
+  balances: {
+    #fauceteer: 1.0e24 // 1MM Comp tokens to Fauceteer, rest stay with $sender
+  }
+}

@@ -152,6 +152,7 @@ define('CToken', {
     interest_rate_model: {
       ref: 'InterestRateModel',
       setter: async ({trx}, cToken, newInterestRateModel) => {
+        // TODO: Consider Gov
         return await trx(cToken, '_setInterestRateModel', [newInterestRateModel]);
       }
     }
@@ -191,6 +192,7 @@ define('CToken', {
     interest_rate_model: {
       ref: 'InterestRateModel',
       setter: async ({trx}, cToken, newInterestRateModel) => {
+        // TODO: Consider Gov
         return await trx(cToken, '_setInterestRateModel', [newInterestRateModel]);
       }
     }
@@ -229,6 +231,7 @@ define('CToken', {
     interest_rate_model: {
       ref: 'InterestRateModel',
       setter: async ({trx}, cEther, newInterestRateModel) => {
+        // TODO: Consider Gov
         return await trx(cETher, '_setInterestRateModel', [newInterestRateModel]);
       }
     }
@@ -263,6 +266,7 @@ define("Unitroller", {
       ref: 'PriceOracle',
       deferred: true,
       setter: async ({trx}, unitroller, oracle) => {
+        // TODO: Consider Gov
         await trx(unitroller, '_setPriceOracle', [oracle], { proxy: 'Comptroller' });
       }
     },
@@ -270,6 +274,7 @@ define("Unitroller", {
       ref: 'Comptroller',
       deferred: true,
       setter: async ({trx}, unitroller, comptroller) => {
+        // TODO: Consider Gov
         await trx(unitroller, '_setPendingImplementation', [comptroller]);
         await trx(comptroller, '_become', [unitroller]);
       }
@@ -285,6 +290,7 @@ define("Unitroller", {
           let marketData = await read(unitroller, 'markets', [market], { proxy: 'Comptroller' });
 
           if (!marketData.isListed) {
+            // TODO: Consider Gov
             return await trx(unitroller, '_supportMarket', [market], { proxy: 'Comptroller' });
           } else {
             console.log(`Market ${show(market)} already listed`);
@@ -311,6 +317,7 @@ define("Unitroller", {
           let current = bn(marketData.collateralFactorMantissa);
           let expected = bn(collateralFactor);
           if (!current.eq(expected)) {
+            // TODO: Consider Gov
             return await trx(unitroller, '_setCollateralFactor', [market, expected], { proxy: 'Comptroller' });
           } else {
             console.log(`Market ${show(market)} already has correct collateral factor`);

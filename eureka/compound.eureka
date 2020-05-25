@@ -1,4 +1,8 @@
 
+Account {
+  admin: $sender
+}
+
 Fauceteer#fauceteer [compound-test] {}
 
 // Underlyings
@@ -100,7 +104,7 @@ CToken#cBAT [b73e68c] {
   comptroller: #comptroller
   delegate: #cErc20Delegate
   interest_rate_model: #Base200bps_Slope3000bps
-  admin: $sender
+  admin: $admin
 }
 
 // Note: we are not using real Dai here-- see dai.eureka for MCD
@@ -112,7 +116,7 @@ CToken#cDAI [b73e68c] {
   comptroller: #comptroller
   delegate: #cErc20Delegate
   interest_rate_model: #Base200bps_Slope1000bps
-  admin: $sender
+  admin: $admin
 }
 
 CToken#cREP [b73e68c] {
@@ -123,7 +127,7 @@ CToken#cREP [b73e68c] {
   comptroller: #comptroller
   delegate: #cErc20Delegate
   interest_rate_model: #Base200bps_Slope3000bps
-  admin: $sender
+  admin: $admin
 }
 
 CToken#cSAI [b73e68c] {
@@ -134,7 +138,7 @@ CToken#cSAI [b73e68c] {
   comptroller: #comptroller
   delegate: #cErc20Delegate
   interest_rate_model: #Base500bps_Slope1200bps
-  admin: $sender
+  admin: $admin
 }
 
 CToken#cETH [b73e68c] {
@@ -143,7 +147,7 @@ CToken#cETH [b73e68c] {
   name: "Compound ETH"
   comptroller: #comptroller
   interest_rate_model: #Base200bps_Slope1000bps
-  admin: $sender
+  admin: $admin
 }
 
 CToken#cUSDC [b73e68c] {
@@ -154,7 +158,7 @@ CToken#cUSDC [b73e68c] {
   comptroller: #comptroller
   delegate: #cErc20Delegate
   interest_rate_model: #Base200bps_Slope1000bps
-  admin: $sender
+  admin: $admin
 }
 
 CToken#cUSDT [b73e68c] {
@@ -165,7 +169,7 @@ CToken#cUSDT [b73e68c] {
   comptroller: #comptroller
   delegate: #cErc20Delegate
   interest_rate_model: #Base200bps_Slope2000bps_Jump20000bps_Kink90
-  admin: $sender
+  admin: $admin
 }
 
 CToken#cWBTC [b73e68c] {
@@ -176,7 +180,7 @@ CToken#cWBTC [b73e68c] {
   comptroller: #comptroller
   delegate: #cErc20Delegate
   interest_rate_model: #Base200bps_Slope3000bps
-  admin: $sender
+  admin: $admin
 }
 
 CToken#cZRX [b73e68c] {
@@ -187,7 +191,7 @@ CToken#cZRX [b73e68c] {
   comptroller: #comptroller
   delegate: #cErc20Delegate
   interest_rate_model: #Base200bps_Slope3000bps
-  admin: $sender
+  admin: $admin
 }
 
 // Maximillion

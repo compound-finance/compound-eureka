@@ -40,11 +40,19 @@ This will clear the development state so Eureka will start fresh.
 To do a fresh deploy to development, then, you can run:
 
 ```bash
-yarn eureka clean -y -n development -c config/compound.js && yarn eureka apply -b ./.build -c config/compound.js -c config/underlying.js -c config/networks.js -c config/networks-abi.js eureka/compound.eureka eureka/testnet.eureka
+yarn eureka clean -y -n development -c config/*.js && yarn eureka apply -b ./.build -c config/*.js -e eureka/{compound,testnet}.eureka
 ```
 
+Or with gov:
+
 ```bash
-yarn eureka clean -y -n rinkeby -c config/compound.js && yarn eureka apply -n rinkeby -b ./.build -c config/compound.js -c config/underlying.js -c config/networks.js -c config/networks-abi.js eureka/compound.eureka eureka/testnet.eureka
+yarn eureka clean -y -n development -c config/*.js && yarn eureka apply -b ./.build -c config/*.js -e eureka/{compound,testnet,testnet-gov}.eureka
+```
+
+Rinkeby
+
+```bash
+yarn eureka apply -n rinkeby -b ./.build -c config/*.js eureka/compound.eureka eureka/testnet.eureka
 ```
 
 ## Test-net Deployment
