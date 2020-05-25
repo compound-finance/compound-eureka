@@ -1,19 +1,4 @@
 
-const cTokenContracts = [
-  'CErc20Delegator',
-  'CEther',
-  'CErc20Immutable'
-];
-
-const tokenContracts = [
-  'Erc20',
-  'StandardToken',
-  'FaucetToken',
-  'BAToken',
-  'TetherToken',
-  'ZRXToken'
-].concat(cTokenContracts);
-
 function asArray(arr) {
   return Array.isArray(arr) ? arr : [arr];
 }
@@ -53,9 +38,9 @@ function toNumber(number) {
   return Number(toNumberString(number));
 }
 
-function tokenProperties({address, contract, deployment, properties}, state, accounts) {
+function tokenProperties({address, contract, definition, deployment, properties}, state, accounts) {
   let cTokenProps = {};
-  if (cTokenContracts.includes(deployment.contract)) {
+  if (definition === 'CToken') {
     cTokenProps = {      
       initial_exchange_rate_mantissa: properties.initial_exchange_rate.toString(),
       admin: findAccount(accounts, properties.admin),
@@ -80,11 +65,11 @@ function mapContracts(state, refMap, filter, map, singleton=false, allowMissing=
   if (typeof(filter) === 'function') {
     filteredEntries = stateEntries.filter(filter);
   } else if (Array.isArray(filter) || typeof(filter) === 'string') {
-    filteredEntries = stateEntries.filter(([ref, {contract, deployment}]) => {
+    filteredEntries = stateEntries.filter(([ref, {definition, deployment}]) => {
       let filterArr = asArray(filter);
       return deployment && (
         filterArr.includes(deployment.contract) ||
-        filterArr.includes(contract)
+        filterArr.includes(definition)
       )
     });
   } else if (filter === null) {
@@ -228,14 +213,14 @@ hook('state.save', async (state, {ethereum}) => {
     let tokensJson = mapContracts(
       state,
       refMap,
-      tokenContracts,
+      ['Erc20', 'CToken'],
       (contract) => tokenProperties(contract, state, accounts)
     );
 
     let cTokenDelegateJson = mapContracts(
       state,
       refMap,
-      cTokenContracts,
+      ['CErc20Delegate', 'CDaiDelegate'],
       ({address, deployment}) => ({
         address,
         contract: deployment.contract,
@@ -246,7 +231,7 @@ hook('state.save', async (state, {ethereum}) => {
     let cTokensJson = mapContracts(
       state,
       refMap,
-      ['CErc20Delegator', 'CEther', 'CErc20Immutable'],
+      ['CToken'],
       (contract) => tokenProperties(contract, state, accounts)
     );
 
