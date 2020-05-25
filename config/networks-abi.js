@@ -37,7 +37,7 @@ hook('state.save', async (state) => {
         [version]: abis
       };
     }, {});
-    console.log(`Versions: ${JSON.stringify(Object.keys(versions))}`);
+    // console.log(`Versions: ${JSON.stringify(Object.keys(versions))}`);
 
     let abis = stateEntries.reduce((acc, [ref, contract]) => {
       let r = refMap.hasOwnProperty(ref) ? refMap[ref] : ref;

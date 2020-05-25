@@ -3,7 +3,7 @@ function asArray(arr) {
   return Array.isArray(arr) ? arr : [arr];
 }
 
-function findAccount(accounts, account) {
+function findAccount(state, accounts, account) {
   if (typeof(account) === 'string') {
     return account;
   } else if (typeof(account) === 'object' && account.type === 'account') {
@@ -12,6 +12,13 @@ function findAccount(accounts, account) {
       return accounts[account_];
     } else {
       throw new Error(`Cannot find account ${account_} in account list ${JSON.stringify(Object.keys(accounts))}`);
+    }
+  } else if (typeof(account) === 'object' && account.type === 'ref') {
+    let ref_ = account.ref;
+    if (state.hasOwnProperty(ref_)) {
+      return state[ref_].address;
+    } else {
+      throw new Error(`Cannot find account by reference #${ref_} in state`);
     }
   } else {
     throw new Error(`Cannot find account from ${JSON.stringify(account)}`);
@@ -43,7 +50,7 @@ function tokenProperties({address, contract, definition, deployment, properties}
   if (definition === 'CToken') {
     cTokenProps = {      
       initial_exchange_rate_mantissa: properties.initial_exchange_rate.toString(),
-      admin: findAccount(accounts, properties.admin),
+      admin: findAccount(state, accounts, properties.admin),
       underlying: properties.underlying ? state[properties.underlying.ref].address : "" // Note: this key is required, even if it's blank
     } 
   }

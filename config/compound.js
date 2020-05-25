@@ -324,6 +324,18 @@ define("Unitroller", {
           }
         });
       }
+    },
+    admin: {
+      type: 'address',
+      deferred: true,
+      setter: async ({trx}, unitroller, newAdmin) => {
+        // Admin must be accepted
+        console.log("aaaa", unitroller, newAdmin);
+        await trx(unitroller, '_setPendingAdmin', [newAdmin]);
+        console.log("bbbb", unitroller, newAdmin);
+        await trx(newAdmin, '_acceptAdmin(address admin)', [unitroller]);
+        console.log("cccc", unitroller, newAdmin);
+      }
     }
   },
   build: async (actor, contract, {implementation, oracle, supported_markets, collateral_factors}, { definition }) => {
