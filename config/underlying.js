@@ -1,20 +1,29 @@
 
-let balanceSetter = async ({deref, encode, ethereum, read, trx}, contract, balances) => {
-  return Object.entries(balances).reduce(async (acc_, [ref, balance]) => {
+let balanceOf = async({read, bn}, contract, spender) => {
+  let balance = await read(contract, 'balanceOf', [spender]);
+  return bn(balance);
+}
+
+let balanceSetter = async (actor, contract, balances) => {
+  let {bn, deref, encode, ethereum, read, trx} = actor;
+  return Object.entries(balances).reduce(async (acc_, [ref, balance_]) => {
     let acc = await acc_; // force ordering
 
-    balance = encode(balance);
-    let recipient = { type: 'ref', ref };
-    let {'0': currentBalance} = await read(contract, 'balanceOf', [recipient]);
-    // TODO: Make better-- a lot better
-    currentBalance = encode({type: 'number', hex: currentBalance});
+    let balance = bn(balance_);
+    let currentBalance = await balanceOf(actor, contract, ref);
 
     if (currentBalance.gte(balance)) {
-      console.log(`Skipping #${ref} as account holds sufficient balance`);
+      console.log(`Skipping ${ref} as account holds sufficient balance`);
     } else {
       let amount = balance.sub(currentBalance);
 
-      await trx(contract, 'transfer', [recipient, amount]);
+      await trx(contract, 'transfer', [ref, amount]);
+
+      // Let's make sure the balance is, in fact, updated correctly
+      let newBalance = await balanceOf(actor, contract, ref);
+      if (newBalance.lt(balance)) {
+        throw new Error(`Expected balance for ${ref} to be greater than or equal to ${balance.toString()} but was ${newBalance.toString()}`);
+      }
     }
   }, Promise.resolve(null));
 }
@@ -44,7 +53,7 @@ define('Erc20', {
   match: {
     default: true
   },
-  contract: 'FaucetToken',
+  contract: 'FaucetToken', // TODO: Replace with StandardToken
   properties: {
     name: 'string',
     symbol: 'string',
@@ -107,7 +116,7 @@ define('Erc20', {
   },
   build: async (actor, contract, {balances}, {definition}) => {
     let {deploy, console, ethereum} = actor;
-    let _ethFundDeposit = "0x0000000000000000000000000000000000000000";
+    let _ethFundDeposit = '0x0000000000000000000000000000000000000000';
     let _batFundDeposit = ethereum.from;
     let _fundingStartBlock = 0;
     let _fundingEndBlock = 0;
