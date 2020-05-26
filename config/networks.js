@@ -88,7 +88,7 @@ function mapContracts(state, refMap, filter, map, singleton=false, allowMissing=
   let mappedEntries = filteredEntries.map(([ref, contract]) => {
     let r = refMap.hasOwnProperty(ref) ? refMap[ref] : ref;
     return [r, map(contract, ref)];
-  });
+  }).filter(([k, v]) => v !== null);
 
   if (singleton) {
     if (mappedEntries.length !== 1) {
@@ -125,7 +125,7 @@ hook('state.save', async (state, {ethereum}) => {
     contractsJson.Comptroller = contractsJson.Unitroller; // Comptroller is special
     contractsJson.PriceOracleProxy = contractsJson.PriceOracle; // PriceOracle is *also* special
 
-    let blocksJson = mapContracts(state, refMap, null, ({deployment}) => deployment.block);
+    let blocksJson = mapContracts(state, refMap, null, ({deployment}) => deployment ? deployment.block : null);
 
     let priceOracleJson = mapContracts(
       state,
@@ -215,7 +215,7 @@ hook('state.save', async (state, {ethereum}) => {
       })
     );
 
-    let constructorsJson = mapContracts(state, refMap,null, ({deployment}) => '0x' + deployment.constructorData);
+    let constructorsJson = mapContracts(state, refMap,null, ({deployment}) => deployment ? '0x' + deployment.constructorData : null);
 
     let tokensJson = mapContracts(
       state,

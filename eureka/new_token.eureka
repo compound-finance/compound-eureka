@@ -1,0 +1,49 @@
+
+Erc20#geo [compound-test] {
+  name: "Geoff Token"
+  symbol: "GEO"
+  decimals: 18
+  total_supply: 8299054e18
+  balances: {
+    #fauceteer: 8299054e18
+  }
+}
+
+CToken#cGEO [b73e68c] {
+  type: "immutable"
+  symbol: "cGEO"
+  name: "Compound Geoff Token"
+  underlying: #geo
+  comptroller: #comptroller
+  delegate: #cErc20Delegate
+  interest_rate_model: #Base200bps_Slope3000bps
+  admin: $admin
+}
+
+Unitroller#comptroller [b73e68c] {
+  admin: $admin
+  implementation: #g0
+  oracle: #oracle
+  supported_markets: [
+    #cBAT,
+    #cDAI,
+    #cREP,
+    #cSAI,
+    #cETH,
+    #cUSDC,
+    #cUSDT,
+    #cWBTC,
+    #cZRX,
+    #cGEO
+  ]
+
+  collateral_factors: {
+    #cBAT: 60e16,
+    #cDAI: 75e16,
+    #cREP: 40e16,
+    #cSAI: 65e16,
+    #cETH: 75e16,
+    #cUSDC: 75e16,
+    #cZRX: 60e16
+  }
+}

@@ -23,7 +23,7 @@ provider(env('provider', defaultProvider), {
   sendOpts: {
     from: env('pk', defaultPk),
     gas: 6000000,
-    gasPrice: 100000000
+    gasPrice: 2000000000
   },
   verificationOpts: network !== 'development' && env('etherscan') ? {
     verify: true,
@@ -31,6 +31,35 @@ provider(env('provider', defaultProvider), {
     raiseOnError: true
   } : {}
 });
+
+async function gov(actor, contract, func, args, opts) {
+  let {read, encodeFunctionData, ethereum, show, trx} = actor;
+  let admin = await read(contract, 'admin(): address', [], opts); // TODO: Pass through opts?
+  if (admin == ethereum.from) {
+    return compoundTrx(actor, contract, func, args, opts);
+  } else {
+    // Okay, we're going to propose through the governor
+    let proposeSig = 'propose(address[] memory targets, uint[] memory values, string[] memory signatures, bytes[] memory calldatas, string memory description)';
+    let description = `Gov ${func} ${show(args)}`;
+    let data = '0x' + encodeFunctionData(func, args);
+    let proposalTrx = await trx('#gov', proposeSig, [[contract], [0], [func], [data], description]);
+    console.log(`Created proposal ${description}`);
+    return proposalTrx;
+  }
+}
+
+async function compoundTrx({events, trx}, contract, func, args, opts) {
+  let receipt = await trx(contract, func, args, opts);
+  let receiptEvents = {};
+  if (!func.includes('(')) { // Short hand to see if we're using a spelled out ABI
+    receiptEvents = events(contract, receipt);
+  }
+  if (receiptEvents.hasOwnProperty('Failure')) {
+    throw new Error(`Failed to execute Compound transaction, got failure: ${JSON.stringify(receiptEvents['Failure'])}`);
+  }
+
+  return receipt;
+}
 
 // Define our contract configuration
 if (network !== 'mainnet') { // Skip these contracts on prod
@@ -151,9 +180,8 @@ define('CToken', {
     initial_exchange_rate: { type: 'number', default: 0.2e10 }, // TODO: Figure out default here
     interest_rate_model: {
       ref: 'InterestRateModel',
-      setter: async ({trx}, cToken, newInterestRateModel) => {
-        // TODO: Consider Gov
-        return await trx(cToken, '_setInterestRateModel', [newInterestRateModel]);
+      setter: async (actor, cToken, newInterestRateModel) => {
+        return await gov(actor, cToken, '_setInterestRateModel(address)', [newInterestRateModel]);
       }
     }
   },
@@ -191,9 +219,8 @@ define('CToken', {
     initial_exchange_rate: { type: 'number', default: 0.2e10 }, // TODO: Figure out default here
     interest_rate_model: {
       ref: 'InterestRateModel',
-      setter: async ({trx}, cToken, newInterestRateModel) => {
-        // TODO: Consider Gov
-        return await trx(cToken, '_setInterestRateModel', [newInterestRateModel]);
+      setter: async (actor, cToken, newInterestRateModel) => {
+        return await gov(actor, cToken, '_setInterestRateModel(address)', [newInterestRateModel]);
       }
     }
   },
@@ -230,9 +257,8 @@ define('CToken', {
     initial_exchange_rate: { type: 'number', default: 0.2e10 }, // TODO: Figure out default here
     interest_rate_model: {
       ref: 'InterestRateModel',
-      setter: async ({trx}, cEther, newInterestRateModel) => {
-        // TODO: Consider Gov
-        return await trx(cETher, '_setInterestRateModel', [newInterestRateModel]);
+      setter: async (actor, cEther, newInterestRateModel) => {
+        return await gov(actor, cETher, '_setInterestRateModel(address)', [newInterestRateModel]);
       }
     }
   },
@@ -265,24 +291,23 @@ define("Unitroller", {
     oracle: {
       ref: 'PriceOracle',
       deferred: true,
-      setter: async ({trx}, unitroller, oracle) => {
-        // TODO: Consider Gov
-        await trx(unitroller, '_setPriceOracle', [oracle], { proxy: 'Comptroller' });
+      setter: async (actor, unitroller, oracle) => {
+        await gov(actor, unitroller, '_setPriceOracle(address)', [oracle], { proxy: 'Comptroller' });
       }
     },
     implementation: {
       ref: 'Comptroller',
       deferred: true,
-      setter: async ({trx}, unitroller, comptroller) => {
-        // TODO: Consider Gov
-        await trx(unitroller, '_setPendingImplementation', [comptroller]);
-        await trx(comptroller, '_become', [unitroller]);
+      setter: async (actor, unitroller, comptroller) => {
+        await gov(actor, unitroller, '_setPendingImplementation(address)', [comptroller]);
+        await gov(actor, comptroller, '_become(address)', [unitroller]);
       }
     },
     supported_markets: {
       type: 'array',
       deferred: true,
-      setter: async ({read, show, trx}, unitroller, markets, { properties }) => {
+      setter: async (actor, unitroller, markets, { properties }) => {
+        let {events, read, show} = actor;
         return await markets.reduce(async (acc, market) => {
           await acc; // Force ordering
 
@@ -290,8 +315,7 @@ define("Unitroller", {
           let marketData = await read(unitroller, 'markets', [market], { proxy: 'Comptroller' });
 
           if (!marketData.isListed) {
-            // TODO: Consider Gov
-            return await trx(unitroller, '_supportMarket', [market], { proxy: 'Comptroller' });
+            return await gov(actor, unitroller, '_supportMarket(address)', [market]);
           } else {
             console.log(`Market ${show(market)} already listed`);
           }
@@ -304,7 +328,8 @@ define("Unitroller", {
         value: 'number'
       },
       deferred: true,
-      setter: async ({read, show, trx, bn}, unitroller, collateralFactors) => {
+      setter: async (actor, unitroller, collateralFactors) => {
+        let {read, show, trx, bn} = actor;
         return await Object.entries(collateralFactors).reduce(async (acc, [market, collateralFactor]) => {
           await acc; // Force ordering
 
@@ -317,8 +342,7 @@ define("Unitroller", {
           let current = bn(marketData.collateralFactorMantissa);
           let expected = bn(collateralFactor);
           if (!current.eq(expected)) {
-            // TODO: Consider Gov
-            return await trx(unitroller, '_setCollateralFactor', [market, expected], { proxy: 'Comptroller' });
+            return await gov(actor, unitroller, '_setCollateralFactor(address,uint)', [market, expected], { proxy: 'Comptroller' });
           } else {
             console.log(`Market ${show(market)} already has correct collateral factor`);
           }
@@ -328,13 +352,12 @@ define("Unitroller", {
     admin: {
       type: 'address',
       deferred: true,
-      setter: async ({trx}, unitroller, newAdmin) => {
+      setter: async (actor, unitroller, newAdmin) => {
+        let {trx, events, show} = actor;
         // Admin must be accepted
-        console.log("aaaa", unitroller, newAdmin);
-        await trx(unitroller, '_setPendingAdmin', [newAdmin]);
-        console.log("bbbb", unitroller, newAdmin);
-        await trx(newAdmin, '_acceptAdmin(address admin)', [unitroller]);
-        console.log("cccc", unitroller, newAdmin);
+        let _setPendingAdmin = await gov(actor, unitroller, '_setPendingAdmin(address)', [newAdmin]);
+        // TODO: Should this be gov, too?
+        let _acceptAdmin = await trx(newAdmin, 'harnessAcceptAdmin(address unitroller)', [unitroller]);
       }
     }
   },

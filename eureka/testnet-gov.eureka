@@ -19,4 +19,8 @@ Comp#comp [b73e68c] {
   balances: {
     #fauceteer: 1.0e24 // 1MM Comp tokens to Fauceteer, rest stay with $sender
   }
+
+  delegates: {
+    $sender: $sender
+  }
 }

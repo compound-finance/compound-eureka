@@ -35,9 +35,29 @@ define('Comp', {
           }
         }, Promise.resolve(null));
       }
+    },
+    delegates: {
+      deferred: true,
+      dictionary: {
+        key: 'ref',
+        value: 'ref'
+      },
+      setter: async (actor, comp, delegates) => {
+        let {bn, deref, encode, ethereum, read, trx} = actor;
+        return Object.entries(delegates).reduce(async (acc_, [ref, delegate]) => {
+          let acc = await acc_; // force ordering
+
+          console.log(`Setting delegate for ${JSON.stringify(ref)} to ${JSON.stringify(delegate)}`);
+          if (deref(ref).address !== ethereum.from) {
+            throw new Error(`Cannot set delegate for ${JSON.stringify(ref)}`);
+          }
+
+          await trx(comp, 'delegate', [delegate]);
+        }, Promise.resolve(null));
+      }
     }
   },
-  build: async (actor, contract, {balances}, { definition }) => {
+  build: async (actor, contract, {balances, delegates}, { definition }) => {
     let {deploy, ethereum} = actor;
     let deployed = await deploy(contract, {
       account: ethereum.from
@@ -46,7 +66,24 @@ define('Comp', {
       console.log(`Setting token balances for ${contract}...`);
       await definition.typeProperties.balances.setter(actor, deployed, balances);
     }
+    if (delegates) {
+      console.log(`Setting token delegates for ${contract}...`);
+      await definition.typeProperties.delegates.setter(actor, deployed, delegates);
+    }
     return deployed;
+  }
+});
+
+define('Comp', {
+  match: {
+    has_properties: ['address']
+  },
+  contract: 'Comp',
+  properties: {
+    address: 'address'
+  },
+  build: async ({existing}, contract, { address }) => {
+    return existing(contract, address);
   }
 });
 

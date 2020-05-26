@@ -49,10 +49,10 @@ Or with gov:
 yarn eureka clean -y -n development -c config/*.js && yarn eureka apply -b ./.build -c config/*.js -e eureka/{compound,testnet,testnet-gov}.eureka
 ```
 
-Rinkeby
+Ropsten
 
 ```bash
-yarn eureka apply -n rinkeby -b ./.build -c config/*.js eureka/compound.eureka eureka/testnet.eureka
+yarn eureka apply -n ropsten -b ./.build -c config/*.js -e eureka/{compound,testnet,testnet-gov,ropsten}.eureka
 ```
 
 ## Test-net Deployment
