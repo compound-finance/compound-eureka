@@ -32,7 +32,7 @@ provider(env('provider', defaultProvider), {
   } : {}
 });
 
-async function gov(actor, contract, func, args, opts) {
+async function gov(actor, contract, func, args, opts={}) {
   let {read, encodeFunctionData, ethereum, show, trx} = actor;
   let admin = await read(contract, 'admin(): address', [], opts); // TODO: Pass through opts?
   if (admin == ethereum.from) {
@@ -48,11 +48,11 @@ async function gov(actor, contract, func, args, opts) {
   }
 }
 
-async function compoundTrx({events, trx}, contract, func, args, opts) {
+async function compoundTrx({events, trx}, contract, func, args, opts={}) {
   let receipt = await trx(contract, func, args, opts);
   let receiptEvents = {};
-  if (!func.includes('(')) { // Short hand to see if we're using a spelled out ABI
-    receiptEvents = events(contract, receipt);
+  if (!func.includes('(') || opts.proxy) { // Short hand to see if we're using a spelled out ABI
+    receiptEvents = events(opts.proxy ? { proxy: opts.proxy } : contract, receipt);
   }
   if (receiptEvents.hasOwnProperty('Failure')) {
     throw new Error(`Failed to execute Compound transaction, got failure: ${JSON.stringify(receiptEvents['Failure'])}`);
@@ -303,6 +303,7 @@ define("Unitroller", {
     supported_markets: {
       type: 'array',
       deferred: true,
+      order: 1,
       setter: async (actor, unitroller, markets, { properties }) => {
         let {events, read, show} = actor;
         return await markets.reduce(async (acc, market) => {
@@ -320,6 +321,7 @@ define("Unitroller", {
       }
     },
     collateral_factors: {
+      order: 2,
       dictionary: {
         key: 'ref',
         value: 'number'
