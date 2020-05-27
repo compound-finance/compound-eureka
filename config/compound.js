@@ -61,6 +61,18 @@ async function compoundTrx({events, trx}, contract, func, args, opts={}) {
   return receipt;
 }
 
+async function cTokenAdminSetter(actor, cToken, newAdmin_, {symbol}) {
+  let {deref, events, read, show, trx} = actor;
+  let admin = await read(cToken, 'admin(): address');
+  let newAdmin = deref(newAdmin_);
+
+  if (admin !== newAdmin.address) {
+    console.log(`Setting cToken ${symbol} admin from ${admin} to ${newAdmin.address}`);
+    let _setPendingAdmin = await gov(actor, cToken, '_setPendingAdmin(address)', [newAdmin]);
+    let _acceptAdmin = await trx(newAdmin, 'harnessAcceptAdmin(address cToken)', [cToken]);
+  }
+}
+
 // Define our contract configuration
 if (network !== 'mainnet') { // Skip these contracts on prod
   define("SimplePriceOracle", {
@@ -159,7 +171,10 @@ define('CToken', {
     type: 'string',
     symbol: 'string',
     name: 'string',
-    admin: 'address',
+    admin: {
+      type: 'address',
+      setter: cTokenAdminSetter
+    },
     underlying: { ref: 'Erc20' },
     comptroller: { ref: 'Unitroller' },
     decimals: { type: 'number', default: 8 },
@@ -196,7 +211,10 @@ define('CToken', {
     type: 'string',
     symbol: 'string',
     name: 'string',
-    admin: 'address',
+    admin: {
+      type: 'address',
+      setter: cTokenAdminSetter
+    },
     underlying: { ref: 'Erc20' },
     comptroller: { ref: 'Unitroller' },
     decimals: { type: 'number', default: 8 },
@@ -237,7 +255,10 @@ define('CToken', {
     type: 'string',
     symbol: 'string',
     name: 'string',
-    admin: 'address',
+    admin: {
+      type: 'address',
+      setter: cTokenAdminSetter
+    },
     comptroller: { ref: 'Unitroller' },
     decimals: { type: 'number', default: 8 },
     initial_exchange_rate: { type: 'number', default: 0.2e10 }, // TODO: Figure out default here

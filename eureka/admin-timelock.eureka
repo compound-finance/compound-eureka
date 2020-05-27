@@ -1,0 +1,5 @@
+
+// Define global admin to actually be the timelock
+Account {
+  admin: #timelock
+}

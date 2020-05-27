@@ -43,16 +43,20 @@ To do a fresh deploy to development, then, you can run:
 yarn eureka clean -y -n development -c config/*.js && yarn eureka apply -b ./.build -c config/*.js -e eureka/{compound,testnet}.eureka
 ```
 
-Or with gov:
+Kovan Deploy:
+
+This will deploy Kovan, but it will keep the admin of the cTokens and Unitroller the deployer address. This is because if we switch over to gov too early, we'll be forced to set everything up via proposals, which is slow and each address can only have one proposal at a time.
 
 ```bash
-yarn eureka clean -y -n development -c config/*.js && yarn eureka apply -b ./.build -c config/*.js -e eureka/{compound,testnet,testnet-gov}.eureka
+yarn eureka apply -n kovan -b ./.build -c config/*.js -e eureka/{compound,testnet,testnet-gov,kovan}.eureka
 ```
 
-Ropsten
+Kovan Deploy (Timelock Shift):
+
+This will switch over to timelock controlled governance, making all future changes come through the `GovernorAlpha` system.
 
 ```bash
-yarn eureka apply -n ropsten -b ./.build -c config/*.js -e eureka/{compound,testnet,testnet-gov,ropsten}.eureka
+yarn eureka apply -n kovan -b ./.build -c config/*.js -e eureka/{compound,testnet,testnet-gov,kovan,admin-timelock}.eureka
 ```
 
 ## Test-net Deployment

@@ -1,1 +1,1157 @@
-{}
+{
+  "lens": {
+    "contract": "lens",
+    "version": "b73e68c",
+    "properties": [],
+    "address": "0xCc04f4e3617Cc60b40E66A15258833a42776eC07",
+    "definition": "CompoundLens",
+    "deployment": {
+      "block": 18746557,
+      "constructorData": "",
+      "contract": "CompoundLens"
+    },
+    "verified": true
+  },
+  "Base200bps_Slope2000bps_Jump20000bps_Kink90": {
+    "contract": "Base200bps_Slope2000bps_Jump20000bps_Kink90",
+    "version": "b73e68c",
+    "properties": {
+      "kink": {
+        "type": "number",
+        "base": 90,
+        "exp": 0
+      },
+      "jump": {
+        "type": "number",
+        "base": 20000,
+        "exp": 14
+      },
+      "slope": {
+        "type": "number",
+        "base": 2000,
+        "exp": 14
+      },
+      "base": {
+        "type": "number",
+        "base": 200,
+        "exp": 14
+      },
+      "type": "jump"
+    },
+    "address": "0xC0421A129E775680BD22Af5143098075eD6B85d5",
+    "definition": "InterestRateModel",
+    "deployment": {
+      "block": 18746562,
+      "constructorData": "00000000000000000000000000000000000000000000000000470de4df82000000000000000000000000000000000000000000000000000002c68af0bb1400000000000000000000000000000000000000000000000000001bc16d674ec80000000000000000000000000000000000000000000000000000000000000000005a",
+      "contract": "JumpRateModel"
+    },
+    "verified": true
+  },
+  "Base200bps_Slope3000bps": {
+    "contract": "Base200bps_Slope3000bps",
+    "version": "b73e68c",
+    "properties": {
+      "slope": {
+        "type": "number",
+        "base": 3000,
+        "exp": 14
+      },
+      "base": {
+        "type": "number",
+        "base": 200,
+        "exp": 14
+      },
+      "type": "linear"
+    },
+    "address": "0xcdda9d63Da6ec00D932561189843F0Cd5D8cb240",
+    "definition": "InterestRateModel",
+    "deployment": {
+      "block": 18746565,
+      "constructorData": "00000000000000000000000000000000000000000000000000470de4df8200000000000000000000000000000000000000000000000000000429d069189e0000",
+      "contract": "WhitePaperInterestRateModel"
+    },
+    "verified": true
+  },
+  "Base500bps_Slope1200bps": {
+    "contract": "Base500bps_Slope1200bps",
+    "version": "b73e68c",
+    "properties": {
+      "slope": {
+        "type": "number",
+        "base": 1200,
+        "exp": 14
+      },
+      "base": {
+        "type": "number",
+        "base": 500,
+        "exp": 14
+      },
+      "type": "linear"
+    },
+    "address": "0xC75c796eEb91283c44AE72e23B3DE39d84ba513f",
+    "definition": "InterestRateModel",
+    "deployment": {
+      "block": 18746570,
+      "constructorData": "00000000000000000000000000000000000000000000000000b1a2bc2ec5000000000000000000000000000000000000000000000000000001aa535d3d0c0000",
+      "contract": "WhitePaperInterestRateModel"
+    },
+    "verified": true
+  },
+  "Base200bps_Slope1000bps": {
+    "contract": "Base200bps_Slope1000bps",
+    "version": "b73e68c",
+    "properties": {
+      "slope": {
+        "type": "number",
+        "base": 1000,
+        "exp": 14
+      },
+      "base": {
+        "type": "number",
+        "base": 200,
+        "exp": 14
+      },
+      "type": "linear"
+    },
+    "address": "0xc08e06C958FbDc8713Da2156DB8EE16e93964881",
+    "definition": "InterestRateModel",
+    "deployment": {
+      "block": 18746574,
+      "constructorData": "00000000000000000000000000000000000000000000000000470de4df820000000000000000000000000000000000000000000000000000016345785d8a0000",
+      "contract": "WhitePaperInterestRateModel"
+    },
+    "verified": true
+  },
+  "g1": {
+    "contract": "g1",
+    "version": "b73e68c",
+    "properties": [],
+    "address": "0xbfE739386f4c3EC82b5071F0FB9addd5234f0dAd",
+    "definition": "Comptroller",
+    "deployment": {
+      "block": 18746578,
+      "constructorData": "",
+      "contract": "Comptroller"
+    },
+    "verified": true
+  },
+  "cErc20Delegate": {
+    "contract": "cErc20Delegate",
+    "version": "b73e68c",
+    "properties": [],
+    "address": "0x389b80949CFB03Bdd15093De6EF2402812a0D6F1",
+    "definition": "CErc20Delegate",
+    "deployment": {
+      "block": 18746583,
+      "constructorData": "",
+      "contract": "CErc20Delegate"
+    },
+    "verified": true
+  },
+  "zrx": {
+    "contract": "zrx",
+    "version": "zrx",
+    "properties": {
+      "type": "zrx",
+      "name": "0x Protocol Token",
+      "symbol": "ZRX",
+      "decimals": {
+        "type": "number",
+        "base": "18",
+        "exp": 0
+      },
+      "balances": {
+        "#fauceteer": {
+          "type": "number",
+          "base": 10,
+          "exp": 26
+        }
+      }
+    },
+    "address": "0x35c225a7eCbe77a67F63d24F1C4B15bd92cdE623",
+    "definition": "Erc20",
+    "deployment": {
+      "block": 18746588,
+      "constructorData": "",
+      "contract": "ZRXToken"
+    }
+  },
+  "wbtc": {
+    "contract": "wbtc",
+    "version": "compound-test",
+    "properties": {
+      "total_supply": {
+        "type": "number",
+        "base": 3851,
+        "exp": 6
+      },
+      "decimals": {
+        "type": "number",
+        "base": 8,
+        "exp": 0
+      },
+      "symbol": "WBTC",
+      "name": "Wrapped BTC",
+      "balances": {
+        "#fauceteer": {
+          "type": "number",
+          "base": 3851,
+          "exp": 6
+        }
+      }
+    },
+    "address": "0xee1c5D04E27B72f991421BbF6eBA34cEbfd2204c",
+    "definition": "Erc20",
+    "deployment": {
+      "block": 18746589,
+      "constructorData": "00000000000000000000000000000000000000000000000000000000e58998c00000000000000000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000c0000000000000000000000000000000000000000000000000000000000000000b577261707065642042544300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000045742544300000000000000000000000000000000000000000000000000000000",
+      "contract": "FaucetToken"
+    },
+    "verified": true
+  },
+  "usdt": {
+    "contract": "usdt",
+    "version": "usdt",
+    "properties": {
+      "total_supply": {
+        "type": "number",
+        "base": 5737970410,
+        "exp": 6
+      },
+      "decimals": {
+        "type": "number",
+        "base": 6,
+        "exp": 0
+      },
+      "symbol": "USDT",
+      "name": "Tether",
+      "type": "usdt",
+      "balances": {
+        "#fauceteer": {
+          "type": "number",
+          "base": 5737970410,
+          "exp": 6
+        }
+      }
+    },
+    "address": "0xbD728022f8CA70be63A5B88a244B7eDF69F149BB",
+    "definition": "Erc20",
+    "deployment": {
+      "block": 18746592,
+      "constructorData": "000000000000000000000000000000000000000000000000001462a758050e80000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000c000000000000000000000000000000000000000000000000000000000000000060000000000000000000000000000000000000000000000000000000000000006546574686572000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000045553445400000000000000000000000000000000000000000000000000000000",
+      "contract": "TetherToken"
+    }
+  },
+  "usdc": {
+    "contract": "usdc",
+    "version": "compound-test",
+    "properties": {
+      "total_supply": {
+        "type": "number",
+        "base": 732246278,
+        "exp": 6
+      },
+      "decimals": {
+        "type": "number",
+        "base": 6,
+        "exp": 0
+      },
+      "symbol": "USDC",
+      "name": "USD Coin",
+      "balances": {
+        "#fauceteer": {
+          "type": "number",
+          "base": 732246278,
+          "exp": 6
+        }
+      }
+    },
+    "address": "0xf426f9f9099565c2c90B6F5886B467Fc83a37f46",
+    "definition": "Erc20",
+    "deployment": {
+      "block": 18746594,
+      "constructorData": "000000000000000000000000000000000000000000000000000299f95f49cd800000000000000000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000000000c0000000000000000000000000000000000000000000000000000000000000000855534420436f696e00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000045553444300000000000000000000000000000000000000000000000000000000",
+      "contract": "FaucetToken"
+    },
+    "verified": true
+  },
+  "sai": {
+    "contract": "sai",
+    "version": "compound-test",
+    "properties": {
+      "total_supply": {
+        "type": "number",
+        "base": 8299054,
+        "exp": 18
+      },
+      "decimals": {
+        "type": "number",
+        "base": 18,
+        "exp": 0
+      },
+      "symbol": "SAI",
+      "name": "Sai",
+      "balances": {
+        "#fauceteer": {
+          "type": "number",
+          "base": 8299054,
+          "exp": 18
+        }
+      }
+    },
+    "address": "0xA1125c8C4EF6857f318de5EeFE047641c765eac0",
+    "definition": "Erc20",
+    "deployment": {
+      "block": 18746597,
+      "constructorData": "00000000000000000000000000000000000000000006dd649e6ae76d5bf800000000000000000000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000000000000001200000000000000000000000000000000000000000000000000000000000000c00000000000000000000000000000000000000000000000000000000000000003536169000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000035341490000000000000000000000000000000000000000000000000000000000",
+      "contract": "FaucetToken"
+    },
+    "verified": true
+  },
+  "rep": {
+    "contract": "rep",
+    "version": "compound-test",
+    "properties": {
+      "total_supply": {
+        "type": "number",
+        "base": 11000000,
+        "exp": 18
+      },
+      "decimals": {
+        "type": "number",
+        "base": 18,
+        "exp": 0
+      },
+      "symbol": "REP",
+      "name": "Augur",
+      "balances": {
+        "#fauceteer": {
+          "type": "number",
+          "base": 11000000,
+          "exp": 18
+        }
+      }
+    },
+    "address": "0x417cA2EDbDB4FAe61Ac3E5e6Afe6A74C45cd0B30",
+    "definition": "Erc20",
+    "deployment": {
+      "block": 18746601,
+      "constructorData": "00000000000000000000000000000000000000000009195731e2ce35eb0000000000000000000000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000000000000001200000000000000000000000000000000000000000000000000000000000000c00000000000000000000000000000000000000000000000000000000000000005417567757200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000035245500000000000000000000000000000000000000000000000000000000000",
+      "contract": "FaucetToken"
+    },
+    "verified": true
+  },
+  "dai": {
+    "contract": "dai",
+    "version": "dai",
+    "properties": {
+      "decimals": {
+        "type": "number",
+        "base": 18,
+        "exp": 0
+      },
+      "symbol": "DAI",
+      "name": "Dai Stablecoin",
+      "address": "0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa",
+      "dai": true
+    },
+    "address": "0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa",
+    "definition": "Erc20"
+  },
+  "bat": {
+    "contract": "bat",
+    "version": "bat",
+    "properties": {
+      "type": "bat",
+      "name": "Basic Attention Token",
+      "symbol": "BAT",
+      "decimals": {
+        "type": "number",
+        "base": "18",
+        "exp": 0
+      },
+      "balances": {
+        "#fauceteer": {
+          "type": "number",
+          "base": 5,
+          "exp": 26
+        }
+      }
+    },
+    "address": "0x110950e0FC7f8f3C51F76E3973fBe4769609eBB6",
+    "definition": "Erc20",
+    "deployment": {
+      "block": 18746606,
+      "constructorData": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000a776184fd6f545dae5f51361dbcc9018549a974900000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "contract": "BAToken"
+    }
+  },
+  "fauceteer": {
+    "contract": "fauceteer",
+    "version": "compound-test",
+    "properties": [],
+    "address": "0xFc6B2279591Cb79c5ff382443fdDfec7A920Cbb3",
+    "definition": "Fauceteer",
+    "deployment": {
+      "block": 18746607,
+      "constructorData": "",
+      "contract": "Fauceteer"
+    },
+    "verified": true
+  },
+  "oracle": {
+    "contract": "oracle",
+    "version": "b73e68c",
+    "properties": {
+      "prices": {
+        "#bat": {
+          "type": "number",
+          "base": 999,
+          "exp": 12
+        },
+        "#dai": {
+          "type": "number",
+          "base": 4825,
+          "exp": 12
+        },
+        "#rep": {
+          "type": "number",
+          "base": 61329,
+          "exp": 12
+        },
+        "#sai": {
+          "type": "number",
+          "base": 5286,
+          "exp": 12
+        },
+        "#usdc": {
+          "type": "number",
+          "base": 4779,
+          "exp": 24
+        },
+        "#usdt": {
+          "type": "number",
+          "base": 4779,
+          "exp": 24
+        },
+        "#wbtc": {
+          "type": "number",
+          "base": 44166198,
+          "exp": 22
+        },
+        "#zrx": {
+          "type": "number",
+          "base": 1608,
+          "exp": 12
+        }
+      }
+    },
+    "address": "0x6f9b9E5EFfA9924E43D0f566C96621bf4bC0Eca7",
+    "definition": "SimplePriceOracle",
+    "deployment": {
+      "block": 18746610,
+      "constructorData": "",
+      "contract": "SimplePriceOracle"
+    },
+    "verified": true
+  },
+  "g3": {
+    "contract": "g3",
+    "version": "e0a16ae",
+    "properties": [],
+    "address": "0x3Def8FCceFB1EfBE54F9020F05386958f1f70EDc",
+    "definition": "Comptroller",
+    "deployment": {
+      "block": 18746623,
+      "constructorData": "",
+      "contract": "Comptroller"
+    },
+    "verified": true
+  },
+  "comp": {
+    "contract": "comp",
+    "version": "b73e68c",
+    "properties": {
+      "delegates": {
+        "$sender": {
+          "type": "account",
+          "account": "sender"
+        }
+      },
+      "decimals": {
+        "type": "number",
+        "base": 18,
+        "exp": 0
+      },
+      "symbol": "COMP",
+      "name": "Comp",
+      "balances": {
+        "#fauceteer": {
+          "type": "number",
+          "base": 10,
+          "exp": 23
+        },
+        "#reservior": {
+          "type": "number",
+          "base": 40,
+          "exp": 23
+        }
+      }
+    },
+    "address": "0x0c037011540F9E561807911FdAe8034Dd8B37a9b",
+    "definition": "Comp",
+    "deployment": {
+      "block": 18746628,
+      "constructorData": "000000000000000000000000a776184fd6f545dae5f51361dbcc9018549a9749",
+      "contract": "Comp"
+    },
+    "verified": true
+  },
+  "timelock": {
+    "contract": "timelock",
+    "version": "compound-test",
+    "properties": {
+      "delay": {
+        "type": "number",
+        "base": 60,
+        "exp": 0
+      },
+      "admin": {
+        "type": "ref",
+        "ref": "gov"
+      }
+    },
+    "address": "0x0f64cad70a6ae9cb37071E0e0646586904A8E1c1",
+    "definition": "Timelock",
+    "deployment": {
+      "block": 18746634,
+      "constructorData": "000000000000000000000000a776184fd6f545dae5f51361dbcc9018549a9749000000000000000000000000000000000000000000000000000000000000003c",
+      "contract": "TimelockTest"
+    },
+    "verified": true
+  },
+  "jug": {
+    "contract": "jug",
+    "version": "dai",
+    "properties": {
+      "address": "0xcbB7718c9F39d05aEEDE1c472ca8Bf804b2f1EaD"
+    },
+    "address": "0xcbB7718c9F39d05aEEDE1c472ca8Bf804b2f1EaD",
+    "definition": "Jug"
+  },
+  "pot": {
+    "contract": "pot",
+    "version": "dai",
+    "properties": {
+      "address": "0xEA190DBDC7adF265260ec4dA6e9675Fd4f5A78bb"
+    },
+    "address": "0xEA190DBDC7adF265260ec4dA6e9675Fd4f5A78bb",
+    "definition": "Pot"
+  },
+  "cDaiDelegate": {
+    "contract": "cDaiDelegate",
+    "version": "b73e68c",
+    "properties": [],
+    "address": "0x51A2fe22386B91Afc76b48144dB1f05361992f27",
+    "definition": "CErc20Delegate",
+    "deployment": {
+      "block": 18746637,
+      "constructorData": "",
+      "contract": "CErc20Delegate"
+    },
+    "verified": true
+  },
+  "comptroller": {
+    "contract": "comptroller",
+    "version": "e0a16ae",
+    "properties": {
+      "max_assets": {
+        "type": "number",
+        "base": 20,
+        "exp": 0
+      },
+      "close_factor": {
+        "type": "number",
+        "base": 5,
+        "exp": 17
+      },
+      "oracle": {
+        "type": "ref",
+        "ref": "oracle"
+      },
+      "generation": "g3",
+      "implementation": {
+        "type": "ref",
+        "ref": "g3"
+      },
+      "admin": {
+        "type": "ref",
+        "ref": "timelock"
+      },
+      "comp_rate": {
+        "type": "number",
+        "base": 5,
+        "exp": 17
+      },
+      "supported_markets": [
+        {
+          "type": "ref",
+          "ref": "cBAT"
+        },
+        {
+          "type": "ref",
+          "ref": "cDAI"
+        },
+        {
+          "type": "ref",
+          "ref": "cREP"
+        },
+        {
+          "type": "ref",
+          "ref": "cSAI"
+        },
+        {
+          "type": "ref",
+          "ref": "cETH"
+        },
+        {
+          "type": "ref",
+          "ref": "cUSDC"
+        },
+        {
+          "type": "ref",
+          "ref": "cUSDT"
+        },
+        {
+          "type": "ref",
+          "ref": "cWBTC"
+        },
+        {
+          "type": "ref",
+          "ref": "cZRX"
+        }
+      ],
+      "collateral_factors": {
+        "#cBAT": {
+          "type": "number",
+          "base": 60,
+          "exp": 16
+        },
+        "#cDAI": {
+          "type": "number",
+          "base": 75,
+          "exp": 16
+        },
+        "#cREP": {
+          "type": "number",
+          "base": 40,
+          "exp": 16
+        },
+        "#cSAI": {
+          "type": "number",
+          "base": 65,
+          "exp": 16
+        },
+        "#cETH": {
+          "type": "number",
+          "base": 75,
+          "exp": 16
+        },
+        "#cUSDC": {
+          "type": "number",
+          "base": 75,
+          "exp": 16
+        },
+        "#cZRX": {
+          "type": "number",
+          "base": 60,
+          "exp": 16
+        }
+      },
+      "comp_markets": [
+        {
+          "type": "ref",
+          "ref": "cBAT"
+        },
+        {
+          "type": "ref",
+          "ref": "cDAI"
+        },
+        {
+          "type": "ref",
+          "ref": "cETH"
+        },
+        {
+          "type": "ref",
+          "ref": "cUSDC"
+        },
+        {
+          "type": "ref",
+          "ref": "cUSDT"
+        },
+        {
+          "type": "ref",
+          "ref": "cWBTC"
+        },
+        {
+          "type": "ref",
+          "ref": "cZRX"
+        }
+      ]
+    },
+    "address": "0x28b1f65a0e02456efcc8DbfbC46F536750C66572",
+    "definition": "Unitroller",
+    "deployment": {
+      "block": 18746643,
+      "constructorData": "",
+      "contract": "Unitroller"
+    },
+    "verified": true
+  },
+  "cZRX": {
+    "contract": "cZRX",
+    "version": "b73e68c",
+    "properties": {
+      "admin": {
+        "type": "ref",
+        "ref": "timelock"
+      },
+      "interest_rate_model": {
+        "type": "ref",
+        "ref": "Base200bps_Slope3000bps"
+      },
+      "delegate": {
+        "type": "ref",
+        "ref": "cErc20Delegate"
+      },
+      "comptroller": {
+        "type": "ref",
+        "ref": "comptroller"
+      },
+      "underlying": {
+        "type": "ref",
+        "ref": "zrx"
+      },
+      "name": "Compound ZRX",
+      "symbol": "cZRX",
+      "type": "immutable",
+      "decimals": 8,
+      "initial_exchange_rate": 2000000000
+    },
+    "address": "0xCc64de099d591A2467d69328d44A0d8B2DC348B9",
+    "definition": "CToken",
+    "deployment": {
+      "block": 18746651,
+      "constructorData": "00000000000000000000000035c225a7ecbe77a67f63d24f1c4b15bd92cde62300000000000000000000000028b1f65a0e02456efcc8dbfbc46f536750c66572000000000000000000000000cdda9d63da6ec00d932561189843f0cd5d8cb2400000000000000000000000000000000000000000000000000000000077359400000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001400000000000000000000000000000000000000000000000000000000000000008000000000000000000000000a776184fd6f545dae5f51361dbcc9018549a9749000000000000000000000000000000000000000000000000000000000000000c436f6d706f756e64205a525800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000004635a525800000000000000000000000000000000000000000000000000000000",
+      "contract": "CErc20Immutable"
+    },
+    "verified": true
+  },
+  "cWBTC": {
+    "contract": "cWBTC",
+    "version": "b73e68c",
+    "properties": {
+      "admin": {
+        "type": "ref",
+        "ref": "timelock"
+      },
+      "interest_rate_model": {
+        "type": "ref",
+        "ref": "Base200bps_Slope3000bps"
+      },
+      "delegate": {
+        "type": "ref",
+        "ref": "cErc20Delegate"
+      },
+      "comptroller": {
+        "type": "ref",
+        "ref": "comptroller"
+      },
+      "underlying": {
+        "type": "ref",
+        "ref": "wbtc"
+      },
+      "name": "Compound WBTC",
+      "symbol": "cWBTC",
+      "type": "immutable",
+      "decimals": 8,
+      "initial_exchange_rate": 2000000000
+    },
+    "address": "0x0Af84aCb0bd83E49de63021518130Ef091B6a7bE",
+    "definition": "CToken",
+    "deployment": {
+      "block": 18746657,
+      "constructorData": "000000000000000000000000ee1c5d04e27b72f991421bbf6eba34cebfd2204c00000000000000000000000028b1f65a0e02456efcc8dbfbc46f536750c66572000000000000000000000000cdda9d63da6ec00d932561189843f0cd5d8cb2400000000000000000000000000000000000000000000000000000000077359400000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001400000000000000000000000000000000000000000000000000000000000000008000000000000000000000000a776184fd6f545dae5f51361dbcc9018549a9749000000000000000000000000000000000000000000000000000000000000000d436f6d706f756e6420574254430000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000056357425443000000000000000000000000000000000000000000000000000000",
+      "contract": "CErc20Immutable"
+    },
+    "verified": true
+  },
+  "cUSDT": {
+    "contract": "cUSDT",
+    "version": "b73e68c",
+    "properties": {
+      "admin": {
+        "type": "ref",
+        "ref": "timelock"
+      },
+      "interest_rate_model": {
+        "type": "ref",
+        "ref": "Base200bps_Slope2000bps_Jump20000bps_Kink90"
+      },
+      "delegate": {
+        "type": "ref",
+        "ref": "cErc20Delegate"
+      },
+      "comptroller": {
+        "type": "ref",
+        "ref": "comptroller"
+      },
+      "underlying": {
+        "type": "ref",
+        "ref": "usdt"
+      },
+      "name": "Compound USDT",
+      "symbol": "cUSDT",
+      "type": "delegator",
+      "decimals": 8,
+      "become_implementation_data": "0x",
+      "initial_exchange_rate": 2000000000
+    },
+    "address": "0x83536B442863dF622Da36611181a39743dAf9caA",
+    "definition": "CToken",
+    "deployment": {
+      "block": 18746660,
+      "constructorData": "000000000000000000000000bd728022f8ca70be63a5b88a244b7edf69f149bb00000000000000000000000028b1f65a0e02456efcc8dbfbc46f536750c66572000000000000000000000000c0421a129e775680bd22af5143098075ed6b85d50000000000000000000000000000000000000000000000000000000077359400000000000000000000000000000000000000000000000000000000000000014000000000000000000000000000000000000000000000000000000000000001800000000000000000000000000000000000000000000000000000000000000008000000000000000000000000a776184fd6f545dae5f51361dbcc9018549a9749000000000000000000000000389b80949cfb03bdd15093de6ef2402812a0d6f100000000000000000000000000000000000000000000000000000000000001c0000000000000000000000000000000000000000000000000000000000000000d436f6d706f756e64205553445400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000563555344540000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "contract": "CErc20Delegator"
+    },
+    "verified": true
+  },
+  "cUSDC": {
+    "contract": "cUSDC",
+    "version": "b73e68c",
+    "properties": {
+      "admin": {
+        "type": "ref",
+        "ref": "timelock"
+      },
+      "interest_rate_model": {
+        "type": "ref",
+        "ref": "Base200bps_Slope1000bps"
+      },
+      "delegate": {
+        "type": "ref",
+        "ref": "cErc20Delegate"
+      },
+      "comptroller": {
+        "type": "ref",
+        "ref": "comptroller"
+      },
+      "underlying": {
+        "type": "ref",
+        "ref": "usdc"
+      },
+      "name": "Compound USDC",
+      "symbol": "cUSDC",
+      "type": "immutable",
+      "decimals": 8,
+      "initial_exchange_rate": 2000000000
+    },
+    "address": "0x6B40e11006A259df21581f90075b61a75e888BC7",
+    "definition": "CToken",
+    "deployment": {
+      "block": 18746664,
+      "constructorData": "000000000000000000000000f426f9f9099565c2c90b6f5886b467fc83a37f4600000000000000000000000028b1f65a0e02456efcc8dbfbc46f536750c66572000000000000000000000000c08e06c958fbdc8713da2156db8ee16e939648810000000000000000000000000000000000000000000000000000000077359400000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001400000000000000000000000000000000000000000000000000000000000000008000000000000000000000000a776184fd6f545dae5f51361dbcc9018549a9749000000000000000000000000000000000000000000000000000000000000000d436f6d706f756e6420555344430000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000056355534443000000000000000000000000000000000000000000000000000000",
+      "contract": "CErc20Immutable"
+    },
+    "verified": true
+  },
+  "cETH": {
+    "contract": "cETH",
+    "version": "b73e68c",
+    "properties": {
+      "admin": {
+        "type": "ref",
+        "ref": "timelock"
+      },
+      "interest_rate_model": {
+        "type": "ref",
+        "ref": "Base200bps_Slope1000bps"
+      },
+      "comptroller": {
+        "type": "ref",
+        "ref": "comptroller"
+      },
+      "name": "Compound ETH",
+      "symbol": "cETH",
+      "type": "cether",
+      "decimals": 8,
+      "initial_exchange_rate": 2000000000
+    },
+    "address": "0x7FC17A20ab83c4bc770C6AB021BB5f657FeE581D",
+    "definition": "CToken",
+    "deployment": {
+      "block": 18746669,
+      "constructorData": "00000000000000000000000028b1f65a0e02456efcc8dbfbc46f536750c66572000000000000000000000000c08e06c958fbdc8713da2156db8ee16e93964881000000000000000000000000000000000000000000000000000000007735940000000000000000000000000000000000000000000000000000000000000000e000000000000000000000000000000000000000000000000000000000000001200000000000000000000000000000000000000000000000000000000000000008000000000000000000000000a776184fd6f545dae5f51361dbcc9018549a9749000000000000000000000000000000000000000000000000000000000000000c436f6d706f756e6420455448000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000046345544800000000000000000000000000000000000000000000000000000000",
+      "contract": "CEther"
+    },
+    "verified": true
+  },
+  "cSAI": {
+    "contract": "cSAI",
+    "version": "b73e68c",
+    "properties": {
+      "admin": {
+        "type": "ref",
+        "ref": "timelock"
+      },
+      "interest_rate_model": {
+        "type": "ref",
+        "ref": "Base500bps_Slope1200bps"
+      },
+      "delegate": {
+        "type": "ref",
+        "ref": "cErc20Delegate"
+      },
+      "comptroller": {
+        "type": "ref",
+        "ref": "comptroller"
+      },
+      "underlying": {
+        "type": "ref",
+        "ref": "sai"
+      },
+      "name": "Compound SAI",
+      "symbol": "cSAI",
+      "type": "immutable",
+      "decimals": 8,
+      "initial_exchange_rate": 2000000000
+    },
+    "address": "0x1B9BF3cbe1D7E4dD2dfF0E01C5C0533A083320c3",
+    "definition": "CToken",
+    "deployment": {
+      "block": 18746674,
+      "constructorData": "000000000000000000000000a1125c8c4ef6857f318de5eefe047641c765eac000000000000000000000000028b1f65a0e02456efcc8dbfbc46f536750c66572000000000000000000000000c75c796eeb91283c44ae72e23b3de39d84ba513f0000000000000000000000000000000000000000000000000000000077359400000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001400000000000000000000000000000000000000000000000000000000000000008000000000000000000000000a776184fd6f545dae5f51361dbcc9018549a9749000000000000000000000000000000000000000000000000000000000000000c436f6d706f756e6420534149000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000046353414900000000000000000000000000000000000000000000000000000000",
+      "contract": "CErc20Immutable"
+    },
+    "verified": true
+  },
+  "cREP": {
+    "contract": "cREP",
+    "version": "b73e68c",
+    "properties": {
+      "admin": {
+        "type": "ref",
+        "ref": "timelock"
+      },
+      "interest_rate_model": {
+        "type": "ref",
+        "ref": "Base200bps_Slope3000bps"
+      },
+      "delegate": {
+        "type": "ref",
+        "ref": "cErc20Delegate"
+      },
+      "comptroller": {
+        "type": "ref",
+        "ref": "comptroller"
+      },
+      "underlying": {
+        "type": "ref",
+        "ref": "rep"
+      },
+      "name": "Compound REP",
+      "symbol": "cDAI",
+      "type": "immutable",
+      "decimals": 8,
+      "initial_exchange_rate": 2000000000
+    },
+    "address": "0xeB8763EA5C796070FCa5adE8C73f331Cf0516126",
+    "definition": "CToken",
+    "deployment": {
+      "block": 18746679,
+      "constructorData": "000000000000000000000000417ca2edbdb4fae61ac3e5e6afe6a74c45cd0b3000000000000000000000000028b1f65a0e02456efcc8dbfbc46f536750c66572000000000000000000000000cdda9d63da6ec00d932561189843f0cd5d8cb2400000000000000000000000000000000000000000000000000000000077359400000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001400000000000000000000000000000000000000000000000000000000000000008000000000000000000000000a776184fd6f545dae5f51361dbcc9018549a9749000000000000000000000000000000000000000000000000000000000000000c436f6d706f756e6420524550000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000046344414900000000000000000000000000000000000000000000000000000000",
+      "contract": "CErc20Immutable"
+    },
+    "verified": true
+  },
+  "cBAT": {
+    "contract": "cBAT",
+    "version": "b73e68c",
+    "properties": {
+      "admin": {
+        "type": "ref",
+        "ref": "timelock"
+      },
+      "interest_rate_model": {
+        "type": "ref",
+        "ref": "Base200bps_Slope3000bps"
+      },
+      "delegate": {
+        "type": "ref",
+        "ref": "cErc20Delegate"
+      },
+      "comptroller": {
+        "type": "ref",
+        "ref": "comptroller"
+      },
+      "underlying": {
+        "type": "ref",
+        "ref": "bat"
+      },
+      "name": "Compound BAT",
+      "symbol": "cBAT",
+      "type": "immutable",
+      "decimals": 8,
+      "initial_exchange_rate": 2000000000
+    },
+    "address": "0x9BAb6c849B0aAE10bE1137C68595EC928c615722",
+    "definition": "CToken",
+    "deployment": {
+      "block": 18746683,
+      "constructorData": "000000000000000000000000110950e0fc7f8f3c51f76e3973fbe4769609ebb600000000000000000000000028b1f65a0e02456efcc8dbfbc46f536750c66572000000000000000000000000cdda9d63da6ec00d932561189843f0cd5d8cb2400000000000000000000000000000000000000000000000000000000077359400000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001400000000000000000000000000000000000000000000000000000000000000008000000000000000000000000a776184fd6f545dae5f51361dbcc9018549a9749000000000000000000000000000000000000000000000000000000000000000c436f6d706f756e6420424154000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000046342415400000000000000000000000000000000000000000000000000000000",
+      "contract": "CErc20Immutable"
+    },
+    "verified": true
+  },
+  "reservior": {
+    "contract": "reservior",
+    "version": "e0a16ae",
+    "properties": {
+      "target": {
+        "type": "ref",
+        "ref": "comptroller"
+      },
+      "token": {
+        "type": "ref",
+        "ref": "comp"
+      },
+      "drip_rate": {
+        "type": "number",
+        "base": 5,
+        "exp": 17
+      }
+    },
+    "address": "0x07Bfc562F67690Ad8300f05ccb05EC97C23d3D0e",
+    "definition": "Reservoir",
+    "deployment": {
+      "block": 18746695,
+      "constructorData": "00000000000000000000000000000000000000000000000006f05b59d3b200000000000000000000000000000c037011540f9e561807911fdae8034dd8b37a9b00000000000000000000000028b1f65a0e02456efcc8dbfbc46f536750c66572",
+      "contract": "Reservoir"
+    },
+    "verified": true
+  },
+  "gov": {
+    "contract": "gov",
+    "version": "compound-test",
+    "properties": {
+      "timelock": {
+        "type": "ref",
+        "ref": "timelock"
+      },
+      "comp": {
+        "type": "ref",
+        "ref": "comp"
+      },
+      "harness": true
+    },
+    "address": "0xa0943253AcBdc4464472D53C9f2bB3d359bCFEE2",
+    "definition": "Governor",
+    "deployment": {
+      "block": 18746702,
+      "constructorData": "0000000000000000000000000f64cad70a6ae9cb37071e0e0646586904a8e1c10000000000000000000000000c037011540f9e561807911fdae8034dd8b37a9b000000000000000000000000a776184fd6f545dae5f51361dbcc9018549a9749",
+      "contract": "GovernorAlpha"
+    },
+    "verified": true
+  },
+  "DSR_Kink_9000bps_Jump_12000bps_AssumedRF_20000bps": {
+    "contract": "DSR_Kink_9000bps_Jump_12000bps_AssumedRF_20000bps",
+    "version": "a79cda9",
+    "properties": {
+      "jug": {
+        "type": "ref",
+        "ref": "jug"
+      },
+      "pot": {
+        "type": "ref",
+        "ref": "pot"
+      },
+      "kink": {
+        "type": "number",
+        "base": 9,
+        "exp": 17
+      },
+      "jump": {
+        "type": "number",
+        "base": 12000,
+        "exp": 14
+      },
+      "type": "dsr"
+    },
+    "address": "0xD9dDD2CaeA08f174e6446f53827D7Bf3AE94962C",
+    "definition": "InterestRateModel",
+    "deployment": {
+      "block": 18746705,
+      "constructorData": "00000000000000000000000000000000000000000000000010a741a4627800000000000000000000000000000000000000000000000000000c7d713b49da0000000000000000000000000000ea190dbdc7adf265260ec4da6e9675fd4f5a78bb000000000000000000000000cbb7718c9f39d05aeede1c472ca8bf804b2f1ead",
+      "contract": "DAIInterestRateModelV2"
+    },
+    "verified": true
+  },
+  "max": {
+    "contract": "max",
+    "version": "b73e68c",
+    "properties": {
+      "cEther": {
+        "type": "ref",
+        "ref": "cETH"
+      }
+    },
+    "address": "0x725029850f2436ACbCc7A49031F4e5Dc90C23278",
+    "definition": "Maximillion",
+    "deployment": {
+      "block": 18746710,
+      "constructorData": "0000000000000000000000007fc17a20ab83c4bc770c6ab021bb5f657fee581d",
+      "contract": "Maximillion"
+    },
+    "verified": true
+  },
+  "cDAI": {
+    "contract": "cDAI",
+    "version": "b73e68c",
+    "properties": {
+      "admin": {
+        "type": "ref",
+        "ref": "timelock"
+      },
+      "interest_rate_model": {
+        "type": "ref",
+        "ref": "DSR_Kink_9000bps_Jump_12000bps_AssumedRF_20000bps"
+      },
+      "delegate": {
+        "type": "ref",
+        "ref": "cDaiDelegate"
+      },
+      "comptroller": {
+        "type": "ref",
+        "ref": "comptroller"
+      },
+      "underlying": {
+        "type": "ref",
+        "ref": "dai"
+      },
+      "name": "Compound DAI",
+      "symbol": "cDAI",
+      "type": "delegator",
+      "decimals": 8,
+      "become_implementation_data": "0x",
+      "initial_exchange_rate": 2000000000
+    },
+    "address": "0x9Fa9048dC2d683581ae470a0DecE5565b84E5361",
+    "definition": "CToken",
+    "deployment": {
+      "block": 18746714,
+      "constructorData": "0000000000000000000000004f96fe3b7a6cf9725f59d353f723c1bdb64ca6aa00000000000000000000000028b1f65a0e02456efcc8dbfbc46f536750c66572000000000000000000000000d9ddd2caea08f174e6446f53827d7bf3ae94962c0000000000000000000000000000000000000000000000000000000077359400000000000000000000000000000000000000000000000000000000000000014000000000000000000000000000000000000000000000000000000000000001800000000000000000000000000000000000000000000000000000000000000008000000000000000000000000a776184fd6f545dae5f51361dbcc9018549a974900000000000000000000000051a2fe22386b91afc76b48144db1f05361992f2700000000000000000000000000000000000000000000000000000000000001c0000000000000000000000000000000000000000000000000000000000000000c436f6d706f756e64204441490000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000463444149000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "contract": "CErc20Delegator"
+    },
+    "verified": true
+  }
+}

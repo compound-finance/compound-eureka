@@ -37,6 +37,7 @@ Unitroller#comptroller [e0a16ae] {
   comp_markets: [
     #cBAT,
     #cDAI,
+    #cETH,
     #cUSDC,
     #cUSDT,
     #cWBTC,
