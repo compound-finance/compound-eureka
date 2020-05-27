@@ -8,7 +8,10 @@ define('Erc20', {
   },
   properties: {
     dai: 'bool',
-    address: 'address'
+    address: 'address',
+    name: 'string',
+    decimals: 'number',
+    symbol: 'string'
   },
   build: async ({existing}, contract, {address}) => existing(contract, address)
 });

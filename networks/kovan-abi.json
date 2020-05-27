@@ -6861,7 +6861,7 @@
       "constant": false,
       "inputs": [
         {
-          "internalType": "contract EIP20Interface",
+          "internalType": "contract EIP20NonStandardInterface",
           "name": "token",
           "type": "address"
         }

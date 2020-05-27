@@ -55,13 +55,15 @@ function tokenProperties({address, contract, definition, deployment, properties}
     } 
   }
 
+  let contractJson = deployment && { contract: deployment.contract };
+
   return {
     name: properties.name,
     symbol: properties.symbol,
     decimals: toNumber(properties.decimals),
-    contract: deployment.contract,
     address: address,
-    ...cTokenProps
+    ...cTokenProps,
+    ...contractJson
   }
 }
 
@@ -74,7 +76,7 @@ function mapContracts(state, refMap, filter, map, singleton=false, allowMissing=
   } else if (Array.isArray(filter) || typeof(filter) === 'string') {
     filteredEntries = stateEntries.filter(([ref, {definition, deployment}]) => {
       let filterArr = asArray(filter);
-      return deployment && (
+      return (deployment &&
         filterArr.includes(deployment.contract) ||
         filterArr.includes(definition)
       )
