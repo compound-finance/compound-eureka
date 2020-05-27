@@ -16,6 +16,10 @@ Governor#gov [compound-test] {
 }
 
 Comp#comp [b73e68c] {
+  name: "Comp"
+  symbol: "COMP"
+  decimals: 18
+
   balances: {
     #fauceteer: 1.0e24 // 1MM Comp tokens to Fauceteer, rest stay with $sender
   }

@@ -369,6 +369,11 @@ define("Unitroller", {
       await definition.typeProperties.implementation.setter(actor, deployed, implementation, properties);
     }
 
+    if (oracle) {
+      console.log("Setting oracle...");
+      await definition.typeProperties.oracle.setter(actor, deployed, oracle, properties);
+    }
+
     if (supported_markets) {
       console.log("Supporting markets...");
       await definition.typeProperties.supported_markets.setter(actor, deployed, supported_markets, properties);

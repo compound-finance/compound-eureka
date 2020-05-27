@@ -25,5 +25,9 @@
   "cZRX": "cZRX",
   "cWBTC": "cWBTC",
   "usdc": "USDC",
-  "usdt": "USDT"
+  "usdt": "USDT",
+  "comp": "Comp",
+  "jug": "Jug",
+  "pot": "Pot",
+  "gov": "GovernorAlpha"
 }

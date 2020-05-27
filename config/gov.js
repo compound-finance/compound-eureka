@@ -6,6 +6,9 @@ define('Comp', {
   },
   contract: 'Comp',
   properties: {
+    name: 'string',
+    decimals: 'number',
+    symbol: 'string',
     balances: {
       deferred: true,
       dictionary: {

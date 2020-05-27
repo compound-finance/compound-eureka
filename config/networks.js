@@ -86,7 +86,13 @@ function mapContracts(state, refMap, filter, map, singleton=false, allowMissing=
   }
 
   let mappedEntries = filteredEntries.map(([ref, contract]) => {
-    let r = refMap.hasOwnProperty(ref) ? refMap[ref] : ref;
+    let r;
+    if (typeof(refMap) === 'function') {
+      r = refMap(contract);
+    } else {
+      r = refMap.hasOwnProperty(ref) ? refMap[ref] : ref;
+    }
+
     return [r, map(contract, ref)];
   }).filter(([k, v]) => v !== null);
 
@@ -219,14 +225,14 @@ hook('state.save', async (state, {ethereum}) => {
 
     let tokensJson = mapContracts(
       state,
-      refMap,
-      ['Erc20', 'CToken'],
+      (contract) => contract.properties.symbol,
+      ['Erc20', 'CToken', 'Comp'],
       (contract) => tokenProperties(contract, state, accounts)
     );
 
     let cTokenDelegateJson = mapContracts(
       state,
-      refMap,
+      (contract) => contract.properties.symbol,
       ['CErc20Delegate', 'CDaiDelegate'],
       ({address, deployment}) => ({
         address,
