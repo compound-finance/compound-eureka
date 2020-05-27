@@ -491,7 +491,7 @@
           "base": 10,
           "exp": 23
         },
-        "#reservior": {
+        "#reservoir": {
           "type": "number",
           "base": 40,
           "exp": 23
@@ -1013,8 +1013,8 @@
     },
     "verified": true
   },
-  "reservior": {
-    "contract": "reservior",
+  "reservoir": {
+    "contract": "reservoir",
     "version": "e0a16ae",
     "properties": {
       "target": {
