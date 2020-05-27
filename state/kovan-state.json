@@ -345,18 +345,18 @@
     "contract": "dai",
     "version": "dai",
     "properties": {
-      "address": "0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa",
-      "dai": true,
       "decimals": {
         "type": "number",
         "base": 18,
         "exp": 0
       },
       "symbol": "DAI",
-      "name": "Dai"
+      "name": "Dai Stablecoin",
+      "address": "0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa",
+      "dai": true
     },
-    "definition": "Erc20",
-    "address": "0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa"
+    "address": "0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa",
+    "definition": "Erc20"
   },
   "bat": {
     "contract": "bat",
@@ -634,7 +634,7 @@
         },
         "#cZRX": {
           "type": "number",
-          "base": 61,
+          "base": 60,
           "exp": 16
         }
       },
