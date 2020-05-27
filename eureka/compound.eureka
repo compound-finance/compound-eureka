@@ -203,9 +203,11 @@ Maximillion#max [b73e68c] {
 Comptroller#g0 [b73e68c] {}
 
 Unitroller#comptroller [b73e68c] {
-  admin: $admin
   implementation: #g0
   oracle: #oracle
+  close_factor: 0.5e18
+  max_assets: 20
+
   supported_markets: [
     #cBAT,
     #cDAI,

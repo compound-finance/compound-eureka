@@ -1,0 +1,37 @@
+
+// Dai
+CErc20Delegate#cDaiDelegate [b73e68c] {}
+
+// Addresses from here: https://changelog.makerdao.com/
+Erc20#dai [dai] ! {
+  dai: true
+  address: '0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa'
+  // Note: we need to manually send dai to Fauceteer
+}
+
+Pot#pot [dai] {
+  address: '0xEA190DBDC7adF265260ec4dA6e9675Fd4f5A78bb'
+}
+
+Jug#jug [dai] {
+  address: '0xcbB7718c9F39d05aEEDE1c472ca8Bf804b2f1EaD'
+}
+
+InterestRateModel#DSR_Kink_9000bps_Jump_12000bps_AssumedRF_20000bps [a79cda9] {
+  type: 'dsr'
+  jump: 12000e14
+  kink: 0.9e18
+  pot: #pot
+  jug: #jug
+}
+
+CToken#cDAI [b73e68c] ! {
+  type: "delegator"
+  symbol: "cDAI"
+  name: "Compound DAI"
+  underlying: #dai
+  comptroller: #comptroller
+  delegate: #cDaiDelegate
+  interest_rate_model: #DSR_Kink_9000bps_Jump_12000bps_AssumedRF_20000bps
+  admin: $admin
+}

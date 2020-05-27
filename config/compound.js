@@ -23,7 +23,7 @@ provider(env('provider', defaultProvider), {
   sendOpts: {
     from: env('pk', defaultPk),
     gas: 6000000,
-    gasPrice: 2000000000
+    gasPrice: 100000
   },
   verificationOpts: network !== 'development' && env('etherscan') ? {
     verify: true,
@@ -36,7 +36,7 @@ async function gov(actor, contract, func, args, opts) {
   let {read, encodeFunctionData, ethereum, show, trx} = actor;
   let admin = await read(contract, 'admin(): address', [], opts); // TODO: Pass through opts?
   if (admin == ethereum.from) {
-    return compoundTrx(actor, contract, func, args, opts);
+    return await compoundTrx(actor, contract, func, args, opts);
   } else {
     // Okay, we're going to propose through the governor
     let proposeSig = 'propose(address[] memory targets, uint[] memory values, string[] memory signatures, bytes[] memory calldatas, string memory description)';
@@ -75,8 +75,7 @@ if (network !== 'mainnet') { // Skip these contracts on prod
           return await Object.entries(prices).reduce(async (acc_, [asset, price_]) => {
             let acc = await acc_;
             let price = bn(price_);
-            let {'0': currentPrice_} = await read(oracle, 'assetPrices', [asset]);
-            let currentPrice = bn(currentPrice_);
+            let currentPrice = bn(await read(oracle, 'assetPrices', [asset]));
 
             if (currentPrice.eq(price)) {
               console.log(`Price of ${asset} currently equal to expected price of ${price.toString()}`);
@@ -88,7 +87,17 @@ if (network !== 'mainnet') { // Skip these contracts on prod
         }
       }
     },
-    build: async ({deploy}, contract, props) => deploy(contract)
+    build: async (actor, contract, {prices}, { definition }) => {
+      let {deploy} = actor;
+      let deployed = await deploy(contract);
+
+      if (prices) {
+        console.log("Setting underlying prices...");
+        await definition.typeProperties.prices.setter(actor, deployed, prices);
+      }
+
+      return deployed;
+    }
   });
 }
 
@@ -131,29 +140,6 @@ define('InterestRateModel', {
       multiplierPerYear: slope,
       jumpMultiplierPerYear: jump,
       kink_: kink
-    })
-});
-
-define('InterestRateModel', {
-  match: {
-    properties: {
-      type: 'dsr'
-    }
-  },
-  contract: 'DAIInterestRateModelV2',
-  properties: {
-    type: 'string',
-    jump: 'number',
-    kink: 'number',
-    pot: { ref: 'Pot' },
-    jug: { ref: 'Jug' }
-  },
-  build: ({deploy}, contract, {jump, kink, pot, jug}) =>
-    deploy(contract, {
-      jumpMultiplierPerYear: jump,
-      kink_: kink,
-      pot_: pot,
-      jug_: jug
     })
 });
 
@@ -290,17 +276,28 @@ define("Unitroller", {
   properties: {
     oracle: {
       ref: 'PriceOracle',
-      deferred: true,
       setter: async (actor, unitroller, oracle) => {
         await gov(actor, unitroller, '_setPriceOracle(address)', [oracle], { proxy: 'Comptroller' });
       }
     },
-    implementation: {
+    max_assets: {
+      ref: 'Comptroller',
+      setter: async (actor, unitroller, comptroller, { max_assets }) => {
+        await gov(actor, unitroller, '_setMaxAssets(uint newMaxAssets)', [max_assets]);
+      }
+    },
+    close_factor: {
       ref: 'Comptroller',
       deferred: true,
+      setter: async (actor, unitroller, comptroller, { close_factor }) => {
+        await gov(actor, unitroller, '_setCloseFactor(uint newCloseFactorMantissa)', [close_factor]);
+      }
+    },
+    implementation: {
+      ref: 'Comptroller',
       setter: async (actor, unitroller, comptroller) => {
         await gov(actor, unitroller, '_setPendingImplementation(address)', [comptroller]);
-        await gov(actor, comptroller, '_become(address)', [unitroller]);
+        await gov(actor, comptroller, '_become(address unitroller)', { unitroller });
       }
     },
     supported_markets: {
@@ -361,29 +358,40 @@ define("Unitroller", {
       }
     }
   },
-  build: async (actor, contract, {implementation, oracle, supported_markets, collateral_factors}, { definition }) => {
+  build: async (actor, contract, properties, { definition }) => {
+    let {implementation, oracle, supported_markets, collateral_factors, max_assets, close_factor, admin} = properties;
     let deployed = await actor.deploy(contract);
 
     // We can't set these properties in the constructor, so they'll
     // need to be set by calling the setters directly
     if (implementation) {
       console.log("Setting implementation...");
-      await definition.typeProperties.implementation.setter(actor, deployed, implementation);
+      await definition.typeProperties.implementation.setter(actor, deployed, implementation, properties);
     }
 
     if (supported_markets) {
       console.log("Supporting markets...");
-      await definition.typeProperties.supported_markets.setter(actor, deployed, supported_markets);
+      await definition.typeProperties.supported_markets.setter(actor, deployed, supported_markets, properties);
     }
 
     if (collateral_factors) {
       console.log("Setting collateral factors...");
-      await definition.typeProperties.collateral_factors.setter(actor, deployed, collateral_factors);
+      await definition.typeProperties.collateral_factors.setter(actor, deployed, collateral_factors, properties);
     }
 
-    if (oracle) {
-      console.log("Setting oracle...");
-      await definition.typeProperties.oracle.setter(actor, deployed, oracle);
+    if (max_assets) {
+      console.log("Setting max assets...");
+      await definition.typeProperties.max_assets.setter(actor, deployed, max_assets, properties);
+    }
+
+    if (close_factor) {
+      console.log("Setting close factor...");
+      await definition.typeProperties.close_factor.setter(actor, deployed, close_factor, properties);
+    }
+
+    if (admin) {
+      console.log("Setting admin...");
+      await definition.typeProperties.admin.setter(actor, deployed, admin, properties);
     }
 
     return deployed;

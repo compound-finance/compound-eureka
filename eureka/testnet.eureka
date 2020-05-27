@@ -3,7 +3,7 @@
 SimplePriceOracle#oracle [b73e68c] {
   prices: {
     #bat: 0.000999e18,
-    #dai: 0.004824e18,
+    #dai: 0.004825e18,
     #rep: 0.061329e18,
     #sai: 0.005286e18,
     #usdc: 0.004779e30,

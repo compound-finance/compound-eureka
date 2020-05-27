@@ -6,4 +6,4 @@ version="$1"
 image="compoundfinance/compound-protocol-alpha:$version"
 
 docker pull "$image"
-docker run "$image" cat .build/contracts.json > .build/contracts-$version.json
+docker run "$image" cat .build/contracts.json > .build/$version.json

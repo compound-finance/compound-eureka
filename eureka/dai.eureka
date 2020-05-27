@@ -19,13 +19,13 @@ InterestRateModel#DSR_Kink_9000bps_Jump_12000bps_AssumedRF_20000bps [dai] {
   jug: #jug
 }
 
-CToken#cDAI [b73e68c] {
-  type: "erc20-delegator"
+CToken#cDAI [b73e68c] ! {
+  type: "delegator"
   symbol: "cDAI"
   name: "Compound DAI"
   underlying: #dai
   comptroller: #comptroller
   delegate: #cDaiDelegate
   interest_rate_model: #DSR_Kink_9000bps_Jump_12000bps_AssumedRF_20000bps
-  admin: $sender
+  admin: $admin
 }
