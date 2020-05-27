@@ -35,6 +35,7 @@ provider(env('provider', defaultProvider), {
 async function gov(actor, contract, func, args, opts={}) {
   let {read, encodeFunctionData, ethereum, show, trx} = actor;
   let admin = await read(contract, 'admin(): address', [], opts); // TODO: Pass through opts?
+  console.log([admin, ethereum.from]);
   if (admin == ethereum.from) {
     return await compoundTrx(actor, contract, func, args, opts);
   } else {
