@@ -317,7 +317,7 @@ define("Unitroller", {
           } else {
             console.log(`Market ${show(market)} already listed`);
           }
-        });
+        }, Promise.resolve(null));
       }
     },
     collateral_factors: {
@@ -345,7 +345,7 @@ define("Unitroller", {
           } else {
             console.log(`Market ${show(market)} already has correct collateral factor`);
           }
-        });
+        }, Promise.resolve(null));
       }
     },
     admin: {
