@@ -131,3 +131,18 @@ define('Governor', {
     });
   }
 });
+
+define('Reservoir', {
+  properties: {
+    drip_rate: 'number',
+    token: 'address',
+    target: 'address'
+  },
+  build: async ({deploy, ethereum}, contract, { drip_rate, token, target }) => {
+    return deploy(contract, {
+      dripRate_: drip_rate,
+      token_: token,
+      target_: target
+    });
+  }
+});

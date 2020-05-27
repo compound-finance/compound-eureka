@@ -200,11 +200,12 @@ Maximillion#max [b73e68c] {
 }
 
 // Unitroller and Comptroller
-Comptroller#g0 [b73e68c] {}
+Comptroller#g1 [b73e68c] {}
 
 Unitroller#comptroller [b73e68c] {
   admin: $admin
-  implementation: #g0
+  implementation: #g1
+  generation: "g1"
   oracle: #oracle
   close_factor: 0.5e18
   max_assets: 20
@@ -262,4 +263,3 @@ InterestRateModel#Base200bps_Slope2000bps_Jump20000bps_Kink90 [b73e68c] {
 // CompoundLens
 CompoundLens#lens [b73e68c] {}
 
-// TODO: g1 Comptroller

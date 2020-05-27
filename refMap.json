@@ -8,6 +8,7 @@
   "cDAI": "cDAI",
   "lens": "CompoundLens",
   "dai": "DAI",
+  "g3": "StdComptrollerG3",
   "g0": "StdComptroller",
   "comptroller": "Unitroller",
   "cDaiDelegate": "cDaiDelegate",

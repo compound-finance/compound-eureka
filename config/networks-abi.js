@@ -37,7 +37,6 @@ hook('state.save', async (state) => {
         [version]: abis
       };
     }, {});
-    // console.log(`Versions: ${JSON.stringify(Object.keys(versions))}`);
 
     let abis = stateEntries.reduce((acc, [ref, contract]) => {
       let r = refMap.hasOwnProperty(ref) ? refMap[ref] : ref;
@@ -63,7 +62,7 @@ hook('state.save', async (state) => {
     // Comptroller is special
     abis.Comptroller = [
       ...abis.Unitroller,
-      ...abis.StdComptroller
+      ...abis.StdComptrollerG3 // Note: handle non-G3
     ];
 
     let networkAbiFile = path.join(process.cwd(), 'networks', `${network}-abi.json`);

@@ -22,7 +22,7 @@ let defaultPk = () =>
 provider(env('provider', defaultProvider), {
   sendOpts: {
     from: env('pk', defaultPk),
-    gas: 6000000,
+    gas: 6600000,
     gasPrice: 100000
   },
   verificationOpts: network !== 'development' && env('etherscan') ? {
@@ -35,7 +35,6 @@ provider(env('provider', defaultProvider), {
 async function gov(actor, contract, func, args, opts={}) {
   let {read, encodeFunctionData, ethereum, show, trx} = actor;
   let admin = await read(contract, 'admin(): address', [], opts); // TODO: Pass through opts?
-  console.log([admin, ethereum.from]);
   if (admin == ethereum.from) {
     return await compoundTrx(actor, contract, func, args, opts);
   } else {
@@ -283,22 +282,52 @@ define("Unitroller", {
     },
     max_assets: {
       ref: 'Comptroller',
-      setter: async (actor, unitroller, comptroller, { max_assets }) => {
+      setter: async (actor, unitroller, max_assets) => {
         await gov(actor, unitroller, '_setMaxAssets(uint newMaxAssets)', [max_assets]);
       }
     },
     close_factor: {
       ref: 'Comptroller',
       deferred: true,
-      setter: async (actor, unitroller, comptroller, { close_factor }) => {
+      setter: async (actor, unitroller, close_factor) => {
         await gov(actor, unitroller, '_setCloseFactor(uint newCloseFactorMantissa)', [close_factor]);
       }
     },
+    generation: 'string',
     implementation: {
       ref: 'Comptroller',
-      setter: async (actor, unitroller, comptroller) => {
+      setter: async (actor, unitroller, comptroller, { comp_rate, generation, comp_markets, supported_markets }) => {
         await gov(actor, unitroller, '_setPendingImplementation(address)', [comptroller]);
-        await gov(actor, comptroller, '_become(address unitroller)', { unitroller });
+        switch (generation) {
+          case 'g1':
+            return await gov(actor, comptroller, '_become(address unitroller)', { unitroller });
+          case 'g3':
+            // These properties may not be available yet
+            supported_markets = supported_markets || [];
+            comp_markets = comp_markets || [];
+
+            let other_markets = supported_markets.filter((market) => comp_markets.includes(market));
+            console.log('zzzgggz',
+              {
+                unitroller,
+                compRate_: comp_rate || 0,
+                compMarketsToAdd: comp_markets,
+                otherMarketsToAdd: other_markets
+              }
+            );
+            return await gov(
+              actor,
+              comptroller,
+              '_become(Unitroller unitroller, uint compRate_, address[] memory compMarketsToAdd, address[] memory otherMarketsToAdd)',
+              {
+                unitroller,
+                compRate_: comp_rate || 0,
+                compMarketsToAdd: comp_markets,
+                otherMarketsToAdd: other_markets
+              });
+          default:
+            throw new Error(`Unknown generation: \`${generation}\` for _become`);
+        }
       }
     },
     supported_markets: {
@@ -349,26 +378,58 @@ define("Unitroller", {
         }, Promise.resolve(null));
       }
     },
+    comp_markets: {
+      type: 'array',
+      deferred: true,
+      order: 3,
+      setter: async (actor, unitroller, markets, { properties }) => {
+        let {events, read, show} = actor;
+        let newMarkets = await markets.reduce(async (acc, market) => {
+          let marketData = await read(unitroller, 'markets', [market], { proxy: 'Comptroller' });
+
+          if (marketData.isListed && !marketData.isComped) { //  && market.ref !== 'cETH'
+            return [
+              ...(await acc),
+              market
+            ];
+          } else {
+            return await acc;
+          }
+        }, Promise.resolve([]));
+        if (newMarkets.length === 0) {
+          console.log("All Markets Comped");
+        } else {
+          await gov(actor, unitroller, '_addCompMarkets(address[])', [newMarkets]);
+        }
+      }
+    },
     admin: {
       type: 'address',
       deferred: true,
-      setter: async (actor, unitroller, newAdmin) => {
-        let {trx, events, show} = actor;
-        // Admin must be accepted
-        let _setPendingAdmin = await gov(actor, unitroller, '_setPendingAdmin(address)', [newAdmin]);
-        // TODO: Should this be gov, too?
-        let _acceptAdmin = await trx(newAdmin, 'harnessAcceptAdmin(address unitroller)', [unitroller]);
+      setter: async (actor, unitroller, newAdmin_) => {
+        let {deref, events, read, show, trx} = actor;
+        let admin = await read(unitroller, 'admin(): address');
+        let newAdmin = deref(newAdmin_);
+
+        if (admin !== newAdmin.address) {
+          console.log(`Setting Unitroller admin from ${admin} to ${newAdmin.address}`);
+          // Admin must be accepted
+          let _setPendingAdmin = await gov(actor, unitroller, '_setPendingAdmin(address)', [newAdmin]);
+          // TODO: Should this be gov, too?
+          let _acceptAdmin = await trx(newAdmin, 'harnessAcceptAdmin(address unitroller)', [unitroller]);
+        }
       }
     }
   },
   build: async (actor, contract, properties, { definition }) => {
-    let {implementation, oracle, supported_markets, collateral_factors, max_assets, close_factor, admin} = properties;
+    let {implementation, oracle, supported_markets, comp_markets, collateral_factors, max_assets, close_factor, admin} = properties;
     let deployed = await actor.deploy(contract);
 
     // We can't set these properties in the constructor, so they'll
     // need to be set by calling the setters directly
     if (implementation) {
       console.log("Setting implementation...");
+      console.log({properties});
       await definition.typeProperties.implementation.setter(actor, deployed, implementation, properties);
     }
 
@@ -385,6 +446,11 @@ define("Unitroller", {
     if (collateral_factors) {
       console.log("Setting collateral factors...");
       await definition.typeProperties.collateral_factors.setter(actor, deployed, collateral_factors, properties);
+    }
+
+    if (comp_markets) {
+      console.log("Setting comp markets...");
+      await definition.typeProperties.comp_markets.setter(actor, deployed, comp_markets, properties);
     }
 
     if (max_assets) {

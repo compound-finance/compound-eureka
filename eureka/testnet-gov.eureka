@@ -1,9 +1,4 @@
 
-// Define global admin to actually be the timelock
-Account {
-  admin: #timelock
-}
-
 Timelock#timelock [compound-test] {
   delay: 60 // 1 minute
   admin: #gov
@@ -12,7 +7,7 @@ Timelock#timelock [compound-test] {
 Governor#gov [compound-test] {
   harness: true
   comp: #comp
-  timelock: #timelock // Note: this is a circular-dep, right? I think we'll see!
+  timelock: #timelock
 }
 
 Comp#comp [b73e68c] {
@@ -21,10 +16,36 @@ Comp#comp [b73e68c] {
   decimals: 18
 
   balances: {
-    #fauceteer: 1.0e24 // 1MM Comp tokens to Fauceteer, rest stay with $sender
+    #fauceteer: 1.0e24, // 1MM tokens to Fauceteer
+    #reservior: 4.0e24 // 4MM tokens to reservoir
+    // Rest (5MM) stay with $sender
   }
 
   delegates: {
     $sender: $sender
   }
+}
+
+// Use G3 Comptroller
+Comptroller#g3 [e0a16ae] {}
+
+Unitroller#comptroller [e0a16ae] {
+  implementation: #g3
+  generation: "g3"
+  comp_rate: 0.5e18 // Check
+
+  comp_markets: [
+    #cBAT,
+    #cDAI,
+    #cUSDC,
+    #cUSDT,
+    #cWBTC,
+    #cZRX
+  ]
+}
+
+Reservoir#reservior [e0a16ae] {
+  drip_rate: 0.5e18
+  token: #comp
+  target: #comptroller
 }
