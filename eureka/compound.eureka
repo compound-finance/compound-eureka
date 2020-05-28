@@ -11,7 +11,7 @@ Fauceteer#fauceteer [compound-test] {}
 Erc20#bat [bat] {
   type: "bat"
   balances: {
-    #fauceteer: 5e26
+    #fauceteer: 48460412e18
   }
 }
 
@@ -24,7 +24,7 @@ Erc20#dai [compound-test] {
   decimals: 18
   total_supply: 107584313e18
   balances: {
-    #fauceteer: 107584313e18
+    #fauceteer: 10000000e18
   }
 }
 
@@ -35,7 +35,7 @@ Erc20#rep [compound-test] {
   decimals: 18
   total_supply: 11000000e18
   balances: {
-    #fauceteer: 11000000e18
+    #fauceteer: 785545e18
   }
 }
 
@@ -57,7 +57,7 @@ Erc20#usdc [compound-test] {
   decimals: 6
   total_supply: 732246278e6
   balances: {
-    #fauceteer: 732246278e6
+    #fauceteer: 10000000e6
   }
 }
 
@@ -69,7 +69,7 @@ Erc20#usdt [usdt] {
   decimals: 6
   total_supply: 5737970410e6
   balances: {
-    #fauceteer: 5737970410e6
+    #fauceteer: 10000000e6
   }
 }
 
@@ -78,9 +78,9 @@ Erc20#wbtc [compound-test] {
   name: "Wrapped BTC"
   symbol: "WBTC"
   decimals: 8
-  total_supply: 3851e6
+  total_supply: 3851e8
   balances: {
-    #fauceteer: 3851e6
+    #fauceteer: 1088e8
   }
 }
 
@@ -88,7 +88,7 @@ Erc20#wbtc [compound-test] {
 Erc20#zrx [zrx] {
   type: 'zrx'
   balances: {
-    #fauceteer: 10e26
+    #fauceteer: 29687685e18
   }
 }
 
@@ -101,6 +101,7 @@ CToken#cBAT [b73e68c] {
   symbol: "cBAT"
   name: "Compound BAT"
   underlying: #bat
+  initial_exchange_rate: 0.02e28
   comptroller: #comptroller
   delegate: #cErc20Delegate
   interest_rate_model: #Base200bps_Slope3000bps
@@ -113,6 +114,7 @@ CToken#cDAI [b73e68c] {
   symbol: "cDAI"
   name: "Compound DAI"
   underlying: #dai
+  initial_exchange_rate: 0.02e28
   comptroller: #comptroller
   delegate: #cErc20Delegate
   interest_rate_model: #Base200bps_Slope1000bps
@@ -121,9 +123,10 @@ CToken#cDAI [b73e68c] {
 
 CToken#cREP [b73e68c] {
   type: "immutable"
-  symbol: "cDAI"
+  symbol: "cREP"
   name: "Compound REP"
   underlying: #rep
+  initial_exchange_rate: 0.02e28
   comptroller: #comptroller
   delegate: #cErc20Delegate
   interest_rate_model: #Base200bps_Slope3000bps
@@ -135,6 +138,7 @@ CToken#cSAI [b73e68c] {
   symbol: "cSAI"
   name: "Compound SAI"
   underlying: #sai
+  initial_exchange_rate: 0.02e28
   comptroller: #comptroller
   delegate: #cErc20Delegate
   interest_rate_model: #Base500bps_Slope1200bps
@@ -145,6 +149,7 @@ CToken#cETH [b73e68c] {
   type: "cether"
   symbol: "cETH"
   name: "Compound ETH"
+  initial_exchange_rate: 0.02e28
   comptroller: #comptroller
   interest_rate_model: #Base200bps_Slope1000bps
   admin: $admin
@@ -155,6 +160,7 @@ CToken#cUSDC [b73e68c] {
   symbol: "cUSDC"
   name: "Compound USDC"
   underlying: #usdc
+  initial_exchange_rate: 0.02e16
   comptroller: #comptroller
   delegate: #cErc20Delegate
   interest_rate_model: #Base200bps_Slope1000bps
@@ -166,6 +172,7 @@ CToken#cUSDT [b73e68c] {
   symbol: "cUSDT"
   name: "Compound USDT"
   underlying: #usdt
+  initial_exchange_rate: 0.02e18
   comptroller: #comptroller
   delegate: #cErc20Delegate
   interest_rate_model: #Base200bps_Slope2000bps_Jump20000bps_Kink90
@@ -177,6 +184,7 @@ CToken#cWBTC [b73e68c] {
   symbol: "cWBTC"
   name: "Compound WBTC"
   underlying: #wbtc
+  initial_exchange_rate: 0.02e18
   comptroller: #comptroller
   delegate: #cErc20Delegate
   interest_rate_model: #Base200bps_Slope3000bps
@@ -188,6 +196,7 @@ CToken#cZRX [b73e68c] {
   symbol: "cZRX"
   name: "Compound ZRX"
   underlying: #zrx
+  initial_exchange_rate: 0.02e28
   comptroller: #comptroller
   delegate: #cErc20Delegate
   interest_rate_model: #Base200bps_Slope3000bps

@@ -178,7 +178,7 @@ define('CToken', {
     underlying: { ref: 'Erc20' },
     comptroller: { ref: 'Unitroller' },
     decimals: { type: 'number', default: 8 },
-    initial_exchange_rate: { type: 'number', default: 0.2e10 }, // TODO: Figure out default here
+    initial_exchange_rate: 'number',
     interest_rate_model: {
       ref: 'InterestRateModel',
       setter: async (actor, cToken, newInterestRateModel) => {
@@ -220,7 +220,7 @@ define('CToken', {
     decimals: { type: 'number', default: 8 },
     delegate: { ref: 'CErc20Delegate' },
     become_implementation_data: { type: 'string', default: '0x' }, // TODO: 'bytes'?
-    initial_exchange_rate: { type: 'number', default: 0.2e10 }, // TODO: Figure out default here
+    initial_exchange_rate: 'number',
     interest_rate_model: {
       ref: 'InterestRateModel',
       setter: async (actor, cToken, newInterestRateModel) => {
@@ -261,7 +261,7 @@ define('CToken', {
     },
     comptroller: { ref: 'Unitroller' },
     decimals: { type: 'number', default: 8 },
-    initial_exchange_rate: { type: 'number', default: 0.2e10 }, // TODO: Figure out default here
+    initial_exchange_rate: 'number',
     interest_rate_model: {
       ref: 'InterestRateModel',
       setter: async (actor, cEther, newInterestRateModel) => {

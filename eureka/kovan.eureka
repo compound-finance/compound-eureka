@@ -33,6 +33,7 @@ CToken#cDAI [b73e68c] ! {
   symbol: "cDAI"
   name: "Compound DAI"
   underlying: #dai
+  initial_exchange_rate: 0.02e28
   comptroller: #comptroller
   delegate: #cDaiDelegate
   interest_rate_model: #DSR_Kink_9000bps_Jump_12000bps_AssumedRF_20000bps
