@@ -27,7 +27,9 @@ Comp#comp [b73e68c] {
 }
 
 // Use G3 Comptroller
-Comptroller#g3 [e0a16ae] {}
+Comptroller#g3 [compound-test] {
+  network: 'kovan'
+}
 
 Unitroller#comptroller [e0a16ae] {
   implementation: #g3

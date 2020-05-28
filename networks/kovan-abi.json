@@ -6861,7 +6861,7 @@
       "constant": false,
       "inputs": [
         {
-          "internalType": "contract EIP20NonStandardInterface",
+          "internalType": "contract EIP20Interface",
           "name": "token",
           "type": "address"
         }
@@ -7004,12 +7004,6 @@
     }
   ],
   "StdComptrollerG3": [
-    {
-      "inputs": [],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "constructor"
-    },
     {
       "anonymous": false,
       "inputs": [
@@ -23044,7 +23038,7 @@
       "type": "function"
     }
   ],
-  "reservior": [
+  "reservoir": [
     {
       "inputs": [
         {
@@ -25954,12 +25948,6 @@
       "payable": false,
       "stateMutability": "view",
       "type": "function"
-    },
-    {
-      "inputs": [],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "constructor"
     },
     {
       "anonymous": false,

@@ -290,6 +290,22 @@ define('Maximillion', {
 });
 
 define("Comptroller", {
+  match: {
+    default: true
+  },
+  build: async ({deploy}, contract, props) => deploy(contract)
+});
+
+define("Comptroller", {
+  match: {
+    properties: {
+      network: 'kovan'
+    }
+  },
+  properties: {
+    network: 'string'
+  },
+  contract: 'ComptrollerKovan',
   build: async ({deploy}, contract, props) => deploy(contract)
 });
 
