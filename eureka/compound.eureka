@@ -266,7 +266,7 @@ InterestRateModel#Base200bps_Slope2000bps_Jump20000bps_Kink90 [b73e68c] {
   base: 200e14
   slope: 2000e14
   jump: 20000e14
-  kink: 90
+  kink: 0.9e18
 }
 
 // CompoundLens
