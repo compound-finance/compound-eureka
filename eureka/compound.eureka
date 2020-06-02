@@ -172,7 +172,7 @@ CToken#cUSDT [b73e68c] {
   symbol: "cUSDT"
   name: "Compound USDT"
   underlying: #usdt
-  initial_exchange_rate: 0.02e18
+  initial_exchange_rate: 0.02e16
   comptroller: #comptroller
   delegate: #cErc20Delegate
   interest_rate_model: #Base200bps_Slope2000bps_Jump20000bps_Kink90

@@ -34,7 +34,7 @@ Comptroller#g3 [compound-test] {
 Unitroller#comptroller [e0a16ae] {
   implementation: #g3
   generation: "g3"
-  comp_rate: 0.5e18 // Check
+  comp_rate: 0.25e18
 
   comp_markets: [
     #cBAT,

@@ -592,8 +592,8 @@
       },
       "comp_rate": {
         "type": "number",
-        "base": 5,
-        "exp": 17
+        "base": 25,
+        "exp": 16
       },
       "supported_markets": [
         {

@@ -331,6 +331,11 @@ define("Unitroller", {
       }
     },
     generation: 'string',
+    comp_rate: {
+      type: 'number',
+      setter: async (actor, unitroller, comp_rate) =>
+        await gov(actor, unitroller, '_setCompRate(uint compRate_)', [comp_rate])
+    },
     implementation: {
       ref: 'Comptroller',
       setter: async (actor, unitroller, comptroller, { comp_rate, generation, comp_markets, supported_markets }) => {
@@ -344,14 +349,6 @@ define("Unitroller", {
             comp_markets = comp_markets || [];
 
             let other_markets = supported_markets.filter((market) => comp_markets.includes(market));
-            console.log('zzzgggz',
-              {
-                unitroller,
-                compRate_: comp_rate || 0,
-                compMarketsToAdd: comp_markets,
-                otherMarketsToAdd: other_markets
-              }
-            );
             return await gov(
               actor,
               comptroller,
