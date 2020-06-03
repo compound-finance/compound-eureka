@@ -40,12 +40,12 @@
   },
   "lens": {
     "contract": "lens",
-    "version": "b73e68c",
+    "version": "25fe06d",
     "properties": [],
-    "address": "0xE5252a158eEda9C7668aEA3d509f7d6ad3bEbb65",
+    "address": "0x08CcdB87966C4C7c3Ce7dA8C103c8E14627753D0",
     "definition": "CompoundLens",
     "deployment": {
-      "block": 18751017,
+      "block": 18839777,
       "constructorData": "",
       "contract": "CompoundLens"
     },
@@ -819,7 +819,7 @@
       "initial_exchange_rate": {
         "type": "number",
         "base": 2,
-        "exp": 16
+        "exp": 14
       },
       "underlying": {
         "type": "ref",

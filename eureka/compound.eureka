@@ -270,5 +270,5 @@ InterestRateModel#Base200bps_Slope2000bps_Jump20000bps_Kink90 [b73e68c] {
 }
 
 // CompoundLens
-CompoundLens#lens [b73e68c] {}
+CompoundLens#lens [25fe06d] {}
 
