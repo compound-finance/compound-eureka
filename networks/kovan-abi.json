@@ -7857,13 +7857,13 @@
         {
           "indexed": false,
           "internalType": "uint256",
-          "name": "oldCompRateMantissa",
+          "name": "oldCompRate",
           "type": "uint256"
         },
         {
           "indexed": false,
           "internalType": "uint256",
-          "name": "newCompRateMantissa",
+          "name": "newCompRate",
           "type": "uint256"
         }
       ],
@@ -26272,13 +26272,13 @@
         {
           "indexed": false,
           "internalType": "uint256",
-          "name": "oldCompRateMantissa",
+          "name": "oldCompRate",
           "type": "uint256"
         },
         {
           "indexed": false,
           "internalType": "uint256",
-          "name": "newCompRateMantissa",
+          "name": "newCompRate",
           "type": "uint256"
         }
       ],

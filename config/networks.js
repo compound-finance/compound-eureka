@@ -49,7 +49,7 @@ function tokenProperties({address, contract, definition, deployment, properties}
   let cTokenProps = {};
   if (definition === 'CToken') {
     cTokenProps = {      
-      initial_exchange_rate_mantissa: properties.initial_exchange_rate.toString(),
+      initial_exchange_rate_mantissa: toNumberString(properties.initial_exchange_rate),
       admin: findAccount(state, accounts, properties.admin),
       underlying: properties.underlying ? state[properties.underlying.ref].address : "" // Note: this key is required, even if it's blank
     } 
