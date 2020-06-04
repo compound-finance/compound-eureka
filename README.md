@@ -48,7 +48,7 @@ Kovan Deploy:
 This will deploy Kovan, but it will keep the admin of the cTokens and Unitroller the deployer address. This is because if we switch over to gov too early, we'll be forced to set everything up via proposals, which is slow and each address can only have one proposal at a time.
 
 ```bash
-yarn eureka apply -n kovan -b ./.build -c config/*.js -e eureka/{compound,testnet,testnet-gov,kovan}.eureka
+yarn eureka apply -n kovan -b ./.build -c config/*.js -e eureka/{compound,testnet,testnet-gov,kovan,kovan-*}.eureka
 ```
 
 Kovan Deploy (Timelock Shift):
@@ -57,6 +57,12 @@ This will switch over to timelock controlled governance, making all future chang
 
 ```bash
 yarn eureka apply -n kovan -b ./.build -c config/*.js -e eureka/{compound,testnet,testnet-gov,kovan,admin-timelock}.eureka
+```
+
+Ropsten Deploy:
+
+```bash
+yarn eureka apply -n ropsten -b ./.build -c config/*.js -e eureka/{compound,testnet,testnet-gov,ropsten}.eureka
 ```
 
 ## Test-net Deployment

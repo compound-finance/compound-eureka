@@ -209,7 +209,9 @@ Maximillion#max [b73e68c] {
 }
 
 // Unitroller and Comptroller
-Comptroller#g1 [b73e68c] {}
+Comptroller#g1 [b73e68c] {
+  generation: "g1"
+}
 
 Unitroller#comptroller [b73e68c] {
   admin: $admin
@@ -240,6 +242,10 @@ Unitroller#comptroller [b73e68c] {
     #cUSDC: 75e16,
     #cZRX: 60e16
   }
+}
+
+Comptroller#g2 [25fe06d] {
+  generation: "g2"
 }
 
 // Interest Rate Models
