@@ -114,9 +114,11 @@ define('Timelock', {
 });
 
 define('Governor', {
-  contract: 'GovernorAlpha',
+  contract: 'GovernorAlphaHarness',
   match: {
-    has_properties: ['harness']
+    properties: {
+      harness: true
+    }
   },
   properties: {
     harness: 'bool',
