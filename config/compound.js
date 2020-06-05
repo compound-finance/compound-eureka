@@ -23,7 +23,7 @@ provider(env('provider', defaultProvider), {
   sendOpts: {
     from: env('pk', defaultPk),
     gas: 6600000,
-    gasPrice: 100000
+    gasPrice: 1000000000 // 1 gwei
   },
   verificationOpts: network !== 'development' && env('etherscan') ? {
     verify: true,
@@ -299,6 +299,32 @@ define("Comptroller", {
 define("Comptroller", {
   match: {
     properties: {
+      generation: 'g1'
+    }
+  },
+  properties: {
+    generation: 'string'
+  },
+  contract: 'ComptrollerG1',
+  build: async ({deploy}, contract, props) => deploy(contract)
+});
+
+define("Comptroller", {
+  match: {
+    properties: {
+      generation: 'g2'
+    }
+  },
+  properties: {
+    generation: 'string'
+  },
+  contract: 'ComptrollerG2',
+  build: async ({deploy}, contract, props) => deploy(contract)
+});
+
+define("Comptroller", {
+  match: {
+    properties: {
       network: 'kovan'
     }
   },
@@ -330,7 +356,10 @@ define("Unitroller", {
         await gov(actor, unitroller, '_setCloseFactor(uint newCloseFactorMantissa)', [close_factor]);
       }
     },
-    generation: 'string',
+    generation: {
+      type: 'string',
+      setter: async (actor, unitroller, generatoin) => null
+    },
     comp_rate: {
       type: 'number',
       setter: async (actor, unitroller, comp_rate) =>
@@ -338,11 +367,19 @@ define("Unitroller", {
     },
     implementation: {
       ref: 'Comptroller',
-      setter: async (actor, unitroller, comptroller, { comp_rate, generation, comp_markets, supported_markets }) => {
+      setter: async (actor, unitroller, comptroller, { properties: { comp_rate, generation, comp_markets, oracle, close_factor, max_assets, supported_markets } }) => {
         await gov(actor, unitroller, '_setPendingImplementation(address)', [comptroller]);
         switch (generation) {
           case 'g1':
-            return await gov(actor, comptroller, '_become(address unitroller)', { unitroller });
+            return await gov(actor, comptroller, '_become(Unitroller unitroller, PriceOracle _oracle, uint _closeFactorMantissa, uint _maxAssets, bool reinitializing)', {
+              unitroller,
+              _oracle: oracle,
+              _closeFactorMantissa: close_factor,
+              _maxAssets: max_assets,
+              reinitializing: false
+            });
+          case 'g2':
+            return await gov(actor, comptroller, '_become(Unitroller unitroller)', { unitroller });
           case 'g3':
             // These properties may not be available yet
             supported_markets = supported_markets || [];
@@ -464,42 +501,42 @@ define("Unitroller", {
     if (implementation) {
       console.log("Setting implementation...");
       console.log({properties});
-      await definition.typeProperties.implementation.setter(actor, deployed, implementation, properties);
+      await definition.typeProperties.implementation.setter(actor, deployed, implementation, {properties});
     }
 
     if (oracle) {
       console.log("Setting oracle...");
-      await definition.typeProperties.oracle.setter(actor, deployed, oracle, properties);
+      await definition.typeProperties.oracle.setter(actor, deployed, oracle, {properties});
     }
 
     if (supported_markets) {
       console.log("Supporting markets...");
-      await definition.typeProperties.supported_markets.setter(actor, deployed, supported_markets, properties);
+      await definition.typeProperties.supported_markets.setter(actor, deployed, supported_markets, {properties});
     }
 
     if (collateral_factors) {
       console.log("Setting collateral factors...");
-      await definition.typeProperties.collateral_factors.setter(actor, deployed, collateral_factors, properties);
+      await definition.typeProperties.collateral_factors.setter(actor, deployed, collateral_factors, {properties});
     }
 
     if (comp_markets) {
       console.log("Setting comp markets...");
-      await definition.typeProperties.comp_markets.setter(actor, deployed, comp_markets, properties);
+      await definition.typeProperties.comp_markets.setter(actor, deployed, comp_markets, {properties});
     }
 
     if (max_assets) {
       console.log("Setting max assets...");
-      await definition.typeProperties.max_assets.setter(actor, deployed, max_assets, properties);
+      await definition.typeProperties.max_assets.setter(actor, deployed, max_assets, {properties});
     }
 
     if (close_factor) {
       console.log("Setting close factor...");
-      await definition.typeProperties.close_factor.setter(actor, deployed, close_factor, properties);
+      await definition.typeProperties.close_factor.setter(actor, deployed, close_factor, {properties});
     }
 
     if (admin) {
       console.log("Setting admin...");
-      await definition.typeProperties.admin.setter(actor, deployed, admin, properties);
+      await definition.typeProperties.admin.setter(actor, deployed, admin, {properties});
     }
 
     return deployed;

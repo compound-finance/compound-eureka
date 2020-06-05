@@ -1,0 +1,21 @@
+
+// Use G3 Comptroller
+Comptroller#g3 [compound-test] {
+  network: 'kovan'
+}
+
+Unitroller#comptroller [e0a16ae] {
+  implementation: #g3
+  generation: "g3"
+  comp_rate: 0.25e18
+
+  comp_markets: [
+    #cBAT,
+    #cDAI,
+    #cETH,
+    #cUSDC,
+    #cUSDT,
+    #cWBTC,
+    #cZRX
+  ]
+}

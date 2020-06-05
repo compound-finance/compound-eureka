@@ -1,4 +1,14 @@
 
+// Build a G3 Comptroller
+Comptroller#g3 [compound-test] {
+  network: 'ropsten'
+}
+
+Unitroller#comptroller [b73e68c] {
+  implementation: #g1
+  generation: "g1"
+}
+
 // Offical Comp on Ropsten
 Comp#comp [b73e68c] ! {
   name: "Comp"
@@ -7,5 +17,3 @@ Comp#comp [b73e68c] ! {
 
   address: "0x1fe16de955718cfab7a44605458ab023838c2793"
 }
-
-
