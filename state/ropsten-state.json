@@ -1076,12 +1076,12 @@
       },
       "harness": true
     },
-    "address": "0x5F36c2616248E4F725451cf6E9B0fE65ff2Bbe1F",
+    "address": "0x5B9Ccf9B3473EA3e4FbC4d66B808459ff2c55906",
     "definition": "Governor",
     "deployment": {
-      "block": 8026395,
+      "block": 8034061,
       "constructorData": "0000000000000000000000000a278af3cf0f5ba7a22133f0c165f6de2dcdf6890000000000000000000000001fe16de955718cfab7a44605458ab023838c27930000000000000000000000009687eb285292cba14a60a0c77dfd36dd95b93889",
-      "contract": "GovernorAlpha"
+      "contract": "GovernorAlphaHarness"
     },
     "verified": true
   },
