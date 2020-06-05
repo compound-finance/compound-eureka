@@ -217,7 +217,7 @@
       "symbol": "cZRX",
       "decimals": 8,
       "address": "0x00e02a5200CE3D5b5743F5369Deb897946C88121",
-      "initial_exchange_rate_mantissa": "[object Object]",
+      "initial_exchange_rate_mantissa": "200000000000000000000000000",
       "admin": "0x9687EB285292cbA14a60a0c77dfD36dD95B93889",
       "underlying": "0xE4C6182EA459E63B8F1be7c428381994CcC2D49c",
       "contract": "CErc20Immutable"
@@ -227,7 +227,7 @@
       "symbol": "cWBTC",
       "decimals": 8,
       "address": "0x58145Bc5407D63dAF226e4870beeb744C588f149",
-      "initial_exchange_rate_mantissa": "[object Object]",
+      "initial_exchange_rate_mantissa": "20000000000000000",
       "admin": "0x9687EB285292cbA14a60a0c77dfD36dD95B93889",
       "underlying": "0xBde8bB00A7eF67007A96945B3a3621177B615C44",
       "contract": "CErc20Immutable"
@@ -237,7 +237,7 @@
       "symbol": "cUSDT",
       "decimals": 8,
       "address": "0x135669c2dcBd63F639582b313883F101a4497F76",
-      "initial_exchange_rate_mantissa": "[object Object]",
+      "initial_exchange_rate_mantissa": "200000000000000",
       "admin": "0x9687EB285292cbA14a60a0c77dfD36dD95B93889",
       "underlying": "0x516de3a7A567d81737e3a46ec4FF9cFD1fcb0136",
       "contract": "CErc20Delegator"
@@ -247,7 +247,7 @@
       "symbol": "cUSDC",
       "decimals": 8,
       "address": "0x8aF93cae804cC220D1A608d4FA54D1b6ca5EB361",
-      "initial_exchange_rate_mantissa": "[object Object]",
+      "initial_exchange_rate_mantissa": "200000000000000",
       "admin": "0x9687EB285292cbA14a60a0c77dfD36dD95B93889",
       "underlying": "0x0D9C8723B343A8368BebE0B5E89273fF8D712e3C",
       "contract": "CErc20Immutable"
@@ -257,7 +257,7 @@
       "symbol": "cETH",
       "decimals": 8,
       "address": "0xBe839b6D93E3eA47eFFcCA1F27841C917a8794f3",
-      "initial_exchange_rate_mantissa": "[object Object]",
+      "initial_exchange_rate_mantissa": "200000000000000000000000000",
       "admin": "0x9687EB285292cbA14a60a0c77dfD36dD95B93889",
       "underlying": "",
       "contract": "CEther"
@@ -267,7 +267,7 @@
       "symbol": "cSAI",
       "decimals": 8,
       "address": "0xc4d2A5872E16BC9E6557bE8B24683D96EB6ADca9",
-      "initial_exchange_rate_mantissa": "[object Object]",
+      "initial_exchange_rate_mantissa": "200000000000000000000000000",
       "admin": "0x9687EB285292cbA14a60a0c77dfD36dD95B93889",
       "underlying": "0x26fF7457496600C63b3E8902C9f871E60eDec4e4",
       "contract": "CErc20Immutable"
@@ -277,7 +277,7 @@
       "symbol": "cREP",
       "decimals": 8,
       "address": "0x8F2c8B147A3D316d2b98f32F3864746F034A55a2",
-      "initial_exchange_rate_mantissa": "[object Object]",
+      "initial_exchange_rate_mantissa": "200000000000000000000000000",
       "admin": "0x9687EB285292cbA14a60a0c77dfD36dD95B93889",
       "underlying": "0x6FD34013CDD2905d8d27b0aDaD5b97B2345cF2B8",
       "contract": "CErc20Immutable"
@@ -287,7 +287,7 @@
       "symbol": "cDAI",
       "decimals": 8,
       "address": "0xdb5Ed4605C11822811a39F94314fDb8F0fb59A2C",
-      "initial_exchange_rate_mantissa": "[object Object]",
+      "initial_exchange_rate_mantissa": "200000000000000000000000000",
       "admin": "0x9687EB285292cbA14a60a0c77dfD36dD95B93889",
       "underlying": "0xc2118d4d90b274016cB7a54c03EF52E6c537D957",
       "contract": "CErc20Delegator"
@@ -297,7 +297,7 @@
       "symbol": "cBAT",
       "decimals": 8,
       "address": "0x9E95c0b2412cE50C37a121622308e7a6177F819D",
-      "initial_exchange_rate_mantissa": "[object Object]",
+      "initial_exchange_rate_mantissa": "200000000000000000000000000",
       "admin": "0x9687EB285292cbA14a60a0c77dfD36dD95B93889",
       "underlying": "0x443Fd8D5766169416aE42B8E050fE9422f628419",
       "contract": "CErc20Immutable"
@@ -316,7 +316,7 @@
       "symbol": "cZRX",
       "decimals": 8,
       "address": "0x00e02a5200CE3D5b5743F5369Deb897946C88121",
-      "initial_exchange_rate_mantissa": "[object Object]",
+      "initial_exchange_rate_mantissa": "200000000000000000000000000",
       "admin": "0x9687EB285292cbA14a60a0c77dfD36dD95B93889",
       "underlying": "0xE4C6182EA459E63B8F1be7c428381994CcC2D49c",
       "contract": "CErc20Immutable"
@@ -326,7 +326,7 @@
       "symbol": "cWBTC",
       "decimals": 8,
       "address": "0x58145Bc5407D63dAF226e4870beeb744C588f149",
-      "initial_exchange_rate_mantissa": "[object Object]",
+      "initial_exchange_rate_mantissa": "20000000000000000",
       "admin": "0x9687EB285292cbA14a60a0c77dfD36dD95B93889",
       "underlying": "0xBde8bB00A7eF67007A96945B3a3621177B615C44",
       "contract": "CErc20Immutable"
@@ -336,7 +336,7 @@
       "symbol": "cUSDT",
       "decimals": 8,
       "address": "0x135669c2dcBd63F639582b313883F101a4497F76",
-      "initial_exchange_rate_mantissa": "[object Object]",
+      "initial_exchange_rate_mantissa": "200000000000000",
       "admin": "0x9687EB285292cbA14a60a0c77dfD36dD95B93889",
       "underlying": "0x516de3a7A567d81737e3a46ec4FF9cFD1fcb0136",
       "contract": "CErc20Delegator"
@@ -346,7 +346,7 @@
       "symbol": "cUSDC",
       "decimals": 8,
       "address": "0x8aF93cae804cC220D1A608d4FA54D1b6ca5EB361",
-      "initial_exchange_rate_mantissa": "[object Object]",
+      "initial_exchange_rate_mantissa": "200000000000000",
       "admin": "0x9687EB285292cbA14a60a0c77dfD36dD95B93889",
       "underlying": "0x0D9C8723B343A8368BebE0B5E89273fF8D712e3C",
       "contract": "CErc20Immutable"
@@ -356,7 +356,7 @@
       "symbol": "cETH",
       "decimals": 8,
       "address": "0xBe839b6D93E3eA47eFFcCA1F27841C917a8794f3",
-      "initial_exchange_rate_mantissa": "[object Object]",
+      "initial_exchange_rate_mantissa": "200000000000000000000000000",
       "admin": "0x9687EB285292cbA14a60a0c77dfD36dD95B93889",
       "underlying": "",
       "contract": "CEther"
@@ -366,7 +366,7 @@
       "symbol": "cSAI",
       "decimals": 8,
       "address": "0xc4d2A5872E16BC9E6557bE8B24683D96EB6ADca9",
-      "initial_exchange_rate_mantissa": "[object Object]",
+      "initial_exchange_rate_mantissa": "200000000000000000000000000",
       "admin": "0x9687EB285292cbA14a60a0c77dfD36dD95B93889",
       "underlying": "0x26fF7457496600C63b3E8902C9f871E60eDec4e4",
       "contract": "CErc20Immutable"
@@ -376,7 +376,7 @@
       "symbol": "cREP",
       "decimals": 8,
       "address": "0x8F2c8B147A3D316d2b98f32F3864746F034A55a2",
-      "initial_exchange_rate_mantissa": "[object Object]",
+      "initial_exchange_rate_mantissa": "200000000000000000000000000",
       "admin": "0x9687EB285292cbA14a60a0c77dfD36dD95B93889",
       "underlying": "0x6FD34013CDD2905d8d27b0aDaD5b97B2345cF2B8",
       "contract": "CErc20Immutable"
@@ -386,7 +386,7 @@
       "symbol": "cDAI",
       "decimals": 8,
       "address": "0xdb5Ed4605C11822811a39F94314fDb8F0fb59A2C",
-      "initial_exchange_rate_mantissa": "[object Object]",
+      "initial_exchange_rate_mantissa": "200000000000000000000000000",
       "admin": "0x9687EB285292cbA14a60a0c77dfD36dD95B93889",
       "underlying": "0xc2118d4d90b274016cB7a54c03EF52E6c537D957",
       "contract": "CErc20Delegator"
@@ -396,7 +396,7 @@
       "symbol": "cBAT",
       "decimals": 8,
       "address": "0x9E95c0b2412cE50C37a121622308e7a6177F819D",
-      "initial_exchange_rate_mantissa": "[object Object]",
+      "initial_exchange_rate_mantissa": "200000000000000000000000000",
       "admin": "0x9687EB285292cbA14a60a0c77dfD36dD95B93889",
       "underlying": "0x443Fd8D5766169416aE42B8E050fE9422f628419",
       "contract": "CErc20Immutable"
