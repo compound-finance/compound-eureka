@@ -566,8 +566,8 @@
         "ref": "g2"
       },
       "admin": {
-        "type": "account",
-        "account": "sender"
+        "type": "ref",
+        "ref": "timelock"
       },
       "supported_markets": [
         {
@@ -659,8 +659,8 @@
     "version": "b73e68c",
     "properties": {
       "admin": {
-        "type": "account",
-        "account": "sender"
+        "type": "ref",
+        "ref": "timelock"
       },
       "interest_rate_model": {
         "type": "ref",
@@ -702,8 +702,8 @@
     "version": "b73e68c",
     "properties": {
       "admin": {
-        "type": "account",
-        "account": "sender"
+        "type": "ref",
+        "ref": "timelock"
       },
       "interest_rate_model": {
         "type": "ref",
@@ -745,8 +745,8 @@
     "version": "b73e68c",
     "properties": {
       "admin": {
-        "type": "account",
-        "account": "sender"
+        "type": "ref",
+        "ref": "timelock"
       },
       "interest_rate_model": {
         "type": "ref",

@@ -23,7 +23,7 @@ provider(env('provider', defaultProvider), {
   sendOpts: {
     from: env('pk', defaultPk),
     gas: 6600000,
-    gasPrice: 1000000000 // 1 gwei
+    gasPrice: 40000000000 // 40 gwei
   },
   verificationOpts: network !== 'development' && env('etherscan') ? {
     verify: true,

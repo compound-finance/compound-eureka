@@ -218,7 +218,7 @@
       "decimals": 8,
       "address": "0x00e02a5200CE3D5b5743F5369Deb897946C88121",
       "initial_exchange_rate_mantissa": "200000000000000000000000000",
-      "admin": "0x9687EB285292cbA14a60a0c77dfD36dD95B93889",
+      "admin": "0x0a278Af3Cf0f5ba7a22133f0C165F6dE2DCdf689",
       "underlying": "0xE4C6182EA459E63B8F1be7c428381994CcC2D49c",
       "contract": "CErc20Immutable"
     },
@@ -228,7 +228,7 @@
       "decimals": 8,
       "address": "0x58145Bc5407D63dAF226e4870beeb744C588f149",
       "initial_exchange_rate_mantissa": "20000000000000000",
-      "admin": "0x9687EB285292cbA14a60a0c77dfD36dD95B93889",
+      "admin": "0x0a278Af3Cf0f5ba7a22133f0C165F6dE2DCdf689",
       "underlying": "0xBde8bB00A7eF67007A96945B3a3621177B615C44",
       "contract": "CErc20Immutable"
     },
@@ -238,7 +238,7 @@
       "decimals": 8,
       "address": "0x135669c2dcBd63F639582b313883F101a4497F76",
       "initial_exchange_rate_mantissa": "200000000000000",
-      "admin": "0x9687EB285292cbA14a60a0c77dfD36dD95B93889",
+      "admin": "0x0a278Af3Cf0f5ba7a22133f0C165F6dE2DCdf689",
       "underlying": "0x516de3a7A567d81737e3a46ec4FF9cFD1fcb0136",
       "contract": "CErc20Delegator"
     },
@@ -317,7 +317,7 @@
       "decimals": 8,
       "address": "0x00e02a5200CE3D5b5743F5369Deb897946C88121",
       "initial_exchange_rate_mantissa": "200000000000000000000000000",
-      "admin": "0x9687EB285292cbA14a60a0c77dfD36dD95B93889",
+      "admin": "0x0a278Af3Cf0f5ba7a22133f0C165F6dE2DCdf689",
       "underlying": "0xE4C6182EA459E63B8F1be7c428381994CcC2D49c",
       "contract": "CErc20Immutable"
     },
@@ -327,7 +327,7 @@
       "decimals": 8,
       "address": "0x58145Bc5407D63dAF226e4870beeb744C588f149",
       "initial_exchange_rate_mantissa": "20000000000000000",
-      "admin": "0x9687EB285292cbA14a60a0c77dfD36dD95B93889",
+      "admin": "0x0a278Af3Cf0f5ba7a22133f0C165F6dE2DCdf689",
       "underlying": "0xBde8bB00A7eF67007A96945B3a3621177B615C44",
       "contract": "CErc20Immutable"
     },
@@ -337,7 +337,7 @@
       "decimals": 8,
       "address": "0x135669c2dcBd63F639582b313883F101a4497F76",
       "initial_exchange_rate_mantissa": "200000000000000",
-      "admin": "0x9687EB285292cbA14a60a0c77dfD36dD95B93889",
+      "admin": "0x0a278Af3Cf0f5ba7a22133f0C165F6dE2DCdf689",
       "underlying": "0x516de3a7A567d81737e3a46ec4FF9cFD1fcb0136",
       "contract": "CErc20Delegator"
     },

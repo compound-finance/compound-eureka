@@ -65,6 +65,18 @@ Ropsten Deploy:
 yarn eureka apply -n ropsten -b ./.build -c config/*.js -e eureka/{compound,testnet,testnet-gov,ropsten}.eureka
 ```
 
+Followed by a Second Eureka Change for G2:
+
+```bash
+yarn eureka apply -n ropsten -b ./.build -c config/*.js -e eureka/{compound,testnet,testnet-gov,ropsten,2_ropsten}.eureka
+```
+
+Followed by a Governance Change:
+
+```bash
+yarn eureka apply -n ropsten -b ./.build -c config/*.js -e eureka/{compound,testnet,testnet-gov,ropsten,2_ropsten,admin-timelock}.eureka
+```
+
 ## Test-net Deployment
 
 To apply the Compound test-net say for Ropsten, you will need to specify the network, set the provider and provide a private key. Make sure you have a private key available, e.g. in `$ethereum_private_key`. Then you can run:
