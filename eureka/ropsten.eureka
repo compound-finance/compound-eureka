@@ -1,4 +1,11 @@
 
+Governor#gov [compound-test] {
+  harness: true
+  fast: true
+  comp: #comp
+  timelock: #timelock
+}
+
 // Build a G3 Comptroller
 Comptroller#g3 [compound-test] {
   network: 'ropsten'

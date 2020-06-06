@@ -32,7 +32,7 @@
     "cDAI": "0xdb5Ed4605C11822811a39F94314fDb8F0fb59A2C",
     "cBAT": "0x9E95c0b2412cE50C37a121622308e7a6177F819D",
     "reservoir": "0x4Aebe384D31e9309BEDf8552232C07591e0cA56F",
-    "GovernorAlpha": "0x5B9Ccf9B3473EA3e4FbC4d66B808459ff2c55906",
+    "GovernorAlpha": "0x93ACbA9ecaCeC21BFA09b0C4650Be3596713d747",
     "Maximillion": "0xE0a38ab2951B6525C33f20D5E637Ab24DFEF9bcB",
     "Comptroller": "0x54188bBeDD7b68228fa89CbDDa5e3e930459C6c6",
     "PriceOracleProxy": "0xb2b3d5B4E35881D518fa2062325F118A6Ebb6C4A"
@@ -69,7 +69,7 @@
     "cDAI": 8026361,
     "cBAT": 8026365,
     "reservoir": 8026391,
-    "GovernorAlpha": 8034061,
+    "GovernorAlpha": 8036134,
     "Maximillion": 8026452
   },
   "PriceOracle": {

@@ -1074,14 +1074,15 @@
         "type": "ref",
         "ref": "comp"
       },
-      "harness": true
+      "harness": true,
+      "fast": true
     },
-    "address": "0x5B9Ccf9B3473EA3e4FbC4d66B808459ff2c55906",
+    "address": "0x93ACbA9ecaCeC21BFA09b0C4650Be3596713d747",
     "definition": "Governor",
     "deployment": {
-      "block": 8034061,
+      "block": 8036134,
       "constructorData": "0000000000000000000000000a278af3cf0f5ba7a22133f0c165f6de2dcdf6890000000000000000000000001fe16de955718cfab7a44605458ab023838c27930000000000000000000000009687eb285292cba14a60a0c77dfd36dd95b93889",
-      "contract": "GovernorAlphaHarness"
+      "contract": "GovernorAlphaHarnessFast"
     },
     "verified": true
   },
