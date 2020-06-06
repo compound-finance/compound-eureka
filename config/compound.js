@@ -335,6 +335,19 @@ define("Comptroller", {
   build: async ({deploy}, contract, props) => deploy(contract)
 });
 
+define("Comptroller", {
+  match: {
+    properties: {
+      network: 'ropsten'
+    }
+  },
+  properties: {
+    network: 'string'
+  },
+  contract: 'ComptrollerRopsten',
+  build: async ({deploy}, contract, props) => deploy(contract)
+});
+
 define("Unitroller", {
   properties: {
     oracle: {

@@ -527,21 +527,6 @@
     },
     "verified": true
   },
-  "g3": {
-    "contract": "g3",
-    "version": "compound-test",
-    "properties": {
-      "network": "ropsten"
-    },
-    "address": "0xf7291DD4D2FCbb9C92B2E9df9044586dAB86Ba5c",
-    "definition": "Comptroller",
-    "deployment": {
-      "block": 8026170,
-      "constructorData": "",
-      "contract": "Comptroller"
-    },
-    "verified": true
-  },
   "comptroller": {
     "contract": "comptroller",
     "version": "b73e68c",
@@ -1101,6 +1086,21 @@
       "block": 8026452,
       "constructorData": "000000000000000000000000be839b6d93e3ea47effcca1f27841c917a8794f3",
       "contract": "Maximillion"
+    },
+    "verified": true
+  },
+  "g3": {
+    "contract": "g3",
+    "version": "compound-test",
+    "properties": {
+      "network": "ropsten"
+    },
+    "address": "0x63Eff946bC42C46450be42721811C1c46714D52d",
+    "definition": "Comptroller",
+    "deployment": {
+      "block": 8036279,
+      "constructorData": "",
+      "contract": "ComptrollerRopsten"
     },
     "verified": true
   }
