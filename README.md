@@ -24,7 +24,7 @@ This will make it significantly easier to pull updates during alpha development.
 To apply the Compound test-net for development, start ganache locally and then run:
 
 ```bash
-yarn eureka apply -b ./.build -c config/compound.js -c config/underlying.js -c config/networks.js -c config/networks-abi.js eureka/compound.eureka eureka/testnet.eureka
+yarn eureka apply -n development -b ./.build -c config/*.js -e eureka/{compound,testnet,testnet-gov,ropsten}.eureka
 ```
 
 This will create a local test-net for you. Take a look at `compound.eureka` and `testnet.eureka` for the configuration. `compound.js` contains information about how the contracts are structured. You will also notice the `.builds` directory contains the builds from Compound.
@@ -32,7 +32,7 @@ This will create a local test-net for you. Take a look at `compound.eureka` and 
 If you want to start over on dev, run:
 
 ```bash
-yarn eureka clean -n development -c config/compound.js
+yarn eureka clean -n development -c config/*.js -e eureka/{compound,testnet,testnet-gov}.eureka
 ```
 
 This will clear the development state so Eureka will start fresh.

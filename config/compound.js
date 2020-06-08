@@ -70,6 +70,8 @@ async function cTokenAdminSetter(actor, cToken, newAdmin_, {symbol}) {
     console.log(`Setting cToken ${symbol} admin from ${admin} to ${newAdmin.address}`);
     let _setPendingAdmin = await gov(actor, cToken, '_setPendingAdmin(address)', [newAdmin]);
     let _acceptAdmin = await trx(newAdmin, 'harnessAcceptAdmin(address cToken)', [cToken]);
+  } else {
+    console.log(`cToken ${symbol} already has admin set to ${admin}`);
   }
 }
 

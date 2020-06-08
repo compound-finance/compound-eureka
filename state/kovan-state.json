@@ -395,7 +395,8 @@
       "dai": true
     },
     "address": "0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa",
-    "definition": "Erc20"
+    "definition": "Erc20",
+    "existing": "Dai"
   },
   "bat": {
     "contract": "bat",
@@ -539,7 +540,8 @@
       "address": "0xcbB7718c9F39d05aEEDE1c472ca8Bf804b2f1EaD"
     },
     "address": "0xcbB7718c9F39d05aEEDE1c472ca8Bf804b2f1EaD",
-    "definition": "Jug"
+    "definition": "Jug",
+    "existing": "Jug"
   },
   "pot": {
     "contract": "pot",
@@ -548,7 +550,8 @@
       "address": "0xEA190DBDC7adF265260ec4dA6e9675Fd4f5A78bb"
     },
     "address": "0xEA190DBDC7adF265260ec4dA6e9675Fd4f5A78bb",
-    "definition": "Pot"
+    "definition": "Pot",
+    "existing": "Pot"
   },
   "cDaiDelegate": {
     "contract": "cDaiDelegate",

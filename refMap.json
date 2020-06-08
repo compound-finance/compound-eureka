@@ -16,6 +16,7 @@
   "bat": "BAT",
   "cErc20Delegate": "cErc20Delegate",
   "g1": "StdComptrollerG1",
+  "g2": "StdComptrollerG2",
   "cETH": "cETH",
   "cSAI": "cSAI",
   "timelock": "Timelock",
@@ -30,5 +31,6 @@
   "comp": "Comp",
   "jug": "Jug",
   "pot": "Pot",
-  "gov": "GovernorAlpha"
+  "gov": "GovernorAlpha",
+  "reservoir": "Reservoir"
 }
