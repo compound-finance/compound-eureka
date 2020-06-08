@@ -114,6 +114,29 @@ define('Timelock', {
 });
 
 define('Governor', {
+  contract: 'GovernorAlphaHarnessFast',
+  match: {
+    properties: {
+      harness: true,
+      fast: true
+    }
+  },
+  properties: {
+    harness: 'bool',
+    fast: 'bool',
+    timelock: { ref: 'Timelock' },
+    comp: { ref: 'Comp' }
+  },
+  build: async ({deploy, ethereum}, contract, { comp, timelock }) => {
+    return deploy(contract, {
+      timelock_: timelock,
+      comp_: comp,
+      guardian_: ethereum.from
+    });
+  }
+});
+
+define('Governor', {
   contract: 'GovernorAlphaHarness',
   match: {
     properties: {

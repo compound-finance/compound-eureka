@@ -164,13 +164,15 @@
   "g1": {
     "contract": "g1",
     "version": "b73e68c",
-    "properties": [],
-    "address": "0x40882CA2A71dA8C3CA44fB32F9Ec83cc1A2A3E63",
+    "properties": {
+      "generation": "g1"
+    },
+    "address": "0x670d9C026025Ce445D7517EBD9e3dE770527D44d",
     "definition": "Comptroller",
     "deployment": {
-      "block": 18751041,
+      "block": 18958737,
       "constructorData": "",
-      "contract": "Comptroller"
+      "contract": "ComptrollerG1"
     },
     "verified": true
   },
@@ -395,7 +397,8 @@
       "dai": true
     },
     "address": "0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa",
-    "definition": "Erc20"
+    "definition": "Erc20",
+    "existing": "Dai"
   },
   "bat": {
     "contract": "bat",
@@ -539,7 +542,8 @@
       "address": "0xcbB7718c9F39d05aEEDE1c472ca8Bf804b2f1EaD"
     },
     "address": "0xcbB7718c9F39d05aEEDE1c472ca8Bf804b2f1EaD",
-    "definition": "Jug"
+    "definition": "Jug",
+    "existing": "Jug"
   },
   "pot": {
     "contract": "pot",
@@ -548,7 +552,8 @@
       "address": "0xEA190DBDC7adF265260ec4dA6e9675Fd4f5A78bb"
     },
     "address": "0xEA190DBDC7adF265260ec4dA6e9675Fd4f5A78bb",
-    "definition": "Pot"
+    "definition": "Pot",
+    "existing": "Pot"
   },
   "cDaiDelegate": {
     "contract": "cDaiDelegate",
@@ -1189,6 +1194,56 @@
       "block": 18751182,
       "constructorData": "0000000000000000000000004f96fe3b7a6cf9725f59d353f723c1bdb64ca6aa0000000000000000000000005eae89dc1c671724a672ff0630122ee834098657000000000000000000000000e5318b00f1bf6d9a8cdc4707290c157354738727000000000000000000000000000000000000000000a56fa5b99019a5c8000000000000000000000000000000000000000000000000000000000000000000014000000000000000000000000000000000000000000000000000000000000001800000000000000000000000000000000000000000000000000000000000000008000000000000000000000000a776184fd6f545dae5f51361dbcc9018549a9749000000000000000000000000c8016288db9dfe5a1ca2503879dcde880737718600000000000000000000000000000000000000000000000000000000000001c0000000000000000000000000000000000000000000000000000000000000000c436f6d706f756e64204441490000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000463444149000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
       "contract": "CErc20Delegator"
+    },
+    "verified": true
+  },
+  "g2": {
+    "contract": "g2",
+    "version": "25fe06d",
+    "properties": {
+      "generation": "g2"
+    },
+    "address": "0xd026627b0D6326dbA5f3c9ecbca1545dB8CD3486",
+    "definition": "Comptroller",
+    "deployment": {
+      "block": 18958731,
+      "constructorData": "",
+      "contract": "ComptrollerG2"
+    },
+    "verified": true
+  },
+  "Base200bps_Slope2000bps_Jump20000bps_Kink90_bad": {
+    "contract": "Base200bps_Slope2000bps_Jump20000bps_Kink90",
+    "version": "b73e68c",
+    "properties": {
+      "kink": {
+        "type": "number",
+        "base": 90,
+        "exp": 0
+      },
+      "jump": {
+        "type": "number",
+        "base": 20000,
+        "exp": 14
+      },
+      "slope": {
+        "type": "number",
+        "base": 2000,
+        "exp": 14
+      },
+      "base": {
+        "type": "number",
+        "base": 200,
+        "exp": 14
+      },
+      "type": "jump"
+    },
+    "address": "0xC0421A129E775680BD22Af5143098075eD6B85d5",
+    "definition": "InterestRateModel",
+    "deployment": {
+      "block": 18746562,
+      "constructorData": "00000000000000000000000000000000000000000000000000470de4df82000000000000000000000000000000000000000000000000000002c68af0bb1400000000000000000000000000000000000000000000000000001bc16d674ec80000000000000000000000000000000000000000000000000000000000000000005a",
+      "contract": "JumpRateModel"
     },
     "verified": true
   }

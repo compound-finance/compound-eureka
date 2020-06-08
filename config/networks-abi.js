@@ -44,10 +44,17 @@ hook('state.save', async (state) => {
       if (!version) {
         throw new Error(`No build to match ${contract.version} for ref #${ref}`);
       }
-      if (!contract.deployment) {
+
+      let deployedContract;
+
+      if (contract.deployment) {
+        deployedContract = contract.deployment.contract;
+      } else if (contract.existing) {
+        deployedContract = contract.existing;
+      } else {
         return acc; // Nothing to do here if we don't have a deployment
       }
-      let deployedContract = contract.deployment.contract;
+
       let abi = version[deployedContract];
       if (!abi) {
         throw new Error(`Cannot find ${deployedContract} in version ${contract.version}`);
@@ -60,9 +67,10 @@ hook('state.save', async (state) => {
     }, {});
 
     // Comptroller is special
+    let comptrollerImpl = refMap[state.comptroller.properties.implementation.ref];
     abis.Comptroller = [
       ...abis.Unitroller,
-      ...abis.StdComptrollerG3 // Note: handle non-G3
+      ...abis[comptrollerImpl] // Note: handle non-G3
     ];
 
     let networkAbiFile = path.join(process.cwd(), 'networks', `${network}-abi.json`);

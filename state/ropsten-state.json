@@ -502,7 +502,8 @@
       "name": "Comp"
     },
     "address": "0x1fe16de955718cfab7a44605458ab023838c2793",
-    "definition": "Comp"
+    "definition": "Comp",
+    "existing": "Comp"
   },
   "timelock": {
     "contract": "timelock",
@@ -527,21 +528,6 @@
     },
     "verified": true
   },
-  "g3": {
-    "contract": "g3",
-    "version": "compound-test",
-    "properties": {
-      "network": "ropsten"
-    },
-    "address": "0xf7291DD4D2FCbb9C92B2E9df9044586dAB86Ba5c",
-    "definition": "Comptroller",
-    "deployment": {
-      "block": 8026170,
-      "constructorData": "",
-      "contract": "Comptroller"
-    },
-    "verified": true
-  },
   "comptroller": {
     "contract": "comptroller",
     "version": "b73e68c",
@@ -560,14 +546,14 @@
         "type": "ref",
         "ref": "oracle"
       },
-      "generation": "g2",
+      "generation": "g3",
       "implementation": {
         "type": "ref",
-        "ref": "g2"
+        "ref": "g3"
       },
       "admin": {
-        "type": "account",
-        "account": "sender"
+        "type": "ref",
+        "ref": "timelock"
       },
       "supported_markets": [
         {
@@ -659,8 +645,8 @@
     "version": "b73e68c",
     "properties": {
       "admin": {
-        "type": "account",
-        "account": "sender"
+        "type": "ref",
+        "ref": "timelock"
       },
       "interest_rate_model": {
         "type": "ref",
@@ -702,8 +688,8 @@
     "version": "b73e68c",
     "properties": {
       "admin": {
-        "type": "account",
-        "account": "sender"
+        "type": "ref",
+        "ref": "timelock"
       },
       "interest_rate_model": {
         "type": "ref",
@@ -745,8 +731,8 @@
     "version": "b73e68c",
     "properties": {
       "admin": {
-        "type": "account",
-        "account": "sender"
+        "type": "ref",
+        "ref": "timelock"
       },
       "interest_rate_model": {
         "type": "ref",
@@ -789,8 +775,8 @@
     "version": "b73e68c",
     "properties": {
       "admin": {
-        "type": "account",
-        "account": "sender"
+        "type": "ref",
+        "ref": "timelock"
       },
       "interest_rate_model": {
         "type": "ref",
@@ -832,8 +818,8 @@
     "version": "b73e68c",
     "properties": {
       "admin": {
-        "type": "account",
-        "account": "sender"
+        "type": "ref",
+        "ref": "timelock"
       },
       "interest_rate_model": {
         "type": "ref",
@@ -867,8 +853,8 @@
     "version": "b73e68c",
     "properties": {
       "admin": {
-        "type": "account",
-        "account": "sender"
+        "type": "ref",
+        "ref": "timelock"
       },
       "interest_rate_model": {
         "type": "ref",
@@ -910,8 +896,8 @@
     "version": "b73e68c",
     "properties": {
       "admin": {
-        "type": "account",
-        "account": "sender"
+        "type": "ref",
+        "ref": "timelock"
       },
       "interest_rate_model": {
         "type": "ref",
@@ -953,8 +939,8 @@
     "version": "b73e68c",
     "properties": {
       "admin": {
-        "type": "account",
-        "account": "sender"
+        "type": "ref",
+        "ref": "timelock"
       },
       "interest_rate_model": {
         "type": "ref",
@@ -997,8 +983,8 @@
     "version": "b73e68c",
     "properties": {
       "admin": {
-        "type": "account",
-        "account": "sender"
+        "type": "ref",
+        "ref": "timelock"
       },
       "interest_rate_model": {
         "type": "ref",
@@ -1074,14 +1060,15 @@
         "type": "ref",
         "ref": "comp"
       },
-      "harness": true
+      "harness": true,
+      "fast": true
     },
-    "address": "0x5B9Ccf9B3473EA3e4FbC4d66B808459ff2c55906",
+    "address": "0x93ACbA9ecaCeC21BFA09b0C4650Be3596713d747",
     "definition": "Governor",
     "deployment": {
-      "block": 8034061,
+      "block": 8036134,
       "constructorData": "0000000000000000000000000a278af3cf0f5ba7a22133f0c165f6de2dcdf6890000000000000000000000001fe16de955718cfab7a44605458ab023838c27930000000000000000000000009687eb285292cba14a60a0c77dfd36dd95b93889",
-      "contract": "GovernorAlphaHarness"
+      "contract": "GovernorAlphaHarnessFast"
     },
     "verified": true
   },
@@ -1100,6 +1087,21 @@
       "block": 8026452,
       "constructorData": "000000000000000000000000be839b6d93e3ea47effcca1f27841c917a8794f3",
       "contract": "Maximillion"
+    },
+    "verified": true
+  },
+  "g3": {
+    "contract": "g3",
+    "version": "compound-test",
+    "properties": {
+      "network": "ropsten"
+    },
+    "address": "0x63Eff946bC42C46450be42721811C1c46714D52d",
+    "definition": "Comptroller",
+    "deployment": {
+      "block": 8036279,
+      "constructorData": "",
+      "contract": "ComptrollerRopsten"
     },
     "verified": true
   }

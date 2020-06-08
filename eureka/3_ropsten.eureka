@@ -1,0 +1,6 @@
+
+// Represents the on-chain state change to G3
+Unitroller#comptroller [b73e68c] {
+  implementation: #g3
+  generation: "g3"
+}
