@@ -33,7 +33,7 @@
     "cREP": "0xA4eC170599a1Cf87240a35b9B1B8Ff823f448b57",
     "cBAT": "0x4a77fAeE9650b09849Ff459eA1476eaB01606C7a",
     "Reservoir": "0x33deD5C4eA51dBC7AF955396839655EFe13E3F1b",
-    "GovernorAlpha": "0x4DEA597f90801192A88F690213D888fD6Fc3145d",
+    "GovernorAlpha": "0x665a5f09716d63D9256934855b0CE2056a5C4Cf8",
     "DSR_Kink_9000bps_Jump_12000bps_AssumedRF_20000bps": "0xe5318b00F1Bf6D9a8cdC4707290c157354738727",
     "Maximillion": "0xC363f83902Ac614F318b04771d21D25aC0d73be5",
     "cDAI": "0xF0d0EB522cfa50B716B3b1604C4F0fA6f04376AD",
@@ -74,7 +74,7 @@
     "cREP": 18751142,
     "cBAT": 18751147,
     "Reservoir": 18751158,
-    "GovernorAlpha": 18751167,
+    "GovernorAlpha": 18964189,
     "DSR_Kink_9000bps_Jump_12000bps_AssumedRF_20000bps": 18751174,
     "Maximillion": 18751178,
     "cDAI": 18751182,
@@ -232,7 +232,7 @@
       "decimals": 8,
       "address": "0xAf45ae737514C8427D373D50Cd979a242eC59e5a",
       "initial_exchange_rate_mantissa": "200000000000000000000000000",
-      "admin": "0xA776184Fd6F545DAe5f51361dBcC9018549a9749",
+      "admin": "0xE3e07F4F3E2F5A5286a99b9b8DEed08B8e07550B",
       "underlying": "0x162c44e53097e7B5aaE939b297ffFD6Bf90D1EE3",
       "contract": "CErc20Immutable"
     },
@@ -242,7 +242,7 @@
       "decimals": 8,
       "address": "0xa1fAA15655B0e7b6B6470ED3d096390e6aD93Abb",
       "initial_exchange_rate_mantissa": "20000000000000000",
-      "admin": "0xA776184Fd6F545DAe5f51361dBcC9018549a9749",
+      "admin": "0xE3e07F4F3E2F5A5286a99b9b8DEed08B8e07550B",
       "underlying": "0xd3A691C852CDB01E281545A27064741F0B7f6825",
       "contract": "CErc20Immutable"
     },
@@ -252,7 +252,7 @@
       "decimals": 8,
       "address": "0x3f0A0EA2f86baE6362CF9799B523BA06647Da018",
       "initial_exchange_rate_mantissa": "200000000000000",
-      "admin": "0xA776184Fd6F545DAe5f51361dBcC9018549a9749",
+      "admin": "0xE3e07F4F3E2F5A5286a99b9b8DEed08B8e07550B",
       "underlying": "0x07de306FF27a2B630B1141956844eB1552B956B5",
       "contract": "CErc20Delegator"
     },
@@ -262,7 +262,7 @@
       "decimals": 8,
       "address": "0x4a92E71227D294F041BD82dd8f78591B75140d63",
       "initial_exchange_rate_mantissa": "200000000000000",
-      "admin": "0xA776184Fd6F545DAe5f51361dBcC9018549a9749",
+      "admin": "0xE3e07F4F3E2F5A5286a99b9b8DEed08B8e07550B",
       "underlying": "0xb7a4F3E9097C08dA09517b5aB877F7a917224ede",
       "contract": "CErc20Immutable"
     },
@@ -272,7 +272,7 @@
       "decimals": 8,
       "address": "0x41B5844f4680a8C38fBb695b7F9CFd1F64474a72",
       "initial_exchange_rate_mantissa": "200000000000000000000000000",
-      "admin": "0xA776184Fd6F545DAe5f51361dBcC9018549a9749",
+      "admin": "0xE3e07F4F3E2F5A5286a99b9b8DEed08B8e07550B",
       "underlying": "",
       "contract": "CEther"
     },
@@ -282,7 +282,7 @@
       "decimals": 8,
       "address": "0xb3f7fB482492f4220833De6D6bfCC81157214bEC",
       "initial_exchange_rate_mantissa": "200000000000000000000000000",
-      "admin": "0xA776184Fd6F545DAe5f51361dBcC9018549a9749",
+      "admin": "0xE3e07F4F3E2F5A5286a99b9b8DEed08B8e07550B",
       "underlying": "0xD1308F63823221518Ec88EB209CBaa1ac182105f",
       "contract": "CErc20Immutable"
     },
@@ -292,7 +292,7 @@
       "decimals": 8,
       "address": "0xA4eC170599a1Cf87240a35b9B1B8Ff823f448b57",
       "initial_exchange_rate_mantissa": "200000000000000000000000000",
-      "admin": "0xA776184Fd6F545DAe5f51361dBcC9018549a9749",
+      "admin": "0xE3e07F4F3E2F5A5286a99b9b8DEed08B8e07550B",
       "underlying": "0x50DD65531676F718B018De3dc48F92B53D756996",
       "contract": "CErc20Immutable"
     },
@@ -302,7 +302,7 @@
       "decimals": 8,
       "address": "0x4a77fAeE9650b09849Ff459eA1476eaB01606C7a",
       "initial_exchange_rate_mantissa": "200000000000000000000000000",
-      "admin": "0xA776184Fd6F545DAe5f51361dBcC9018549a9749",
+      "admin": "0xE3e07F4F3E2F5A5286a99b9b8DEed08B8e07550B",
       "underlying": "0x482dC9bB08111CB875109B075A40881E48aE02Cd",
       "contract": "CErc20Immutable"
     },
@@ -312,7 +312,7 @@
       "decimals": 8,
       "address": "0xF0d0EB522cfa50B716B3b1604C4F0fA6f04376AD",
       "initial_exchange_rate_mantissa": "200000000000000000000000000",
-      "admin": "0xA776184Fd6F545DAe5f51361dBcC9018549a9749",
+      "admin": "0xE3e07F4F3E2F5A5286a99b9b8DEed08B8e07550B",
       "underlying": "0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa",
       "contract": "CErc20Delegator"
     }
@@ -331,7 +331,7 @@
       "decimals": 8,
       "address": "0xAf45ae737514C8427D373D50Cd979a242eC59e5a",
       "initial_exchange_rate_mantissa": "200000000000000000000000000",
-      "admin": "0xA776184Fd6F545DAe5f51361dBcC9018549a9749",
+      "admin": "0xE3e07F4F3E2F5A5286a99b9b8DEed08B8e07550B",
       "underlying": "0x162c44e53097e7B5aaE939b297ffFD6Bf90D1EE3",
       "contract": "CErc20Immutable"
     },
@@ -341,7 +341,7 @@
       "decimals": 8,
       "address": "0xa1fAA15655B0e7b6B6470ED3d096390e6aD93Abb",
       "initial_exchange_rate_mantissa": "20000000000000000",
-      "admin": "0xA776184Fd6F545DAe5f51361dBcC9018549a9749",
+      "admin": "0xE3e07F4F3E2F5A5286a99b9b8DEed08B8e07550B",
       "underlying": "0xd3A691C852CDB01E281545A27064741F0B7f6825",
       "contract": "CErc20Immutable"
     },
@@ -351,7 +351,7 @@
       "decimals": 8,
       "address": "0x3f0A0EA2f86baE6362CF9799B523BA06647Da018",
       "initial_exchange_rate_mantissa": "200000000000000",
-      "admin": "0xA776184Fd6F545DAe5f51361dBcC9018549a9749",
+      "admin": "0xE3e07F4F3E2F5A5286a99b9b8DEed08B8e07550B",
       "underlying": "0x07de306FF27a2B630B1141956844eB1552B956B5",
       "contract": "CErc20Delegator"
     },
@@ -361,7 +361,7 @@
       "decimals": 8,
       "address": "0x4a92E71227D294F041BD82dd8f78591B75140d63",
       "initial_exchange_rate_mantissa": "200000000000000",
-      "admin": "0xA776184Fd6F545DAe5f51361dBcC9018549a9749",
+      "admin": "0xE3e07F4F3E2F5A5286a99b9b8DEed08B8e07550B",
       "underlying": "0xb7a4F3E9097C08dA09517b5aB877F7a917224ede",
       "contract": "CErc20Immutable"
     },
@@ -371,7 +371,7 @@
       "decimals": 8,
       "address": "0x41B5844f4680a8C38fBb695b7F9CFd1F64474a72",
       "initial_exchange_rate_mantissa": "200000000000000000000000000",
-      "admin": "0xA776184Fd6F545DAe5f51361dBcC9018549a9749",
+      "admin": "0xE3e07F4F3E2F5A5286a99b9b8DEed08B8e07550B",
       "underlying": "",
       "contract": "CEther"
     },
@@ -381,7 +381,7 @@
       "decimals": 8,
       "address": "0xb3f7fB482492f4220833De6D6bfCC81157214bEC",
       "initial_exchange_rate_mantissa": "200000000000000000000000000",
-      "admin": "0xA776184Fd6F545DAe5f51361dBcC9018549a9749",
+      "admin": "0xE3e07F4F3E2F5A5286a99b9b8DEed08B8e07550B",
       "underlying": "0xD1308F63823221518Ec88EB209CBaa1ac182105f",
       "contract": "CErc20Immutable"
     },
@@ -391,7 +391,7 @@
       "decimals": 8,
       "address": "0xA4eC170599a1Cf87240a35b9B1B8Ff823f448b57",
       "initial_exchange_rate_mantissa": "200000000000000000000000000",
-      "admin": "0xA776184Fd6F545DAe5f51361dBcC9018549a9749",
+      "admin": "0xE3e07F4F3E2F5A5286a99b9b8DEed08B8e07550B",
       "underlying": "0x50DD65531676F718B018De3dc48F92B53D756996",
       "contract": "CErc20Immutable"
     },
@@ -401,7 +401,7 @@
       "decimals": 8,
       "address": "0x4a77fAeE9650b09849Ff459eA1476eaB01606C7a",
       "initial_exchange_rate_mantissa": "200000000000000000000000000",
-      "admin": "0xA776184Fd6F545DAe5f51361dBcC9018549a9749",
+      "admin": "0xE3e07F4F3E2F5A5286a99b9b8DEed08B8e07550B",
       "underlying": "0x482dC9bB08111CB875109B075A40881E48aE02Cd",
       "contract": "CErc20Immutable"
     },
@@ -411,7 +411,7 @@
       "decimals": 8,
       "address": "0xF0d0EB522cfa50B716B3b1604C4F0fA6f04376AD",
       "initial_exchange_rate_mantissa": "200000000000000000000000000",
-      "admin": "0xA776184Fd6F545DAe5f51361dBcC9018549a9749",
+      "admin": "0xE3e07F4F3E2F5A5286a99b9b8DEed08B8e07550B",
       "underlying": "0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa",
       "contract": "CErc20Delegator"
     }

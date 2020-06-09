@@ -592,8 +592,8 @@
         "ref": "g3"
       },
       "admin": {
-        "type": "account",
-        "account": "sender"
+        "type": "ref",
+        "ref": "timelock"
       },
       "comp_rate": {
         "type": "number",
@@ -720,8 +720,8 @@
     "version": "b73e68c",
     "properties": {
       "admin": {
-        "type": "account",
-        "account": "sender"
+        "type": "ref",
+        "ref": "timelock"
       },
       "interest_rate_model": {
         "type": "ref",
@@ -763,8 +763,8 @@
     "version": "b73e68c",
     "properties": {
       "admin": {
-        "type": "account",
-        "account": "sender"
+        "type": "ref",
+        "ref": "timelock"
       },
       "interest_rate_model": {
         "type": "ref",
@@ -806,8 +806,8 @@
     "version": "b73e68c",
     "properties": {
       "admin": {
-        "type": "account",
-        "account": "sender"
+        "type": "ref",
+        "ref": "timelock"
       },
       "interest_rate_model": {
         "type": "ref",
@@ -850,8 +850,8 @@
     "version": "b73e68c",
     "properties": {
       "admin": {
-        "type": "account",
-        "account": "sender"
+        "type": "ref",
+        "ref": "timelock"
       },
       "interest_rate_model": {
         "type": "ref",
@@ -893,8 +893,8 @@
     "version": "b73e68c",
     "properties": {
       "admin": {
-        "type": "account",
-        "account": "sender"
+        "type": "ref",
+        "ref": "timelock"
       },
       "interest_rate_model": {
         "type": "ref",
@@ -928,8 +928,8 @@
     "version": "b73e68c",
     "properties": {
       "admin": {
-        "type": "account",
-        "account": "sender"
+        "type": "ref",
+        "ref": "timelock"
       },
       "interest_rate_model": {
         "type": "ref",
@@ -971,8 +971,8 @@
     "version": "b73e68c",
     "properties": {
       "admin": {
-        "type": "account",
-        "account": "sender"
+        "type": "ref",
+        "ref": "timelock"
       },
       "interest_rate_model": {
         "type": "ref",
@@ -1014,8 +1014,8 @@
     "version": "b73e68c",
     "properties": {
       "admin": {
-        "type": "account",
-        "account": "sender"
+        "type": "ref",
+        "ref": "timelock"
       },
       "interest_rate_model": {
         "type": "ref",
@@ -1081,7 +1081,7 @@
   },
   "gov": {
     "contract": "gov",
-    "version": "compound-test",
+    "version": "compound-test-f9901f4",
     "properties": {
       "timelock": {
         "type": "ref",
@@ -1093,12 +1093,12 @@
       },
       "harness": true
     },
-    "address": "0x4DEA597f90801192A88F690213D888fD6Fc3145d",
+    "address": "0x665a5f09716d63D9256934855b0CE2056a5C4Cf8",
     "definition": "Governor",
     "deployment": {
-      "block": 18751167,
+      "block": 18964189,
       "constructorData": "000000000000000000000000e3e07f4f3e2f5a5286a99b9b8deed08b8e07550b00000000000000000000000061460874a7196d6a22d1ee4922473664b3e95270000000000000000000000000a776184fd6f545dae5f51361dbcc9018549a9749",
-      "contract": "GovernorAlpha"
+      "contract": "GovernorAlphaHarness"
     },
     "verified": true
   },
@@ -1158,8 +1158,8 @@
     "version": "b73e68c",
     "properties": {
       "admin": {
-        "type": "account",
-        "account": "sender"
+        "type": "ref",
+        "ref": "timelock"
       },
       "interest_rate_model": {
         "type": "ref",
