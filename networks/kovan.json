@@ -465,6 +465,16 @@
       "slope": "200000000000000000",
       "jump": "2000000000000000000",
       "kink": "90"
+    },
+    "Base200bps_Slope2000bps_Jump20000bps_Kink90_bad_2": {
+      "name": "Base200bps_Slope2000bps_Jump20000bps_Kink90_bad_2",
+      "contract": "JumpRateModel",
+      "description": "JumpRateModel  baseRate=20000000000000000 multiplier=200000000000000000 jump=2000000000000000000 kink=90",
+      "address": "0x059965e18ae254954b500f198876bd43afc1ddec",
+      "base": "20000000000000000",
+      "slope": "200000000000000000",
+      "jump": "2000000000000000000",
+      "kink": "90"
     }
   }
 }

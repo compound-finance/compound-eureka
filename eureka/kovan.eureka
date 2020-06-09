@@ -36,6 +36,14 @@ InterestRateModel#Base200bps_Slope2000bps_Jump20000bps_Kink90_bad [b73e68c] {
   kink: 90
 }
 
+InterestRateModel#Base200bps_Slope2000bps_Jump20000bps_Kink90_bad_2 [b73e68c] {
+  type: 'jump'
+  base: 200e14
+  slope: 2000e14
+  jump: 20000e14
+  kink: 90
+}
+
 CToken#cDAI [b73e68c] ! {
   type: "delegator"
   symbol: "cDAI"
