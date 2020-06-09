@@ -1,6 +1,6 @@
 
 // Use G3 Comptroller
-Comptroller#g3 [compound-test] {
+Comptroller#g3 [compound-test-f9901f4] {
   network: 'kovan'
 }
 

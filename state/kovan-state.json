@@ -499,14 +499,14 @@
   },
   "g3": {
     "contract": "g3",
-    "version": "compound-test",
+    "version": "compound-test-f9901f4",
     "properties": {
       "network": "kovan"
     },
-    "address": "0xD3099817E1fA16ffa321b0114f2e193869521E70",
+    "address": "0xbDF4D9A65023CAf0DaDa604cf46C44D5aab0bb0C",
     "definition": "Comptroller",
     "deployment": {
-      "block": 18751090,
+      "block": 18963197,
       "constructorData": "",
       "contract": "ComptrollerKovan"
     },

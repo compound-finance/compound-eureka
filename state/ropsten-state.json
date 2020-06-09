@@ -1092,14 +1092,14 @@
   },
   "g3": {
     "contract": "g3",
-    "version": "compound-test",
+    "version": "compound-test-f9901f4",
     "properties": {
       "network": "ropsten"
     },
-    "address": "0x63Eff946bC42C46450be42721811C1c46714D52d",
+    "address": "0x6F4B5C3d29ed8eFa211bB7549bDCcEc19c74c1AA",
     "definition": "Comptroller",
     "deployment": {
-      "block": 8036279,
+      "block": 8053317,
       "constructorData": "",
       "contract": "ComptrollerRopsten"
     },

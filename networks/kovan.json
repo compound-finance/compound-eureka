@@ -18,7 +18,7 @@
     "BAT": "0x482dC9bB08111CB875109B075A40881E48aE02Cd",
     "Fauceteer": "0x916518711a75a98Ac00e8E3386d036F7eA56A484",
     "PriceOracle": "0x37ac0cb24b5DA520B653A5D94cFF26EB08d4Dc02",
-    "StdComptrollerG3": "0xD3099817E1fA16ffa321b0114f2e193869521E70",
+    "StdComptrollerG3": "0xbDF4D9A65023CAf0DaDa604cf46C44D5aab0bb0C",
     "Timelock": "0xE3e07F4F3E2F5A5286a99b9b8DEed08B8e07550B",
     "Jug": "0xcbB7718c9F39d05aEEDE1c472ca8Bf804b2f1EaD",
     "Pot": "0xEA190DBDC7adF265260ec4dA6e9675Fd4f5A78bb",
@@ -60,7 +60,7 @@
     "BAT": 18751073,
     "Fauceteer": 18751074,
     "PriceOracle": 18751077,
-    "StdComptrollerG3": 18751090,
+    "StdComptrollerG3": 18963197,
     "Timelock": 18751096,
     "cDaiDelegate": 18751101,
     "Unitroller": 18751106,
@@ -105,7 +105,7 @@
       "description": "Comptroller Description"
     },
     "StdComptrollerG3": {
-      "address": "0xD3099817E1fA16ffa321b0114f2e193869521E70",
+      "address": "0xbDF4D9A65023CAf0DaDa604cf46C44D5aab0bb0C",
       "contract": "ComptrollerKovan",
       "description": "Comptroller Description"
     },
