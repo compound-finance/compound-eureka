@@ -133,7 +133,11 @@ hook('state.save', async (state, {ethereum}) => {
     contractsJson.Comptroller = contractsJson.Unitroller; // Comptroller is special
     contractsJson.PriceOracleProxy = contractsJson.PriceOracle; // PriceOracle is *also* special
 
-    let blocksJson = mapContracts(state, refMap, null, ({deployment}) => deployment ? deployment.block : null);
+    let blocksJson = mapContracts(state, refMap, null, ({deployment, properties}) =>
+      deployment ? deployment.block : (
+        properties.block ? toNumber(properties.block) : null
+      )
+    );
 
     let priceOracleJson = mapContracts(
       state,

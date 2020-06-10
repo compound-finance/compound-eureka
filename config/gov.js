@@ -83,7 +83,11 @@ define('Comp', {
   },
   contract: 'Comp',
   properties: {
-    address: 'address'
+    address: 'address',
+    block: {
+      type: 'number',
+      setter: async ({trx}, contract, block) => {}
+    }
   },
   build: async ({existing}, contract, { address }) => {
     return existing(contract, address);
