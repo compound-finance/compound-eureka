@@ -5,14 +5,18 @@ Governor#gov [compound-test-f9901f4] {
   timelock: #timelock
 }
 
-// Use G3 Comptroller
 Comptroller#g3 [compound-test-f9901f4] {
   network: 'kovan'
 }
 
+// Use G4 Comptroller
+Comptroller#g4 [compound-test-96370c1] {
+  network: 'kovan'
+}
+
 Unitroller#comptroller [e0a16ae] {
-  implementation: #g3
-  generation: "g3"
+  implementation: #g4
+  generation: "g4"
   comp_rate: 0.25e18
 
   comp_markets: [

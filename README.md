@@ -56,7 +56,7 @@ Kovan Deploy (Timelock Shift):
 This will switch over to timelock controlled governance, making all future changes come through the `GovernorAlpha` system.
 
 ```bash
-yarn eureka apply -n kovan -b ./.build -c config/*.js -e eureka/{compound,testnet,testnet-gov,kovan,admin-timelock}.eureka
+yarn eureka apply -n kovan -b ./.build -c config/*.js -e eureka/{compound,testnet,testnet-gov,kovan,kovan-*,admin-timelock}.eureka
 ```
 
 Ropsten Deploy:

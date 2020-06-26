@@ -1,0 +1,11 @@
+
+// Use G4 Comptroller
+Comptroller#g4 [compound-test-96370c1] {
+  network: 'ropsten'
+}
+
+// Represents the on-chain state change to G4
+Unitroller#comptroller [b73e68c] {
+  implementation: #g4
+  generation: "g4"
+}

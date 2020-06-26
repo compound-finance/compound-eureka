@@ -586,10 +586,10 @@
         "type": "ref",
         "ref": "oracle"
       },
-      "generation": "g3",
+      "generation": "g4",
       "implementation": {
         "type": "ref",
-        "ref": "g3"
+        "ref": "g4"
       },
       "admin": {
         "type": "ref",
@@ -1283,5 +1283,19 @@
     },
     "verified": true,
     "existing": "JumpRateModel"
+  },
+  "g4": {
+    "contract": "g4",
+    "version": "compound-test-96370c1",
+    "properties": {
+      "network": "kovan"
+    },
+    "address": "0x35cf8e1f268680db66119dae1bffea136491939a",
+    "definition": "Comptroller",
+    "deployment": {
+      "block": 19266981,
+      "constructorData": "",
+      "contract": "ComptrollerKovan"
+    }
   }
 }
