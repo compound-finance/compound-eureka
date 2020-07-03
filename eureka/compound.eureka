@@ -92,6 +92,22 @@ Erc20#zrx [zrx] {
   }
 }
 
+// Main-net https://etherscan.io/token/0x514910771af9ca656af840dff83e8264ecf986ca
+Erc20#link [chainlink] {
+  type: "link"
+  balances: {
+    #fauceteer: 2100840e18
+  }
+}
+
+// Main-net https://etherscan.io/token/0xdd974d5c2e2928dea5f71b9825b8b646686bd200
+Erc20#knc [kyber] {
+  type: "knc"
+  balances: {
+    #fauceteer: 5376344e18
+  }
+}
+
 // CToken Delegate
 CErc20Delegate#cErc20Delegate [b73e68c] {}
 
