@@ -220,3 +220,114 @@ define('Erc20', {
     return deployed;
   }
 });
+
+// Main-net https://etherscan.io/token/0x514910771af9ca656af840dff83e8264ecf986ca
+define('Erc20', {
+  match: {
+    properties: {
+      type: 'link'
+    }
+  },
+  contract: 'LinkToken',
+  properties: {
+    type: 'string',
+    name: {
+      type: 'string',
+      default: 'ChainLink Token',
+      setter: async () => null
+    },
+    symbol: {
+      type: 'string',
+      default: 'LINK',
+      setter: async () => null
+    },
+    decimals: {
+      type: 'string',
+      default: { type: 'number', base: '18', exp: 0 },
+      setter: async () => null
+    },
+    balances: {
+      deferred: true,
+      dictionary: {
+        key: 'ref',
+        value: 'number'
+      },
+      setter: balanceSetter
+    }
+  },
+  build: async (actor, contract, {balances}, {definition}) => {
+    let {deploy} = actor;
+    let deployed = await deploy(contract, {});
+    if (balances) {
+      console.log(`Setting token balances for ${contract}...`);
+      await definition.typeProperties.balances.setter(actor, deployed, balances);
+    }
+    return deployed;
+  }
+});
+
+// Main-net https://etherscan.io/token/0xdd974d5c2e2928dea5f71b9825b8b646686bd200
+define('Erc20', {
+  match: {
+    properties: {
+      type: 'knc'
+    }
+  },
+  contract: 'KyberNetworkCrystal',
+  properties: {
+    type: 'string',
+    name: {
+      type: 'string',
+      default: 'Kyber Network Crystal',
+      setter: async () => null
+    },
+    symbol: {
+      type: 'string',
+      default: 'KNC',
+      setter: async () => null
+    },
+    decimals: {
+      type: 'string',
+      default: { type: 'number', base: '18', exp: 0 }, // TODO
+      setter: async () => null
+    },
+    total_supply: {
+      type: 'number',
+      default: { type: 'number', base: '210564972417906851272699383', exp: 0 },
+      setter: async () => null
+    },
+    sale_start_time: {
+      type: 'number',
+      default: { type: 'number', base: '1505455200', exp: 0 },
+      setter: async () => null
+    },
+    sale_end_time: {
+      type: 'number',
+      default: { type: 'number', base: '1506232800', exp: 0 },
+      setter: async () => null
+    },
+    balances: {
+      deferred: true,
+      dictionary: {
+        key: 'ref',
+        value: 'number'
+      },
+      setter: balanceSetter
+    }
+  },
+  build: async (actor, contract, {total_supply, sale_start_time, sale_end_time, balances}, {definition}) => {
+    let {deploy, from} = actor; // TODO: Is this from?
+    // TODO: This isn't verifying, but the contract is matching existing, so it's hard to test
+    let deployed = await deploy(contract, {
+      tokenTotalAmount: total_supply,
+      startTime: sale_start_time,
+      endTime: sale_end_time,
+      admin: from
+    });
+    if (balances) {
+      console.log(`Setting token balances for ${contract}...`);
+      await definition.typeProperties.balances.setter(actor, deployed, balances);
+    }
+    return deployed;
+  }
+});

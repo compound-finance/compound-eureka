@@ -117,46 +117,6 @@ async function cTokenAdminSetter(actor, cToken, newAdmin_, {symbol}) {
   }
 }
 
-// Define our contract configuration
-if (network !== 'mainnet') { // Skip these contracts on prod
-  define("SimplePriceOracle", {
-    properties: {
-      prices: {
-        deferred: true,
-        dictionary: {
-          key: 'ref',
-          value: 'number'
-        },
-        setter: async ({bn, read, trx}, oracle, prices) => {
-          return await Object.entries(prices).reduce(async (acc_, [asset, price_]) => {
-            let acc = await acc_;
-            let price = bn(price_);
-            let currentPrice = bn(await read(oracle, 'assetPrices', [asset]));
-
-            if (currentPrice.eq(price)) {
-              console.log(`Price of ${asset} currently equal to expected price of ${price.toString()}`);
-            } else {
-              console.log(`Setting price of ${asset} from ${currentPrice.toString()} to ${price.toString()}`);
-              return await trx(oracle, 'setDirectPrice', [asset, price]);
-            }
-          }, Promise.resolve(null));
-        }
-      }
-    },
-    build: async (actor, contract, {prices}, { definition }) => {
-      let {deploy} = actor;
-      let deployed = await deploy(contract);
-
-      if (prices) {
-        console.log("Setting underlying prices...");
-        await definition.typeProperties.prices.setter(actor, deployed, prices);
-      }
-
-      return deployed;
-    }
-  });
-}
-
 define('InterestRateModel', {
   match: {
     properties: {
