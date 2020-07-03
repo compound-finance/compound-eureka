@@ -32,17 +32,59 @@ provider(env('provider', defaultProvider), {
   } : {}
 });
 
+let stripColor = (str) => {
+  return str.replace(/\x1B[[(?);]{0,2}(;?\d)*./g, '');
+}
+
 async function gov(actor, contract, func, args, opts={}) {
+  return await govs(actor, [[contract, func, args, opts]]);
+}
+
+// Gov, but accepts a list of actions
+async function govs(actor, actions) {
   let {read, encodeFunctionData, ethereum, show, trx} = actor;
-  let admin = await read(contract, 'admin(): address', [], opts); // TODO: Pass through opts?
+  // TODO: Maybe check all actions, not just the first?
+  let admin = await read(actions[0][0], 'admin(): address', [], actions[0][3] || {}); // TODO: Pass through opts?
   if (admin == ethereum.from) {
-    return await compoundTrx(actor, contract, func, args, opts);
+    for ([contract, func, args, opts] of actions) {
+      await compoundTrx(actor, contract, func, args, opts);
+    }
   } else {
+    let {
+      targets,
+      values,
+      funcs,
+      calldatas,
+      title,
+      desc
+    } = actions.reduce(({targets, values, funcs, calldatas, title, desc}, [contract, func, args, opts]) => {
+      let newTitle = `${title} ${stripColor(show(contract))}:${func}`;
+      console.log(args);
+      let showArgs;
+      if (Array.isArray(args)) {
+        showArgs = args.map((arg) => `${stripColor(show(arg))}`).join(', ');
+      } else {
+        showArgs = Object.entries(args).map(([key, arg]) => `${key}=${stripColor(show(arg))}`).join(', ');
+      }
+      let newFunc = (opts || {}).canonical || func;
+      let newDesc = `${desc}\n * ${func} [${showArgs}]`;
+      let data = '0x' + encodeFunctionData(func, args);
+
+      return {
+        targets: [...targets, contract],
+        values: [...values, 0],
+        funcs: [...funcs, newFunc],
+        calldatas: [...calldatas, data],
+        title: newTitle,
+        desc: newDesc
+      }
+    }, { targets: [], values: [], funcs: [], calldatas: [], title: " # Governance", desc: "" });
+
     // Okay, we're going to propose through the governor
     let proposeSig = 'propose(address[] memory targets, uint[] memory values, string[] memory signatures, bytes[] memory calldatas, string memory description)';
-    let description = `Gov ${func} ${show(args)}`;
-    let data = '0x' + encodeFunctionData(func, args);
-    let proposalTrx = await trx('#gov', proposeSig, [[contract], [0], [func], [data], description]);
+    let description = `${title}\n${desc}`;
+
+    let proposalTrx = await trx('#gov', proposeSig, [targets, values, funcs, calldatas, description]);
     console.log(`Created proposal ${description}`);
     return proposalTrx;
   }
@@ -327,6 +369,19 @@ define("Comptroller", {
 define("Comptroller", {
   match: {
     properties: {
+      generation: 'g3'
+    }
+  },
+  properties: {
+    generation: 'string'
+  },
+  contract: 'ComptrollerG3',
+  build: async ({deploy}, contract, props) => deploy(contract)
+});
+
+define("Comptroller", {
+  match: {
+    properties: {
       network: 'kovan'
     }
   },
@@ -383,37 +438,43 @@ define("Unitroller", {
     implementation: {
       ref: 'Comptroller',
       setter: async (actor, unitroller, comptroller, { properties: { comp_rate, generation, comp_markets, oracle, close_factor, max_assets, supported_markets } }) => {
-        await gov(actor, unitroller, '_setPendingImplementation(address)', [comptroller]);
+        let actions = [[unitroller, '_setPendingImplementation(address)', [comptroller]]];
         switch (generation) {
           case 'g1':
-            return await gov(actor, comptroller, '_become(Unitroller unitroller, PriceOracle _oracle, uint _closeFactorMantissa, uint _maxAssets, bool reinitializing)', {
+            actions.push([comptroller, '_become(Unitroller unitroller, PriceOracle _oracle, uint _closeFactorMantissa, uint _maxAssets, bool reinitializing)', {
               unitroller,
               _oracle: oracle,
               _closeFactorMantissa: close_factor,
               _maxAssets: max_assets,
               reinitializing: false
-            });
+            }, { canonical: '_become(address,address,uint256,uint256,bool)' }]);
+            break;
           case 'g2':
-            return await gov(actor, comptroller, '_become(Unitroller unitroller)', { unitroller });
+            actions.push([comptroller, '_become(Unitroller unitroller)', { unitroller }, { canonical: '_become(address)' }]);
+            break;
           case 'g3':
             // These properties may not be available yet
             supported_markets = supported_markets || [];
             comp_markets = comp_markets || [];
 
             let other_markets = supported_markets.filter((market) => comp_markets.includes(market));
-            return await gov(
-              actor,
-              comptroller,
+            actions.push([comptroller,
               '_become(Unitroller unitroller, uint compRate_, address[] memory compMarketsToAdd, address[] memory otherMarketsToAdd)',
               {
                 unitroller,
                 compRate_: comp_rate || 0,
                 compMarketsToAdd: comp_markets,
                 otherMarketsToAdd: other_markets
-              });
+              }, { canonical: '_become(address,uint256,address[],address[])' }]);
+            break;
+          case 'g4':
+            actions.push([comptroller, '_become(Unitroller unitroller)', { unitroller }, { canonical: '_become(address)' }]);
+            break;
           default:
             throw new Error(`Unknown generation: \`${generation}\` for _become`);
         }
+
+        await govs(actor, actions);
       }
     },
     supported_markets: {

@@ -551,10 +551,10 @@
         "type": "ref",
         "ref": "oracle"
       },
-      "generation": "g3",
+      "generation": "g4",
       "implementation": {
         "type": "ref",
-        "ref": "g3"
+        "ref": "g4"
       },
       "admin": {
         "type": "ref",
@@ -1105,6 +1105,21 @@
     "definition": "Comptroller",
     "deployment": {
       "block": 8053317,
+      "constructorData": "",
+      "contract": "ComptrollerRopsten"
+    },
+    "verified": true
+  },
+  "g4": {
+    "contract": "g4",
+    "version": "compound-test-96370c1",
+    "properties": {
+      "network": "ropsten"
+    },
+    "address": "0xdC82E0c29e0c69cAf323dCF6Bd25dcE741d4C38C",
+    "definition": "Comptroller",
+    "deployment": {
+      "block": 8175772,
       "constructorData": "",
       "contract": "ComptrollerRopsten"
     },
