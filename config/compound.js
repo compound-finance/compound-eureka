@@ -28,7 +28,7 @@ provider(env('provider', defaultProvider), {
   verificationOpts: network !== 'development' && env('etherscan') ? {
     verify: true,
     etherscanApiKey: env('etherscan'),
-    raiseOnError: true
+    raiseOnError: false
   } : {}
 });
 

@@ -257,7 +257,7 @@ define('Erc20', {
   },
   build: async (actor, contract, {balances}, {definition}) => {
     let {deploy} = actor;
-    let deployed = await deploy(contract, {});
+    let deployed = await deploy(contract, {}, { verify: false });
     if (balances) {
       console.log(`Setting token balances for ${contract}...`);
       await definition.typeProperties.balances.setter(actor, deployed, balances);
@@ -316,14 +316,14 @@ define('Erc20', {
     }
   },
   build: async (actor, contract, {total_supply, sale_start_time, sale_end_time, balances}, {definition}) => {
-    let {deploy, from} = actor; // TODO: Is this from?
+    let {deploy, ethereum} = actor;
     // TODO: This isn't verifying, but the contract is matching existing, so it's hard to test
     let deployed = await deploy(contract, {
       tokenTotalAmount: total_supply,
       startTime: sale_start_time,
       endTime: sale_end_time,
-      admin: from
-    });
+      admin: ethereum.from
+    }, { verify: false });
     if (balances) {
       console.log(`Setting token balances for ${contract}...`);
       await definition.typeProperties.balances.setter(actor, deployed, balances);

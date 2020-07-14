@@ -1,22 +1,18 @@
 
-Uniswap#uniswap [uniswap] {
-  // This address is the same for all supported test-nets!
-  // See https://uniswap.org/docs/v2/smart-contracts/factory/
-  address: "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
-}
-
 OpenOraclePriceData#price_data [open-oracle] {}
 
 OpenOracle#oracle [open-oracle] {
   uniswap: #uniswap
   price_data: #price_data
+  weth: #weth
+  usdc: #usdc
   reporter: "0xfCEAdAFab14d46e20144F48824d0C09B1a03F2BC" // https://docs.pro.coinbase.com/#oracle
   anchor_period: 1800 // 30 minutes
-  anchor_tolerance: 0.2 // 20%
-  configs: [
+  anchor_tolerance: 0.2e18 // 20%
+  config: [
     {
       symbol: "ETH",
-      source: "FIXED_ETH",
+      price_source: "FIXED_ETH",
       base_unit: 1e18,
       ctoken: #cETH,
     },
@@ -90,6 +86,12 @@ OpenOracle#oracle [open-oracle] {
       price_source: "REPORTER",
       base_unit: 1e18,
       underlying: #knc
-    }
+    },
+    {
+      symbol: "COMP",
+      price_source: "REPORTER",
+      base_unit: 1e18,
+      underlying: #comp
+    },
   ]
 }

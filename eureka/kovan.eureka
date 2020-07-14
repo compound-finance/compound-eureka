@@ -55,3 +55,13 @@ CToken#cDAI [b73e68c] ! {
   interest_rate_model: #DSR_Kink_9000bps_Jump_12000bps_AssumedRF_20000bps
   admin: $admin
 }
+
+Uniswap#uniswap [uniswap] {
+  // This address is the same for all supported test-nets!
+  // See https://uniswap.org/docs/v2/smart-contracts/factory/
+  address: "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
+}
+
+WETH#weth [weth] {
+  address: "0xd0a1e359811322d97991e03f863a0c30c2cf029c"
+}
