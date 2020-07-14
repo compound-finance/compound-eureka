@@ -7,7 +7,7 @@ This example sets up what is necessary for a Compound test-net deployment. This 
 
 You may want to directly link `eureka` during development:
 
-```bash
+```sh
 cd ~ # or your code directory
 git clone git@github.com:compound-finance/eureka.git
 cd eureka
@@ -23,7 +23,7 @@ This will make it significantly easier to pull updates during alpha development.
 
 To apply the Compound test-net for development, start ganache locally and then run:
 
-```bash
+```sh
 yarn eureka apply -n development -b ./.build -c config/*.js -e eureka/{compound,testnet,testnet-gov,ropsten}.eureka
 ```
 
@@ -31,7 +31,7 @@ This will create a local test-net for you. Take a look at `compound.eureka` and 
 
 If you want to start over on dev, run:
 
-```bash
+```sh
 yarn eureka clean -n development -c config/*.js -e eureka/{compound,testnet,testnet-gov}.eureka
 ```
 
@@ -39,7 +39,7 @@ This will clear the development state so Eureka will start fresh.
 
 To do a fresh deploy to development, then, you can run:
 
-```bash
+```sh
 yarn eureka clean -y -n development -c config/*.js && yarn eureka apply -b ./.build -c config/*.js -e eureka/{compound,testnet}.eureka
 ```
 
@@ -47,7 +47,7 @@ Kovan Deploy:
 
 This will deploy Kovan, but it will keep the admin of the cTokens and Unitroller the deployer address. This is because if we switch over to gov too early, we'll be forced to set everything up via proposals, which is slow and each address can only have one proposal at a time.
 
-```bash
+```sh
 yarn eureka apply -n kovan -b ./.build -c config/*.js -e eureka/{compound,testnet-gov,open-oracle,kovan,kovan-*}.eureka
 ```
 
@@ -55,33 +55,39 @@ Kovan Deploy (Timelock Shift):
 
 This will switch over to timelock controlled governance, making all future changes come through the `GovernorAlpha` system.
 
-```bash
+```sh
 yarn eureka apply -n kovan -b ./.build -c config/*.js -e eureka/{compound,testnet-gov,open-oracle,kovan,kovan-*,admin-timelock}.eureka
 ```
 
 Ropsten Deploy:
 
-```bash
+```sh
 yarn eureka apply -n ropsten -b ./.build -c config/*.js -e eureka/{compound,testnet,testnet-gov,ropsten}.eureka
 ```
 
 Followed by a Second Eureka Change for G2:
 
-```bash
+```sh
 yarn eureka apply -n ropsten -b ./.build -c config/*.js -e eureka/{compound,testnet,testnet-gov,ropsten,2_ropsten}.eureka
 ```
 
 Followed by a Governance Change:
 
-```bash
+```sh
 yarn eureka apply -n ropsten -b ./.build -c config/*.js -e eureka/{compound,testnet,testnet-gov,ropsten,2_ropsten,admin-timelock}.eureka
+```
+
+Note: to verify a contract, e.g.
+
+```sh
+yarn eureka verify oracle -n kovan -b ./.build -c config/*.js
 ```
 
 ## Test-net Deployment
 
 To apply the Compound test-net say for Ropsten, you will need to specify the network, set the provider and provide a private key. Make sure you have a private key available, e.g. in `$ethereum_private_key`. Then you can run:
 
-```bash
+```sh
 etherscan=$ETHERSCAN_API_KEY provider=https://ropsten-eth.compound.finance pk=$ethereum_private_key yarn eureka apply -n ropsten -c compound.js -c networks.js -c networks-abi.js compound.eureka testnet.eureka
 ```
 
@@ -107,7 +113,7 @@ Set your syntax highlighting for `eureka` files to Java. It looks pretty normal.
 
 For issues with `.eureka` files, parsing can be helpful. The following command can show you the parsed output of your given Compound Eureka files:
 
-```bash
+```sh
 yarn eureka parse compound.eureka testnet.eureka ropsten.eureka
 ```
 
@@ -117,7 +123,7 @@ yarn eureka parse compound.eureka testnet.eureka ropsten.eureka
 
 We can fetch different versions of Compound from Docker builds by running:
 
-```bash
+```sh
 ./fetch_build.sh 8bc065b
 ```
 
@@ -127,7 +133,7 @@ See a list of tagged releases here: https://hub.docker.com/repository/docker/com
 
 Currently, we're using a random token to pretend to be foreign-imported Dai, you can pull the build by running:
 
-```bash
+```sh
 npx saddle import -n ropsten --outdir=.build --outname=contracts-atari.json 0x1f5d94172e6363f7b4a334f86f86911de4d0b8c5
 ```
 

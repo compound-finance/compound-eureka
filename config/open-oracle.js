@@ -1,6 +1,22 @@
 
-// Currently, we can only use an existing factory
+// Currently, we can only use an existing Uniswap factory
 define("Uniswap", {
+  contract: 'UniswapV2Factory',
+  properties: {
+    address: 'address',
+    block: {
+      type: 'number',
+      setter: async ({trx}, contract, block) => {}
+    }
+  },
+  build: async ({existing}, contract, { address }) => {
+    return existing(contract, address);
+  }
+});
+
+// Currently, we can only use an existing WETH
+define("WETH", {
+  contract: 'WETH9_',
   properties: {
     address: 'address',
     block: {
@@ -16,56 +32,86 @@ define("Uniswap", {
 define("OpenOraclePriceData", {
   properties: {},
   build: async ({deploy}, contract, {}) => {
-    return await deploy(contract, {});
+    return await deploy(contract, []);
   }
 });
 
 define("OpenOracle", {
+  contract: 'UniswapAnchoredView',
   properties: {
     uniswap: { ref: 'Uniswap' },
+    weth: { ref: 'WETH' },
+    usdc: { ref: 'Erc20' },
     price_data: { ref: 'OpenOraclePriceData' },
     reporter: 'address',
     anchor_period: 'number',
     anchor_tolerance: 'number',
     config: 'array'
   },
-  build: async ({deploy, keccak}, contract, {uniswap, price_data, reporter, anchor_period, anchor_tolerance, config}) => {
-    console.log({uniswap, price_data, reporter, anchor_period, anchor_tolerance, config});
-    throw "abc";
-    // TODO: I think we need WETH address
-    let weth = null;
-
+  build: async ({bn, deploy, encode, keccak, read, trx}, contract, {uniswap, weth, usdc, price_data, reporter, anchor_period, anchor_tolerance, config}) => {
     let priceSourceEnum = {
-      "REPORTER": 0,
+      "FIXED_ETH": 0,
       "FIXED_USD": 1,
-      "FIXED_ETH": 2
+      "REPORTER": 2
     };
 
-    let configs = await Promise.all(configs.map(async (config) => {
-      let uniswapPair = await uniswap.getPair(config.underlying, weth);
-      // TODO: Handle ETH
-      // TODO: Check if 0
+    let zeroAddress = '0x0000000000000000000000000000000000000000';
 
-      let isUniswapReversed = false; // TODO
-      let symbolHash = keccak(config.symbol);
-      let priceSource = priceSourceEnum[config.price_source];
-      if (priceSource === undefined) {
-        throw `Unknown price source: ${config.price_source}`;
+    async function getOrCreatePair(asset0, asset1, allowCreate=true) {
+      let pair = await read(uniswap, 'getPair(address,address): address', [asset0, asset1]);
+      if (pair === zeroAddress) {
+        if (allowCreate) {
+          console.log(`Creating Uniswap Pair: ${asset0} ${asset1}`);
+          await trx(uniswap, 'createPair(address,address)', [asset0, asset1]);
+          // TODO: We need to fund liquidity for the pair as well
+          return await getOrCreatePair(asset0, asset1, false);
+        } else {
+          throw new Error(`Could not find Uniswap pair ${asset0} ${asset1}`);
+        }
+      } else {
+        let reversed = bn(asset0).lt(bn(asset1)); // TODO: Check
+        return [ pair, reversed ];
+      }
+    }
+
+    let configs = await config.reduce(async (accP, conf) => {
+      let acc = await accP; // force ordering
+      let uniswapMarket;
+      let isUniswapReversed;
+      if (conf.price_source === 'REPORTER') {
+        if (conf.symbol === 'ETH') {
+          [uniswapMarket, isUniswapReversed] = await getOrCreatePair(weth, usdc);
+        } else {
+          [uniswapMarket, isUniswapReversed] = await getOrCreatePair(conf.underlying, weth); // TODO: Check asset order
+        }
+      } else {
+        [uniswapMarket, isUniswapReversed] = [zeroAddress, false];
       }
 
-      return {
-        uniswapPair,
-        isUniswapReversed,
-        symbolHash,
-        priceSource,
-        baseUnit: config.base_unit,
-        underlying: config.underlying,
-        cTokenAddress: config.cToken,
-        fixedPrice: config.fixed_price
-      };
-    }));
-    console.log(configs);
-    throw `def`;
+      console.log("uniswapMarket", conf.symbol, uniswapMarket, isUniswapReversed);
+
+      let symbolHash = keccak(conf.symbol);
+      let priceSource = priceSourceEnum[conf.price_source];
+      if (priceSource === undefined) {
+        throw `Unknown price source: ${conf.price_source}`;
+      }
+
+      // TODO: Fix encoding issues here
+      return [
+        ...acc,
+        {
+          cToken: encode(conf.cToken || zeroAddress),
+          underlying: encode(conf.underlying || zeroAddress),
+          symbolHash,
+          baseUnit: '0x' + encode(conf.base_unit),
+          priceSource: '0x' + encode(priceSource),
+          fixedPrice: '0x' + encode(conf.fixed_price || 0),
+          uniswapMarket,
+          isUniswapReversed
+        }
+      ];
+    }, []);
+    console.log({configs});
 
     return await deploy(contract, {
       priceData_: price_data,
