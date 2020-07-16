@@ -1,0 +1,70 @@
+Uniswap#uniswap [uniswap-mock] {
+  type: "mock"
+  config: [
+    {
+      symbol: "BAT",
+      price_source: "REPORTER",
+      underlying: #bat,
+    },
+    {
+      symbol: "DAI",
+      price_source: "REPORTER",
+      underlying: #dai,
+    },
+    {
+      symbol: "REP",
+      price_source: "REPORTER",
+      underlying: #rep,
+    },
+    {
+      symbol: "SAI",
+      price_source: "FIXED_ETH",
+      underlying: #sai,
+    },
+    {
+      symbol: "USDC",
+      price_source: "FIXED_USD",
+      underlying: #dai,
+    },
+    {
+      symbol: "USDT",
+      price_source: "FIXED_USD",
+      underlying: #usdt,
+    },
+    {
+      symbol: "WBTC",
+      price_source: "REPORTER",
+      underlying: #wbtc,
+    },
+    {
+      symbol: "ZRX",
+      price_source: "REPORTER",
+      underlying: #zrx,
+    },
+    {
+      symbol: "LINK",
+      price_source: "REPORTER",
+      underlying: #link
+    },
+    {
+      symbol: "KNC",
+      price_source: "REPORTER",
+      underlying: #knc
+    },
+    {
+      symbol: "COMP",
+      price_source: "REPORTER",
+      underlying: #comp
+    },
+  ]
+  weth: #weth
+  usdc: #usdc
+}
+
+
+// Main-net https://etherscan.io/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2
+WETH#weth [weth] ! {
+  type: "weth"
+  total_supply: 2656466816825295472718264
+ // Note: we need to manually send dai to Fauceteer
+}
