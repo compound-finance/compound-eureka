@@ -1,0 +1,96 @@
+// Main-net https://etherscan.io/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2
+WETH#weth [weth] ! {
+  type: "weth"
+  total_supply: 2656466816825295472718264
+}
+
+OpenOraclePriceData#price_data [open-oracle] {}
+
+OpenOracle#oracle [open-oracle] {
+  price_data: #price_data
+  weth: #weth
+  usdc: #usdc
+  reporter: "0xfCEAdAFab14d46e20144F48824d0C09B1a03F2BC" // https://docs.pro.coinbase.com/#oracle
+  anchor_period: 1800 // 30 minutes
+  anchor_tolerance: 0.2e18 // 20%
+  config: [
+    {
+      symbol: "ETH",
+      price_source: "REPORTER",
+      base_unit: 1e18,
+      ctoken: #cETH,
+      uniswapMarket: "0x87Dc58FE11f619fD69864b6D3134448a0B719BFe",
+      isUniswapReversed: true
+    },
+    {
+      symbol: "BAT",
+      price_source: "REPORTER",
+      base_unit: 1e18,
+      underlying: #bat,
+      ctoken: #cBAT,
+      uniswapMarket: "0xbFc921ec12D8bC1E482c2cB16f6773D506ab8056",
+      isUniswapReversed: false
+    },
+    {
+      symbol: "DAI",
+      price_source: "REPORTER",
+      base_unit: 1e18,
+      underlying: #dai,
+      ctoken: #cDAI,
+      uniswapMarket: "0x8C6046bD538Eb847829cb8f47eBC1446E214209E",
+      isUniswapReversed: false
+    },
+    {
+      symbol: "REP",
+      price_source: "REPORTER",
+      base_unit: 1e18,
+      underlying: #rep,
+      ctoken: #cREP,
+      uniswapMarket: "0x778450170884687e50AdFe616f711CBBE874BFbe",
+      isUniswapReversed: false
+    },
+    {
+      symbol: "BTC",
+      price_source: "REPORTER",
+      base_unit: 1e8,
+      underlying: #wbtc,
+      ctoken: #cWBTC,
+      uniswapMarket: "0xEC067D534C3d736Bb8dD5D8bF02Bc1D895983700",
+      isUniswapReversed: false
+    },
+    {
+      symbol: "ZRX",
+      price_source: "REPORTER",
+      base_unit: 1e18,
+      underlying: #zrx,
+      ctoken: #cZRX,
+      uniswapMarket: "0x170d1675E96FD71E75Ee7A6e800EA2205A54e33D",
+      isUniswapReversed: true
+    },
+    {
+      symbol: "LINK",
+      price_source: "REPORTER",
+      base_unit: 1e18,
+      underlying: #link,
+      uniswapMarket: "0x4E95466E3EBdfE5465A8684FD0Ae80e07561872F",
+      isUniswapReversed: false
+    },
+    {
+      symbol: "KNC",
+      price_source: "REPORTER",
+      base_unit: 1e18,
+      underlying: #knc,
+      uniswapMarket: "0x7bd6a648E1Fd4983a8f4405592bF64297eE35cb2",
+      isUniswapReversed: true
+
+    },
+    {
+      symbol: "COMP",
+      price_source: "REPORTER",
+      base_unit: 1e18,
+      underlying: #comp,
+      uniswapMarket: "0x22722a34684e939D3C26eE3b758b725631aa2295",
+      isUniswapReversed: false
+    },
+  ]
+}
