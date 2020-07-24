@@ -46,7 +46,7 @@ define("OpenOracle", {
       let uniswapMarket;
       let isUniswapReversed;
       if (conf.price_source === 'REPORTER') {
-        [uniswapMarket, isUniswapReversed] = [config.uniswapMarket, config.isUniswapReversed];
+        [uniswapMarket, isUniswapReversed] = [conf.uniswapMarket, conf.isUniswapReversed];
       } else {
         [uniswapMarket, isUniswapReversed] = [zeroAddress, false];
       }

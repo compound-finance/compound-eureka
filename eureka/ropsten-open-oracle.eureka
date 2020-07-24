@@ -82,7 +82,6 @@ OpenOracle#oracle [open-oracle] {
       underlying: #knc,
       uniswapMarket: "0x7bd6a648E1Fd4983a8f4405592bF64297eE35cb2",
       isUniswapReversed: true
-
     },
     {
       symbol: "COMP",
@@ -92,5 +91,13 @@ OpenOracle#oracle [open-oracle] {
       uniswapMarket: "0x22722a34684e939D3C26eE3b758b725631aa2295",
       isUniswapReversed: false
     },
+    {
+      symbol: "SAI",
+      price_source: "FIXED_ETH",
+      base_unit: 1e18,
+      underlying: #sai,
+      ctoken: #cSAI,
+      fixed_price: 0.005285551943761727e18
+    }
   ]
 }
