@@ -1,0 +1,118 @@
+WETH#weth [weth] {
+  address: "0xc778417e063141139fce010982780140aa0cd5ab"
+}
+
+OpenOraclePriceData#price_data [open-oracle] {}
+
+MockedOpenOracle#mocked_oracle [open-oracle] {
+  price_data: #price_data
+  reporter: "0xfCEAdAFab14d46e20144F48824d0C09B1a03F2BC" // https://docs.pro.coinbase.com/#oracle
+  anchor_period: 600 // 10 minutes
+  anchor_tolerance: 0.2e18 // 20%
+  config: [
+    {
+      symbol: "ETH",
+      price_source: "REPORTER",
+      underlying: #weth,
+      base_unit: 1e18,
+      ctoken: #cETH,
+      uniswapMarket: #eth_usdc,
+      isUniswapReversed: true
+    },
+     {
+      symbol: "BAT",
+      price_source: "REPORTER",
+      base_unit: 1e18,
+      underlying: #bat,
+      ctoken: #cBAT,
+      uniswapMarket: #bat_eth,
+      isUniswapReversed: false
+    },
+    // {
+    //  symbol: "DAI",
+    //  price_source: "REPORTER",
+    //  base_unit: 1e18,
+    //  underlying: #dai,
+    //  ctoken: #cDAI,
+    //  uniswapMarket: #dai_eth,
+    //  isUniswapReversed: false
+    // },
+    // {
+    //  symbol: "REP",
+    //  price_source: "REPORTER",
+    //  base_unit: 1e18,
+    //  underlying: #rep,
+    //  ctoken: #cREP,
+    //  uniswapMarket: #rep_eth,
+    //  isUniswapReversed: false
+    // },
+    // {
+    //  symbol: "WBTC",
+    //  price_source: "REPORTER",
+    //  base_unit: 1e8,
+    //  underlying: #wbtc,
+    //  ctoken: #cWBTC,
+    //  uniswapMarket: #wbtc_eth,
+    //  isUniswapReversed: false
+    // },
+    // {
+    //  symbol: "ZRX",
+    //  price_source: "REPORTER",
+    //  base_unit: 1e18,
+    //  underlying: #zrx,
+    //  ctoken: #cZRX,
+    //  uniswapMarket: #eth_zrx,
+    //  isUniswapReversed: true
+    // },
+    //  {
+    //  symbol: "LINK",
+    //  price_source: "REPORTER",
+    //  base_unit: 1e18,
+    //  underlying: #link,
+    //  uniswapMarket: #link_eth,
+    //  isUniswapReversed: false
+    // },
+    // {
+    //  symbol: "KNC",
+    //  price_source: "REPORTER",
+    //  base_unit: 1e18,
+    //  underlying: #knc,
+    //  uniswapMarket: #eth_knc,
+    //  isUniswapReversed: true
+    // },
+    // {
+    //  symbol: "COMP",
+    //  price_source: "REPORTER",
+    //  base_unit: 1e18,
+    //  underlying: #comp,
+    //  uniswapMarket: #comp_eth,
+    //  isUniswapReversed: false
+    // }
+    // {
+    //  symbol: "SAI",
+    //  price_source: "FIXED_ETH",
+    //  base_unit: 1e18,
+    //  underlying: #sai,
+    //  ctoken: #cSAI,
+    //  fixed_price: 0.005285551943761727e18
+    // },
+    // {
+    //  symbol: "USDC",
+    //  price_source: "FIXED_USD",
+    //  base_unit: 1e6,
+    //  underlying: #usdc,
+    //  ctoken: #cUSDC,
+    //  fixed_price: 1.0e6
+    // },
+    // {
+    //  symbol: "USDT",
+    //  price_source: "FIXED_USD",
+    //  base_unit: 1e6,
+    //  underlying: #usdt,
+    //  ctoken: #cUSDT,
+    //  fixed_price: 1.0e6
+    // }
+  ]
+}
+
+
