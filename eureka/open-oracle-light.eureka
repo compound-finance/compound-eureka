@@ -1,10 +1,61 @@
-WETH#weth [weth] {
-  address: "0xc778417e063141139fce010982780140aa0cd5ab"
-}
 
 OpenOraclePriceData#price_data [open-oracle] {}
 
-MockedOpenOracle#mocked_oracle [open-oracle] {
+UniswapPair#eth_usdc [open-oracle] {
+  mock: true
+  token0: #weth
+  token1: #usdc
+}
+
+UniswapPair#bat_eth [open-oracle] {
+  mock: true
+  token0: #bat
+  token1: #weth
+}
+
+UniswapPair#rep_eth [open-oracle] {
+  mock: true
+  token0: #rep
+  token1: #weth
+}
+
+UniswapPair#wbtc_eth [open-oracle] {
+  mock: true
+  token0: #wbtc
+  token1: #weth
+}
+
+UniswapPair#dai_eth [open-oracle] {
+  mock: true
+  token0: #dai
+  token1: #weth
+}
+
+UniswapPair#link_eth [open-oracle] {
+  mock: true
+  token0: #link
+  token1: #weth
+}
+
+UniswapPair#comp_eth [open-oracle] {
+  mock: true
+  token0: #comp
+  token1: #weth
+}
+
+UniswapPair#eth_knc [open-oracle] {
+  mock: true
+  token0: #weth
+  token1: #knc
+}
+
+UniswapPair#eth_zrx [open-oracle] {
+  mock: true
+  token0: #weth
+  token1: #zrx
+}
+
+OpenOracle#oracle [open-oracle] {
   price_data: #price_data
   reporter: "0xfCEAdAFab14d46e20144F48824d0C09B1a03F2BC" // https://docs.pro.coinbase.com/#oracle
   anchor_period: 600 // 10 minutes
@@ -114,5 +165,3 @@ MockedOpenOracle#mocked_oracle [open-oracle] {
     // }
   ]
 }
-
-
