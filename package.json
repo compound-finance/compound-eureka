@@ -8,6 +8,7 @@
     "import-contract": "node --experimental-vm-modules --unhandled-rejections=strict ./import_contract.mjs"
   },
   "dependencies": {
+    "@compound-finance/eureka": "^1.0.2",
     "request": "^2.88.2"
   },
   "devDependencies": {}
