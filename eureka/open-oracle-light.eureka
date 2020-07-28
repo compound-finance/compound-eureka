@@ -116,7 +116,7 @@ OpenOracle#oracle [open-oracle] {
       uniswapMarket: #eth_usdc,
       isUniswapReversed: true
     },
-     {
+    {
       symbol: "BAT",
       price_source: "REPORTER",
       base_unit: 1e18,
@@ -125,89 +125,89 @@ OpenOracle#oracle [open-oracle] {
       uniswapMarket: #bat_eth,
       isUniswapReversed: false
     },
-    // {
-    //  symbol: "DAI",
-    //  price_source: "REPORTER",
-    //  base_unit: 1e18,
-    //  underlying: #dai,
-    //  ctoken: #cDAI,
-    //  uniswapMarket: #dai_eth,
-    //  isUniswapReversed: false
-    // },
-    // {
-    //  symbol: "REP",
-    //  price_source: "REPORTER",
-    //  base_unit: 1e18,
-    //  underlying: #rep,
-    //  ctoken: #cREP,
-    //  uniswapMarket: #rep_eth,
-    //  isUniswapReversed: false
-    // },
-    // {
-    //  symbol: "WBTC",
-    //  price_source: "REPORTER",
-    //  base_unit: 1e8,
-    //  underlying: #wbtc,
-    //  ctoken: #cWBTC,
-    //  uniswapMarket: #wbtc_eth,
-    //  isUniswapReversed: false
-    // },
-    // {
-    //  symbol: "ZRX",
-    //  price_source: "REPORTER",
-    //  base_unit: 1e18,
-    //  underlying: #zrx,
-    //  ctoken: #cZRX,
-    //  uniswapMarket: #eth_zrx,
-    //  isUniswapReversed: true
-    // },
-    //  {
-    //  symbol: "LINK",
-    //  price_source: "REPORTER",
-    //  base_unit: 1e18,
-    //  underlying: #link,
-    //  uniswapMarket: #link_eth,
-    //  isUniswapReversed: false
-    // },
-    // {
-    //  symbol: "KNC",
-    //  price_source: "REPORTER",
-    //  base_unit: 1e18,
-    //  underlying: #knc,
-    //  uniswapMarket: #eth_knc,
-    //  isUniswapReversed: true
-    // },
-    // {
-    //  symbol: "COMP",
-    //  price_source: "REPORTER",
-    //  base_unit: 1e18,
-    //  underlying: #comp,
-    //  uniswapMarket: #comp_eth,
-    //  isUniswapReversed: false
-    // }
-    // {
-    //  symbol: "SAI",
-    //  price_source: "FIXED_ETH",
-    //  base_unit: 1e18,
-    //  underlying: #sai,
-    //  ctoken: #cSAI,
-    //  fixed_price: 0.005285551943761727e18
-    // },
-    // {
-    //  symbol: "USDC",
-    //  price_source: "FIXED_USD",
-    //  base_unit: 1e6,
-    //  underlying: #usdc,
-    //  ctoken: #cUSDC,
-    //  fixed_price: 1.0e6
-    // },
-    // {
-    //  symbol: "USDT",
-    //  price_source: "FIXED_USD",
-    //  base_unit: 1e6,
-    //  underlying: #usdt,
-    //  ctoken: #cUSDT,
-    //  fixed_price: 1.0e6
-    // }
+    {
+     symbol: "DAI",
+     price_source: "REPORTER",
+     base_unit: 1e18,
+     underlying: #dai,
+     ctoken: #cDAI,
+     uniswapMarket: #dai_eth,
+     isUniswapReversed: false
+    },
+    {
+     symbol: "REP",
+     price_source: "REPORTER",
+     base_unit: 1e18,
+     underlying: #rep,
+     ctoken: #cREP,
+     uniswapMarket: #rep_eth,
+     isUniswapReversed: false
+    },
+    {
+     symbol: "WBTC",
+     price_source: "REPORTER",
+     base_unit: 1e8,
+     underlying: #wbtc,
+     ctoken: #cWBTC,
+     uniswapMarket: #wbtc_eth,
+     isUniswapReversed: false
+    },
+    {
+     symbol: "ZRX",
+     price_source: "REPORTER",
+     base_unit: 1e18,
+     underlying: #zrx,
+     ctoken: #cZRX,
+     uniswapMarket: #eth_zrx,
+     isUniswapReversed: true
+    },
+     {
+     symbol: "LINK",
+     price_source: "REPORTER",
+     base_unit: 1e18,
+     underlying: #link,
+     uniswapMarket: #link_eth,
+     isUniswapReversed: false
+    },
+    {
+     symbol: "KNC",
+     price_source: "REPORTER",
+     base_unit: 1e18,
+     underlying: #knc,
+     uniswapMarket: #eth_knc,
+     isUniswapReversed: true
+    },
+    {
+     symbol: "COMP",
+     price_source: "REPORTER",
+     base_unit: 1e18,
+     underlying: #comp,
+     uniswapMarket: #comp_eth,
+     isUniswapReversed: false
+    },
+    {
+     symbol: "SAI",
+     price_source: "FIXED_ETH",
+     base_unit: 1e18,
+     underlying: #sai,
+     ctoken: #cSAI,
+     fixed_price: 0.005285551943761727e18
+    },
+    {
+     symbol: "USDC",
+     price_source: "FIXED_USD",
+     base_unit: 1e6,
+     underlying: #usdc,
+     ctoken: #cUSDC,
+     fixed_price: 1.0e6
+    },
+    {
+     symbol: "USDT",
+     price_source: "FIXED_USD",
+     base_unit: 1e6,
+     underlying: #usdt,
+     ctoken: #cUSDT,
+     fixed_price: 1.0e6
+    }
   ]
 }
