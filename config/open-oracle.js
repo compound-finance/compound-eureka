@@ -32,24 +32,19 @@ define("UniswapPair", {
     priceCumulative0: 'number',
     priceCumulative1: 'number',
   },
-  build: async ({deploy, encode, read}, contract, {token0, token1, reserve0, reserve1, blockTimestampLast, priceCumulative0, priceCumulative1}) => {
+  build: async ({deploy, encode, read}, contract, {token0, token1, reserve0, reserve1, blockTimestampLast, price0Cumulative, price1Cumulative}) => {
     let tokenSymbol0 = await read(token0, 'symbol(): string', []);
     let tokenSymbol1 = await read(token1, 'symbol(): string', []);
 
     console.log(`Creating mock Uniswap token pair for ${tokenSymbol0}-${tokenSymbol1}`);
-    const _reserve0 = '0x' + encode(reserve0).toString(16);
-    const _reserve1 = '0x' + encode(reserve1).toString(16);
-    const _blockTimestampLast = '0x' + encode(blockTimestampLast).toString(16);
-    const _priceCumulative0 = '0x' + encode(priceCumulative0).toString(16);
-    const _priceCumulative1 = '0x' + encode(priceCumulative1).toString(16);
-    // TODO: Is uniswap reversed?
+
     return await deploy(
       contract, [
-        _reserve0,
-        _reserve1,
-        _blockTimestampLast,
-        _priceCumulative0,
-        _priceCumulative1
+        encode(reserve0),
+        encode(reserve1),
+        encode(blockTimestampLast),
+        encode(price0Cumulative),
+        encode(price1Cumulative)
       ]);
   }
 });
