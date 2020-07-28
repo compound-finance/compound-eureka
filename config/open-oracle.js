@@ -14,6 +14,37 @@ define("Uniswap", {
   }
 });
 
+// Note: allow real Uniswap pairs, as well
+define("UniswapPair", {
+  match: {
+    properties: {
+      mock: true
+    }
+  },
+  contract: 'MockUniswapTokenPair',
+  properties: {
+    mock: 'bool',
+    token0: { ref: 'ERC20' },
+    token1: { ref: 'ERC20' }
+  },
+  build: async ({deploy, encode, read}, contract, {token0, token1}) => {
+    let tokenSymbol0 = await read(token0, 'symbol(): string', []);
+    let tokenSymbol1 = await read(token1, 'symbol(): string', []);
+
+    console.log(`Creating mock Uniswap token pair for ${tokenSymbol0}-${tokenSymbol1}`);
+    const initialValue = '0x' + encode(0).toString(16);
+    // TODO: Is uniswap reversed?
+    return await deploy(
+      contract, [
+        initialValue,
+        initialValue,
+        initialValue,
+        initialValue,
+        initialValue
+      ]);
+  }
+});
+
 // Currently, we can only use an existing WETH
 define("WETH", {
   contract: 'WETH9_',
@@ -48,7 +79,7 @@ define("OpenOracle", {
     anchor_tolerance: 'number',
     config: 'array'
   },
-  build: async ({bn, deploy, encode, keccak, read, trx}, contract, {uniswap, weth, usdc, price_data, reporter, anchor_period, anchor_tolerance, config}) => {
+  build: async ({bn, deploy, deref, encode, keccak, read, trx}, contract, {uniswap, weth, usdc, price_data, reporter, anchor_period, anchor_tolerance, config}) => {
     let priceSourceEnum = {
       "FIXED_ETH": 0,
       "FIXED_USD": 1,
@@ -57,35 +88,17 @@ define("OpenOracle", {
 
     let zeroAddress = '0x0000000000000000000000000000000000000000';
 
-    async function getOrCreatePair(asset0, asset1, allowCreate=true) {
-      let pair = await read(uniswap, 'getPair(address,address): address', [asset0, asset1]);
-      if (pair === zeroAddress) {
-        if (allowCreate) {
-          console.log(`Creating Uniswap Pair: ${asset0} ${asset1}`);
-          await trx(uniswap, 'createPair(address,address)', [asset0, asset1]);
-          // TODO: We need to fund liquidity for the pair as well
-          return await getOrCreatePair(asset0, asset1, false);
-        } else {
-          throw new Error(`Could not find Uniswap pair ${asset0} ${asset1}`);
-        }
-      } else {
-        let reversed = bn(asset0).lt(bn(asset1)); // TODO: Check
-        return [ pair, reversed ];
-      }
-    }
-
     let configs = await config.reduce(async (accP, conf) => {
       let acc = await accP; // force ordering
       let uniswapMarket;
       let isUniswapReversed;
       if (conf.price_source === 'REPORTER') {
-        if (conf.symbol === 'ETH') {
-          [uniswapMarket, isUniswapReversed] = await getOrCreatePair(weth, usdc);
-        } else {
-          [uniswapMarket, isUniswapReversed] = await getOrCreatePair(conf.underlying, weth); // TODO: Check asset order
-        }
+        // TODO: Do we calculate isUniswapReversed?
+        uniswapMarket = deref(conf.uniswapMarket).address;
+        isUniswapReversed = conf.isUniswapReversed;
       } else {
-        [uniswapMarket, isUniswapReversed] = [zeroAddress, false];
+        uniswapMarket = zeroAddress;
+        isUniswapReversed = false;
       }
 
       console.log("uniswapMarket", conf.symbol, uniswapMarket, isUniswapReversed);
@@ -122,7 +135,6 @@ define("OpenOracle", {
     });
   }
 });
-
 
 // This is our old oracle, for posterity
 if (network !== 'mainnet') { // Skip these contracts on prod
