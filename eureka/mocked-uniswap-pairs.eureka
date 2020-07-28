@@ -1,0 +1,9 @@
+ETH_USDC#eth_usdc [open-oracle] {}
+BAT_ETH#bat_eth [open-oracle] {}
+REP_ETH#rep_eth [open-oracle] {}
+WBTC_ETH#wbtc_eth [open-oracle] {}
+DAI_ETH#dai_eth [open-oracle] {}
+LINK_ETH#link_eth [open-oracle] {}
+COMP_ETH#comp_eth [open-oracle] {}
+ETH_KNC#eth_knc [open-oracle] {}
+ETH_ZRX#eth_zrx [open-oracle] {}
