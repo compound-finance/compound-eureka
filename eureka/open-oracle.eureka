@@ -62,7 +62,7 @@ OpenOracle#oracle [open-oracle] {
       fixed_price: 1.0e6
     },
     {
-      symbol: "WBTC",
+      symbol: "BTC",
       price_source: "REPORTER",
       base_unit: 1e8,
       underlying: #wbtc,

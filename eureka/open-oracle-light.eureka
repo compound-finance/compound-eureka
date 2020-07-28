@@ -144,7 +144,7 @@ OpenOracle#oracle [open-oracle] {
      isUniswapReversed: false
     },
     {
-     symbol: "WBTC",
+     symbol: "BTC",
      price_source: "REPORTER",
      base_unit: 1e8,
      underlying: #wbtc,
