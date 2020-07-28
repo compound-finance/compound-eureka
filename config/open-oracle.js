@@ -79,7 +79,7 @@ define("OpenOracle", {
     anchor_tolerance: 'number',
     config: 'array'
   },
-  build: async ({bn, deploy, encode, keccak, read, trx}, contract, {uniswap, weth, usdc, price_data, reporter, anchor_period, anchor_tolerance, config}) => {
+  build: async ({bn, deploy, deref, encode, keccak, read, trx}, contract, {uniswap, weth, usdc, price_data, reporter, anchor_period, anchor_tolerance, config}) => {
     let priceSourceEnum = {
       "FIXED_ETH": 0,
       "FIXED_USD": 1,
@@ -94,7 +94,7 @@ define("OpenOracle", {
       let isUniswapReversed;
       if (conf.price_source === 'REPORTER') {
         // TODO: Do we calculate isUniswapReversed?
-        uniswapMarket = deref(conf.uniswapMarket)
+        uniswapMarket = deref(conf.uniswapMarket).address;
         isUniswapReversed = conf.isUniswapReversed;
       } else {
         uniswapMarket = zeroAddress;
