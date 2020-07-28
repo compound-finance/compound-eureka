@@ -25,22 +25,32 @@ define("UniswapPair", {
   properties: {
     mock: 'bool',
     token0: { ref: 'ERC20' },
-    token1: { ref: 'ERC20' }
+    token1: { ref: 'ERC20' },
+    reserve0: 'number',
+    reserve1: 'number',
+    blockTimestampLast: 'number',
+    priceCumulative0: 'number',
+    priceCumulative1: 'number'
   },
   build: async ({deploy, encode, read}, contract, {token0, token1}) => {
     let tokenSymbol0 = await read(token0, 'symbol(): string', []);
     let tokenSymbol1 = await read(token1, 'symbol(): string', []);
 
     console.log(`Creating mock Uniswap token pair for ${tokenSymbol0}-${tokenSymbol1}`);
-    const initialValue = '0x' + encode(0).toString(16);
+    //const initialValue = '0x' + encode(0).toString(16);
+    const reserve0 = '0x' + encode(reserve0).toString(16),
+    const reserve1 = '0x' + encode(reserve1).toString(16),
+    const blockTimestampLast = '0x' + encode(blockTimestampLast).toString(16),
+    const priceCumulative0 = '0x' + encode(priceCumulative0).toString(16),
+    const priceCumulative1 = '0x' + encode(priceCumulative1).toString(16),
     // TODO: Is uniswap reversed?
     return await deploy(
       contract, [
-        initialValue,
-        initialValue,
-        initialValue,
-        initialValue,
-        initialValue
+        reserve0,
+        reserve1,
+        blockTimestampLast,
+        priceCumulative0,
+        priceCumulative1
       ]);
   }
 });
@@ -70,16 +80,13 @@ define("OpenOraclePriceData", {
 define("OpenOracle", {
   contract: 'UniswapAnchoredView',
   properties: {
-    uniswap: { ref: 'Uniswap' },
-    weth: { ref: 'WETH' },
-    usdc: { ref: 'Erc20' },
     price_data: { ref: 'OpenOraclePriceData' },
     reporter: 'address',
     anchor_period: 'number',
     anchor_tolerance: 'number',
     config: 'array'
   },
-  build: async ({bn, deploy, deref, encode, keccak, read, trx}, contract, {uniswap, weth, usdc, price_data, reporter, anchor_period, anchor_tolerance, config}) => {
+  build: async ({deploy, deref, encode, keccak}, contract, {price_data, reporter, anchor_period, anchor_tolerance, config}) => {
     let priceSourceEnum = {
       "FIXED_ETH": 0,
       "FIXED_USD": 1,
@@ -109,16 +116,15 @@ define("OpenOracle", {
         throw `Unknown price source: ${conf.price_source}`;
       }
 
-      // TODO: Fix encoding issues here
       return [
         ...acc,
         {
-          cToken: encode(conf.cToken || zeroAddress),
+          cToken: encode(conf.ctoken || zeroAddress),
           underlying: encode(conf.underlying || zeroAddress),
           symbolHash,
-          baseUnit: '0x' + encode(conf.base_unit),
+          baseUnit: '0x' + encode(conf.base_unit).toString(16),
           priceSource: '0x' + encode(priceSource),
-          fixedPrice: '0x' + encode(conf.fixed_price || 0),
+          fixedPrice: '0x' + encode(conf.fixed_price || 0).toString(16),
           uniswapMarket,
           isUniswapReversed
         }
