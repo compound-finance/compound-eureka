@@ -5,54 +5,100 @@ UniswapPair#eth_usdc [open-oracle] {
   mock: true
   token0: #weth
   token1: #usdc
+  reserve0: 5635541683569
+  reserve1: 17815930094924730318466
+  blockTimestampLast: 1595963233
+  cumulativePrice0: 166006796292266285603372817208396896410225493375744
+  cumulativePrice1: 8691205411197190872206845918849
 }
 
 UniswapPair#bat_eth [open-oracle] {
   mock: true
   token0: #bat
   token1: #weth
+  reserve0: 1859496384580442941157898
+  reserve1: 1471588017256739547179
+  blockTimestampLast: 1595962123
+  cumulativePrice0: 34603112326234095056085018544167450636
+  cumulativePrice1: 33506573394595693143054261298487036890550830
 }
 
 UniswapPair#rep_eth [open-oracle] {
   mock: true
   token0: #rep
   token1: #weth
+  reserve0: 2006824583107231082232
+  reserve1: 133924044359624374413
+  blockTimestampLast: 1595963080
+  cumulativePrice0: 2256265144806299983962517474077341702436
+  cumulativePrice1: 457825886799269067948146231864391609217572
 }
 
 UniswapPair#wbtc_eth [open-oracle] {
   mock: true
   token0: #wbtc
   token1: #weth
+  reserve0: 12377250276
+  reserve1: 4269936705675806335677
+  blockTimestampLast: 1595963228
+  cumulativePrice0: 12761744971436919754564573400916947259593967282265284
+  cumulativePrice1: 80101900177875456236284018675
+
 }
 
 UniswapPair#dai_eth [open-oracle] {
   mock: true
   token0: #dai
   token1: #weth
+  reserve0: 5142763052685582661500587
+  reserve1: 16634819730190357259358
+  blockTimestampLast: 1595963190
+  cumulativePrice0: 147727751148689537867354285889322068469
+  cumulativePrice1: 7896238934233498614134104494916528966463034
 }
 
 UniswapPair#link_eth [open-oracle] {
   mock: true
   token0: #link
   token1: #weth
+  reserve0: 169056878301840714797699
+  reserve1: 3843029380153917989823
+  blockTimestampLast: 1595963221
+  cumulativePrice0: 698206420907790342681419649298326511405
+  cumulativePrice1: 1525787102092508663102735066381109593673832
 }
 
 UniswapPair#comp_eth [open-oracle] {
   mock: true
   token0: #comp
   token1: #weth
+  reserve0: 4563536846494609010921
+  reserve1: 1994187299015962548355
+  blockTimestampLast: 1595963228
+  cumulativePrice0: 14918178478054531407143642319213849455623
+  cumulativePrice1: 27956971240633323817491382420749936127829
 }
 
 UniswapPair#eth_knc [open-oracle] {
   mock: true
   token0: #weth
   token1: #knc
+  reserve0: 1843808162347109757100
+  reserve1: 395982341371266838566135
+  blockTimestampLast: 1595963221
+  cumulativePrice0: 7011640340623149057984615873832997580673784
+  cumulativePrice1: 160191544109398272936742310589015789817
 }
 
 UniswapPair#eth_zrx [open-oracle] {
   mock: true
   token0: #weth
   token1: #zrx
+  reserve0: 294251073832783627157
+  reserve1: 244879738584666504875249
+  blockTimestampLast: 1595962252
+  cumulativePrice0: 20808220832204917412810710455301208762642351
+  cumulativePrice1: 49266221717262206836240432702919326382
 }
 
 OpenOracle#oracle [open-oracle] {
