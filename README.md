@@ -68,13 +68,13 @@ yarn eureka apply -n ropsten -b ./.build -c config/*.js -e eureka/{compound,test
 Followed by a Second Eureka Change for G2:
 
 ```sh
-yarn eureka apply -n ropsten -b ./.build -c config/*.js -e eureka/{compound,testnet,testnet-gov,ropsten,2_ropsten}.eureka
+yarn eureka apply -n ropsten -b ./.build -c config/*.js -e eureka/{compound,testnet,testnet-gov,ropsten,2_ropsten,open-oracle}.eureka
 ```
 
 Followed by a Governance Change:
 
 ```sh
-yarn eureka apply -n ropsten -b ./.build -c config/*.js -e eureka/{compound,testnet,testnet-gov,ropsten,2_ropsten,admin-timelock}.eureka
+yarn eureka apply -n ropsten -b ./.build -c config/*.js -e eureka/{compound,testnet,testnet-gov,ropsten,4_ropsten,admin-timelock}.eureka
 ```
 
 Note: to verify a contract, e.g.
