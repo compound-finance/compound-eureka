@@ -7698,7 +7698,7 @@
       "type": "function"
     }
   ],
-  "PriceOracle": [
+  "PriceFeed": [
     {
       "inputs": [
         {
@@ -31289,7 +31289,7 @@
       "type": "function"
     }
   ],
-  "knc": [
+  "KNC": [
     {
       "constant": true,
       "inputs": [],
@@ -31658,7 +31658,7 @@
       "type": "event"
     }
   ],
-  "link": [
+  "LINK": [
     {
       "constant": true,
       "inputs": [],
@@ -31959,7 +31959,7 @@
       "type": "event"
     }
   ],
-  "price_data": [
+  "PriceData": [
     {
       "anonymous": false,
       "inputs": [
@@ -32118,7 +32118,7 @@
       "type": "function"
     }
   ],
-  "weth": [
+  "WETH": [
     {
       "constant": true,
       "inputs": [],
@@ -32397,7 +32397,7 @@
       "type": "event"
     }
   ],
-  "uniswap": [
+  "Uniswap": [
     {
       "inputs": [
         {
@@ -32590,7 +32590,7 @@
       "type": "function"
     }
   ],
-  "eth_zrx": [
+  "Pair_ETH_ZRX": [
     {
       "inputs": [
         {
@@ -32763,7 +32763,7 @@
       "type": "function"
     }
   ],
-  "eth_knc": [
+  "Pair_ETH_KNC": [
     {
       "inputs": [
         {
@@ -32936,7 +32936,7 @@
       "type": "function"
     }
   ],
-  "comp_eth": [
+  "Pair_COMP_ETH": [
     {
       "inputs": [
         {
@@ -33109,7 +33109,7 @@
       "type": "function"
     }
   ],
-  "link_eth": [
+  "Pair_LINK_ETH": [
     {
       "inputs": [
         {
@@ -33282,7 +33282,7 @@
       "type": "function"
     }
   ],
-  "dai_eth": [
+  "Pair_DAI_ETH": [
     {
       "inputs": [
         {
@@ -33455,7 +33455,7 @@
       "type": "function"
     }
   ],
-  "wbtc_eth": [
+  "Pair_WBTC_ETH": [
     {
       "inputs": [
         {
@@ -33628,7 +33628,7 @@
       "type": "function"
     }
   ],
-  "rep_eth": [
+  "Pair_REP_ETH": [
     {
       "inputs": [
         {
@@ -33801,7 +33801,7 @@
       "type": "function"
     }
   ],
-  "bat_eth": [
+  "Pair_BAT_ETH": [
     {
       "inputs": [
         {
@@ -33974,7 +33974,7 @@
       "type": "function"
     }
   ],
-  "eth_usdc": [
+  "Pair_ETH_USDC": [
     {
       "inputs": [
         {
