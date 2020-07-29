@@ -57,7 +57,11 @@ hook('state.save', async (state) => {
 
       let abi = version[deployedContract];
       if (!abi) {
-        throw new Error(`Cannot find ${deployedContract} in version ${contract.version}`);
+        if (deployedContract === 'UniswapV2Pair') {
+          return acc;
+        } else {
+          throw new Error(`Cannot find ${deployedContract} in version ${contract.version}`);
+        }
       }
 
       return {
