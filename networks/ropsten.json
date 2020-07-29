@@ -49,7 +49,8 @@
     "PriceData": "0xC22BC2b43a31936F01dC33b7bA2eA9E7a8FDAc5e",
     "Pair_ETH_USDC": "0xbc30AaA8e99d0f0e435FC938034850c2fC77f753",
     "PriceFeed": "0xBEf4E076A995c784be6094a432b9CA99b7431A3f",
-    "Comptroller": "0x54188bBeDD7b68228fa89CbDDa5e3e930459C6c6"
+    "Comptroller": "0x54188bBeDD7b68228fa89CbDDa5e3e930459C6c6",
+    "PriceFeedPoster": "0x83563ba7F1B093aae57Fe876f8D870f8a1508886:"
   },
   "Blocks": {
     "CompoundLens": 8026049,

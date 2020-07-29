@@ -1,0 +1,7 @@
+{
+  "ropsten": {
+    "PriceFeedPoster": "0x83563ba7F1B093aae57Fe876f8D870f8a1508886:"
+  }, "kovan": {
+    "PriceFeedPoster": "0x83563ba7F1B093aae57Fe876f8D870f8a1508886:"
+  }
+}
