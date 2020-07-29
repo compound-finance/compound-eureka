@@ -76,5 +76,5 @@
       "metadata": "{\"compiler\":{\"version\":\"0.6.10+commit.00c0fcaf\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"testOverflow\",\"outputs\":[],\"stateMutability\":\"pure\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"tests/contracts/Test.sol\":\"TestOverflow\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"tests/contracts/Test.sol\":{\"content\":\"// SPDX-License-Identifier: GPL-3.0\\n\\npragma solidity ^0.6.10;\\npragma experimental ABIEncoderV2;\\n\\ncontract TestOverflow {\\n\\n    function testOverflow() public pure {\\n        uint128 sum = uint128(uint64(-1)) + uint128(uint64(-1));\\n        require(sum == 36893488147419103230, \\\"overflows\\\");// (2^64 -1)*2\\n        uint64 half = uint64(sum / 2);\\n        require(half == 18446744073709551615, \\\"overflow2\\\");// 2 ^ 64 - 1\\n    }\\n}\\n\",\"keccak256\":\"0x54896be410933145616d842ffd8a5052b3e6736a414fb84c0f8bb9dd7abb5487\",\"license\":\"GPL-3.0\"}},\"version\":1}"
     }
   },
-  "version": "0.6.10+commit.00c0fcaf.Linux.g++"
+  "version": "0.6.10+commit.00c0fcaf.Darwin.appleclang"
 }

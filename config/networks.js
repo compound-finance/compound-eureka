@@ -131,7 +131,6 @@ hook('state.save', async (state, {ethereum}) => {
     // TODO: Handle imports like test-net DAI
     let contractsJson = mapContracts(state, refMap, null, ({address}) => address, false, false, true);
     contractsJson.Comptroller = contractsJson.Unitroller; // Comptroller is special
-    contractsJson.PriceOracleProxy = contractsJson.PriceOracle; // PriceOracle is *also* special
 
     let blocksJson = mapContracts(state, refMap, null, ({deployment, properties}) =>
       deployment ? deployment.block : (
@@ -139,24 +138,12 @@ hook('state.save', async (state, {ethereum}) => {
       )
     );
 
-    let priceOracleJson = mapContracts(
+    let priceFeedJson = mapContracts(
       state,
       refMap,
-      ['SimplePriceOracle'],
-      ({address, deployment}) => ({
-        description: `${deployment.contract}`,
-        address
-      }),
-      true
-    );
-
-    // TODO
-    let priceOracleProxyJson = mapContracts(
-      state,
-      refMap,
-      ['PriceOracleProxy'],
+      ['PriceFeed'],
       ({address}) => ({
-        description: "Price Oracle Proxy Description",
+        description: "Price Feed",
         cETH: cETH,
         cUSDC: "0xTODO",
         cSAI: "0xTODO",
@@ -235,6 +222,12 @@ hook('state.save', async (state, {ethereum}) => {
       ['Erc20', 'CToken', 'Comp'],
       (contract) => tokenProperties(contract, state, accounts)
     );
+    tokensJson.ETH = {
+      name: "Ether",
+      symbol: "ETH",
+      decimals: 18,
+      address: "0x0000000000000000000000000000000000000000"
+    };
 
     let cTokenDelegateJson = mapContracts(
       state,
@@ -296,8 +289,7 @@ hook('state.save', async (state, {ethereum}) => {
     let networksJson = {
       'Contracts': contractsJson,
       'Blocks': blocksJson,
-      'PriceOracle': priceOracleJson,
-      'PriceOracleProxy': priceOracleProxyJson,
+      'PriceFeed': priceFeedJson,
       'Maximillion': maximillionJson,
       'CompoundLens': compoundLensJson,
       'Unitroller': unitrollerJson,

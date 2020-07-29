@@ -1,41 +1,133 @@
 
 OpenOraclePriceData#price_data [open-oracle] {}
 
-OpenOracle#oracle [open-oracle] {
+UniswapPair#eth_usdc [open-oracle] {
   uniswap: #uniswap
+  token0: #weth
+  token1: #usdc
+  seeds: {
+    #usdc: 3.16778e6,
+    #weth: 0.01e18
+  }
+}
+
+UniswapPair#bat_eth [open-oracle] {
+  uniswap: #uniswap
+  token0: #bat
+  token1: #weth
+  seeds: {
+    #bat: 12.5805e18,
+    #weth: 0.01e18
+  }
+}
+
+UniswapPair#rep_eth [open-oracle] {
+  uniswap: #uniswap
+  token0: #rep
+  token1: #weth
+  seeds: {
+    #rep: 0.144529e18,
+    #weth: 0.01e18
+  }
+}
+
+UniswapPair#wbtc_eth [open-oracle] {
+  uniswap: #uniswap
+  token0: #wbtc
+  token1: #weth
+  seeds: {
+    #wbtc: 0.00029199e8,
+    #weth: 0.01e18
+  }
+}
+
+UniswapPair#dai_eth [open-oracle] {
+  uniswap: #uniswap
+  token0: #dai
+  token1: #weth
+  seeds: {
+    #dai: 3.10272e18,
+    #weth: 0.01e18
+  }
+}
+
+UniswapPair#link_eth [open-oracle] {
+  uniswap: #uniswap
+  token0: #link
+  token1: #weth
+  seeds: {
+    #link: 0.444544e18,
+    #weth: 0.01e18
+  }
+}
+
+UniswapPair#comp_eth [open-oracle] {
+  uniswap: #uniswap
+  token0: #comp
+  token1: #weth
+  seeds: {
+    #comp: 0.0230735e18,
+    #weth: 0.01e18
+  }
+}
+
+UniswapPair#eth_knc [open-oracle] {
+  uniswap: #uniswap
+  token0: #weth
+  token1: #knc
+  seeds: {
+    #knc: 2.15765e18,
+    #weth: 0.01e18
+  }
+}
+
+UniswapPair#eth_zrx [open-oracle] {
+  uniswap: #uniswap
+  token0: #weth
+  token1: #zrx
+  seeds: {
+    #zrx: 8.42126e18,
+    #weth: 0.01e18
+  }
+}
+
+OpenOracle#oracle [open-oracle] {
   price_data: #price_data
-  weth: #weth
-  usdc: #usdc
   reporter: "0xfCEAdAFab14d46e20144F48824d0C09B1a03F2BC" // https://docs.pro.coinbase.com/#oracle
   anchor_period: 1800 // 30 minutes
-  anchor_tolerance: 0.2e18 // 20%
+  anchor_tolerance: 20e18 // 20000%
   config: [
     {
       symbol: "ETH",
-      price_source: "FIXED_ETH",
+      price_source: "REPORTER",
+      underlying: #weth,
       base_unit: 1e18,
       ctoken: #cETH,
+      uniswapMarket: #eth_usdc
     },
     {
       symbol: "BAT",
       price_source: "REPORTER",
       base_unit: 1e18,
       underlying: #bat,
-      ctoken: #cBAT
+      ctoken: #cBAT,
+      uniswapMarket: #bat_eth
     },
     {
       symbol: "DAI",
       price_source: "REPORTER",
       base_unit: 1e18,
       underlying: #dai,
-      ctoken: #cDAI
+      ctoken: #cDAI,
+      uniswapMarket: #dai_eth
     },
     {
       symbol: "REP",
       price_source: "REPORTER",
       base_unit: 1e18,
       underlying: #rep,
-      ctoken: #cREP
+      ctoken: #cREP,
+      uniswapMarket: #rep_eth
     },
     {
       symbol: "SAI",
@@ -66,32 +158,37 @@ OpenOracle#oracle [open-oracle] {
       price_source: "REPORTER",
       base_unit: 1e8,
       underlying: #wbtc,
-      ctoken: #cWBTC
+      ctoken: #cWBTC,
+      uniswapMarket: #wbtc_eth
     },
     {
       symbol: "ZRX",
       price_source: "REPORTER",
       base_unit: 1e18,
       underlying: #zrx,
-      ctoken: #cZRX
+      ctoken: #cZRX,
+      uniswapMarket: #eth_zrx
     },
     {
       symbol: "LINK",
       price_source: "REPORTER",
       base_unit: 1e18,
-      underlying: #link
+      underlying: #link,
+      uniswapMarket: #link_eth
     },
     {
       symbol: "KNC",
       price_source: "REPORTER",
       base_unit: 1e18,
-      underlying: #knc
+      underlying: #knc,
+      uniswapMarket: #eth_knc
     },
     {
       symbol: "COMP",
       price_source: "REPORTER",
       base_unit: 1e18,
-      underlying: #comp
+      underlying: #comp,
+      uniswapMarket: #comp_eth
     },
   ]
 }
