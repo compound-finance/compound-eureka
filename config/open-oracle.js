@@ -14,7 +14,6 @@ define("Uniswap", {
   }
 });
 
-// Note: allow real Uniswap pairs, as well
 define("UniswapPair", {
   match: {
     properties: {
@@ -49,6 +48,82 @@ define("UniswapPair", {
   }
 });
 
+define("UniswapPair", {
+  contract: 'UniswapV2Pair',
+  properties: {
+    token0: { ref: 'ERC20' },
+    token1: { ref: 'ERC20' },
+    seeds: {
+      dictionary: {
+        key: 'ref',
+        value: 'number'
+      },
+      setter: async ({bn, ethereum, read, show, trx}, pair, seeds) => {
+        let changed = await Object.entries(seeds).reduce(async (accP, [ref, amt]) => {
+          let acc = await accP;
+          let pairBalance = await read(ref, 'balanceOf(address): uint256', [pair]);
+          let senderBalance = await read(ref, 'balanceOf(address): uint256', [ethereum.from]);
+
+          console.log({
+            ref: show(ref),
+            from: ethereum.from,
+            pairBalance,
+            senderBalance,
+            amt
+          });
+
+          if (bn(amt).gt(bn(pairBalance))) {
+            let diff = bn(amt).sub(bn(pairBalance));
+
+            if (diff.gt(bn(senderBalance))) {
+              throw new Error(`Wanted to seed with ${show(diff)} ${show(ref)} but my balance is only ${show(senderBalance)}`);
+            }
+
+            console.log(`Adding ${show(diff)} ${show(ref)} balance to ${show(pair)}`);
+            await trx(ref, 'transfer(address,uint256)', [pair, diff]);
+
+            return true;
+          } else {
+            return acc;
+          }
+        }, false);
+
+        if (changed) {
+          console.log("Minting liquidity...");
+
+          await trx(pair, 'mint(address)', [ethereum.from]);
+        } else {
+          console.log("No change, not minting");
+        }
+      }
+    }
+  },
+  build: async (actor, contract, {uniswap, seeds, token0, token1}, { definition }) => {
+    let {encode, existing, read, trx} = actor;
+    let tokenSymbol0 = await read(token0, 'symbol(): string', []);
+    let tokenSymbol1 = await read(token1, 'symbol(): string', []);
+
+    let pair = await read(uniswap, 'getPair(address,address): address', [token0, token1]);
+    if (pair === '0x0000000000000000000000000000000000000000') {
+      console.log(`Creating Uniswap Pair: ${tokenSymbol0} ${tokenSymbol1}`);
+      await trx(uniswap, 'createPair(address,address)', [token0, token1]);
+
+      pair = await read(uniswap, 'getPair(address,address): address', [token0, token1]);
+    } else {
+      console.log(`Using existing pair for ${tokenSymbol0} ${tokenSymbol1}`);
+    }
+
+    let deployed = existing(contract, pair);
+
+    if (seeds) {
+      console.log("Seeding market...");
+      await definition.typeProperties.seeds.setter(actor, deployed, seeds);
+    }
+
+    return deployed;
+  }
+});
+
 // Currently, we can only use an existing WETH
 define("WETH", {
   contract: 'WETH9_',
@@ -80,7 +155,7 @@ define("OpenOracle", {
     anchor_tolerance: 'number',
     config: 'array'
   },
-  build: async ({deploy, deref, encode, keccak}, contract, {price_data, reporter, anchor_period, anchor_tolerance, config}) => {
+  build: async ({deploy, deref, encode, keccak, read}, contract, {price_data, reporter, anchor_period, anchor_tolerance, config}) => {
     let priceSourceEnum = {
       "FIXED_ETH": 0,
       "FIXED_USD": 1,
@@ -94,9 +169,13 @@ define("OpenOracle", {
       let uniswapMarket;
       let isUniswapReversed;
       if (conf.price_source === 'REPORTER') {
-        // TODO: Do we calculate isUniswapReversed?
         uniswapMarket = deref(conf.uniswapMarket).address;
-        isUniswapReversed = conf.isUniswapReversed;
+
+        if (conf.isUniswapReversed === undefined) {
+          isUniswapReversed = await read(conf.uniswapMarket, 'token0(): address', []) !== deref(conf.underlying).address;
+        } else {
+          isUniswapReversed = conf.isUniswapReversed;
+        }
       } else {
         uniswapMarket = zeroAddress;
         isUniswapReversed = false;
@@ -126,13 +205,26 @@ define("OpenOracle", {
     }, []);
     console.log({configs});
 
-    return await deploy(contract, {
-      priceData_: price_data,
-      reporter_: reporter,
-      anchorPeriod_: anchor_period,
-      anchorToleranceMantissa_: anchor_tolerance,
-      configs
-    });
+    async function deployRetry() {
+      try {
+        return await deploy(contract, {
+          priceData_: price_data,
+          reporter_: reporter,
+          anchorPeriod_: anchor_period,
+          anchorToleranceMantissa_: anchor_tolerance,
+          configs
+        });
+      } catch (e) {
+        if (e.message.includes('oversized')) {
+          console.log(`Error ${e}, retrying...`);
+          return await deployRetry();
+        } else {
+          throw e;
+        }
+      }
+    }
+
+    return await deployRetry();
   }
 });
 
