@@ -122,6 +122,8 @@ hook('state.save', async (state, {ethereum}) => {
 
     let refMapFile = path.join(process.cwd(), 'refMap.json');
     let refMap = JSON.parse(await readFile(refMapFile));
+    let fixedFile = path.join(process.cwd(), 'fixed.json');
+    let fixed = JSON.parse(await readFile(fixedFile))[network] || {};
 
     let cETH = state.cETH.address;
     let accounts = {
@@ -131,6 +133,10 @@ hook('state.save', async (state, {ethereum}) => {
     // TODO: Handle imports like test-net DAI
     let contractsJson = mapContracts(state, refMap, null, ({address}) => address, false, false, true);
     contractsJson.Comptroller = contractsJson.Unitroller; // Comptroller is special
+    contractsJson = {
+      ...contractsJson,
+      ...fixed
+    };
 
     let blocksJson = mapContracts(state, refMap, null, ({deployment, properties}) =>
       deployment ? deployment.block : (
