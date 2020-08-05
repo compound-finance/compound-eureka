@@ -141,8 +141,8 @@ OpenOracle#oracle [open-oracle] {
       symbol: "USDC",
       price_source: "FIXED_USD",
       base_unit: 1e6,
-      underlying: #dai,
-      ctoken: #cDAI,
+      underlying: #usdc,
+      ctoken: #cUSDC,
       fixed_price: 1.0e6
     },
     {

@@ -74,7 +74,7 @@ yarn eureka apply -n ropsten -b ./.build -c config/*.js -e eureka/{compound,test
 Followed by a Governance Change:
 
 ```sh
-yarn eureka apply -n ropsten -b ./.build -c config/*.js -e eureka/{compound,testnet,testnet-gov,ropsten,4_ropsten,admin-timelock}.eureka
+yarn eureka apply -n ropsten -b ./.build -c config/*.js -e eureka/{compound,testnet,testnet-gov,ropsten,4_ropsten,open-oracle,admin-timelock}.eureka
 ```
 
 Note: to verify a contract, e.g.

@@ -1473,48 +1473,6 @@
     "contract": "oracle",
     "version": "open-oracle",
     "properties": {
-      "prices": {
-        "#bat": {
-          "type": "number",
-          "base": 999,
-          "exp": 12
-        },
-        "#dai": {
-          "type": "number",
-          "base": 4825,
-          "exp": 12
-        },
-        "#rep": {
-          "type": "number",
-          "base": 61329,
-          "exp": 12
-        },
-        "#sai": {
-          "type": "number",
-          "base": 5286,
-          "exp": 12
-        },
-        "#usdc": {
-          "type": "number",
-          "base": 4779,
-          "exp": 24
-        },
-        "#usdt": {
-          "type": "number",
-          "base": 4779,
-          "exp": 24
-        },
-        "#wbtc": {
-          "type": "number",
-          "base": 44166198,
-          "exp": 22
-        },
-        "#zrx": {
-          "type": "number",
-          "base": 1608,
-          "exp": 12
-        }
-      },
       "config": [
         {
           "symbol": "ETH",
@@ -1774,10 +1732,6 @@
       "price_data": {
         "type": "ref",
         "ref": "price_data"
-      },
-      "uniswap": {
-        "type": "ref",
-        "ref": "uniswap"
       }
     },
     "address": "0xBEf4E076A995c784be6094a432b9CA99b7431A3f",
