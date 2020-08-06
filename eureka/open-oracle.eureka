@@ -106,14 +106,6 @@ OpenOracle#oracle [open-oracle] {
       uniswapMarket: #eth_usdc
     },
     {
-      symbol: "BAT",
-      price_source: "REPORTER",
-      base_unit: 1e18,
-      underlying: #bat,
-      ctoken: #cBAT,
-      uniswapMarket: #bat_eth
-    },
-    {
       symbol: "DAI",
       price_source: "REPORTER",
       base_unit: 1e18,
@@ -122,27 +114,11 @@ OpenOracle#oracle [open-oracle] {
       uniswapMarket: #dai_eth
     },
     {
-      symbol: "REP",
-      price_source: "REPORTER",
-      base_unit: 1e18,
-      underlying: #rep,
-      ctoken: #cREP,
-      uniswapMarket: #rep_eth
-    },
-    {
-      symbol: "SAI",
-      price_source: "FIXED_ETH",
-      base_unit: 1e18,
-      underlying: #sai,
-      ctoken: #cSAI,
-      fixed_price: 0.005285551943761727e18
-    },
-    {
       symbol: "USDC",
       price_source: "FIXED_USD",
       base_unit: 1e6,
-      underlying: #dai,
-      ctoken: #cDAI,
+      underlying: #usdc,
+      ctoken: #cUSDC,
       fixed_price: 1.0e6
     },
     {
@@ -162,12 +138,43 @@ OpenOracle#oracle [open-oracle] {
       uniswapMarket: #wbtc_eth
     },
     {
+      symbol: "BAT",
+      price_source: "REPORTER",
+      base_unit: 1e18,
+      underlying: #bat,
+      ctoken: #cBAT,
+      uniswapMarket: #bat_eth
+    },
+    {
       symbol: "ZRX",
       price_source: "REPORTER",
       base_unit: 1e18,
       underlying: #zrx,
       ctoken: #cZRX,
       uniswapMarket: #eth_zrx
+    },
+    {
+      symbol: "REP",
+      price_source: "REPORTER",
+      base_unit: 1e18,
+      underlying: #rep,
+      ctoken: #cREP,
+      uniswapMarket: #rep_eth
+    },
+    {
+      symbol: "SAI",
+      price_source: "FIXED_ETH",
+      base_unit: 1e18,
+      underlying: #sai,
+      ctoken: #cSAI,
+      fixed_price: 0.005285551943761727e18
+    },
+    {
+      symbol: "COMP",
+      price_source: "REPORTER",
+      base_unit: 1e18,
+      underlying: #comp,
+      uniswapMarket: #comp_eth
     },
     {
       symbol: "LINK",
@@ -182,13 +189,6 @@ OpenOracle#oracle [open-oracle] {
       base_unit: 1e18,
       underlying: #knc,
       uniswapMarket: #eth_knc
-    },
-    {
-      symbol: "COMP",
-      price_source: "REPORTER",
-      base_unit: 1e18,
-      underlying: #comp,
-      uniswapMarket: #comp_eth
     },
   ]
 }
