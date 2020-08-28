@@ -101,7 +101,7 @@ UniswapPair#eth_zrx [open-oracle] {
   price1Cumulative: 49266221717262206836240432702919326382n
 }
 
-OpenOracle#oracle [open-oracle] {
+OpenOracle#open_oracle [open-oracle] {
   price_data: #price_data
   reporter: "0xfCEAdAFab14d46e20144F48824d0C09B1a03F2BC" // https://docs.pro.coinbase.com/#oracle
   anchor_period: 600 // 10 minutes
@@ -210,4 +210,8 @@ OpenOracle#oracle [open-oracle] {
      fixed_price: 1.0e6
     }
   ]
+}
+
+Unitroller#comptroller [b73e68c] {
+  oracle: #open_oracle
 }
