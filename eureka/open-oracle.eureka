@@ -91,7 +91,7 @@ UniswapPair#eth_zrx [open-oracle] {
   }
 }
 
-OpenOracle#oracle [open-oracle] {
+OpenOracle#open_oracle [open-oracle] {
   price_data: #price_data
   reporter: "0xfCEAdAFab14d46e20144F48824d0C09B1a03F2BC" // https://docs.pro.coinbase.com/#oracle
   anchor_period: 1800 // 30 minutes
@@ -191,4 +191,8 @@ OpenOracle#oracle [open-oracle] {
       uniswapMarket: #eth_knc
     },
   ]
+}
+
+Unitroller#comptroller [b73e68c] {
+  oracle: #open_oracle
 }

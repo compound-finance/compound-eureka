@@ -441,7 +441,7 @@
     },
     "verified": true
   },
-  "oracle": {
+  "open_oracle": {
     "contract": "oracle",
     "version": "open-oracle",
     "properties": {
@@ -810,7 +810,7 @@
       },
       "oracle": {
         "type": "ref",
-        "ref": "oracle"
+        "ref": "open_oracle"
       },
       "generation": "g4",
       "implementation": {
@@ -2050,5 +2050,61 @@
       "constructorData": "000000000000000000000000000000000000000000000000000005202075cd710000000000000000000000000000000000000000000003c5cdb28c7dabedbe82000000000000000000000000000000000000000000000000000000005f207761000000000000000000000071962232e329c7d813c6898cdbb32e3b6c493f7b00000000000000000000000000000000000000006db2cc9da8e3686031265fbe81",
       "contract": "MockUniswapTokenPair"
     }
+  },
+  "oracle": {
+    "contract": "oracle",
+    "version": "b73e68c",
+    "properties": {
+      "prices": {
+        "#bat": {
+          "type": "number",
+          "base": 67126,
+          "exp": 10
+        },
+        "#dai": {
+          "type": "number",
+          "base": 273463137,
+          "exp": 7
+        },
+        "#rep": {
+          "type": "number",
+          "base": 5481120,
+          "exp": 10
+        },
+        "#sai": {
+          "type": "number",
+          "base": 5285551943761727,
+          "exp": 0
+        },
+        "#usdc": {
+          "type": "number",
+          "base": 268860568,
+          "exp": 19
+        },
+        "#usdt": {
+          "type": "number",
+          "base": 268860568,
+          "exp": 19
+        },
+        "#wbtc": {
+          "type": "number",
+          "base": 308928019771,
+          "exp": 18
+        },
+        "#zrx": {
+          "type": "number",
+          "base": 104582,
+          "exp": 10
+        }
+      }
+    },
+    "address": "0x37ac0cb24b5DA520B653A5D94cFF26EB08d4Dc02",
+    "definition": "SimplePriceOracle",
+    "deployment": {
+      "block": 18751077,
+      "constructorData": "",
+      "contract": "SimplePriceOracle"
+    },
+    "verified": true
   }
 }
