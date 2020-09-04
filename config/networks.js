@@ -1,4 +1,48 @@
 
+// https://stackoverflow.com/a/34749873
+function isObject(item) {
+  return (item && typeof item === 'object' && !Array.isArray(item));
+}
+
+function mergeDeep(target, ...sources) {
+  if (!sources.length) return target;
+  const source = sources.shift();
+
+  if (isObject(target) && isObject(source)) {
+    for (const key in source) {
+      if (isObject(source[key])) {
+        if (!target[key]) Object.assign(target, { [key]: {} });
+        mergeDeep(target[key], source[key]);
+      } else {
+        Object.assign(target, { [key]: source[key] });
+      }
+    }
+  }
+
+  return mergeDeep(target, ...sources);
+}
+
+async function loadExtra(network) {
+  let baseDir = path.join('./network-extra', network);
+  let extras;
+  try {
+    extras = await fs.promises.readdir(baseDir);
+  } catch (e) {
+    extras = [];
+  }
+
+  return await extras.reduce(async (acc, extra) => {
+    try {
+      let contents = await fs.promises.readFile(path.join(baseDir, extra, 'network.json'), 'utf-8');
+      let json = JSON.parse(contents);
+      return mergeDeep(await acc, json);
+    } catch (e) {
+      console.log(`Error loading extra: ${extra}`, e);
+      return await acc;
+    }
+  }, {});
+}
+
 function asArray(arr) {
   return Array.isArray(arr) ? arr : [arr];
 }
@@ -95,8 +139,14 @@ function mapContracts(state, refMap, filter, map, singleton=false, allowMissing=
       r = refMap.hasOwnProperty(ref) ? refMap[ref] : ref;
     }
 
-    return [r, map(contract, ref)];
-  }).filter(([k, v]) => v !== null);
+    if (Array.isArray(r)) {
+      return r.map((rr) => {
+        return [rr, map(contract, ref)];
+      });
+    } else {
+      return [[r, map(contract, ref)]];
+    }
+  }).flat().filter(([k, v]) => v !== null);
 
   if (singleton) {
     if (mappedEntries.length !== 1) {
@@ -308,8 +358,13 @@ hook('state.save', async (state, {ethereum}) => {
       'InterestRateModel': interestRateModelJson
     };
 
+    let fullNetworksJson = mergeDeep(
+      networksJson,
+      await loadExtra(network)
+    );
+
     let networkFile = path.join(process.cwd(), 'networks', `${network}.json`);
-    await writeFile(networkFile, JSON.stringify(networksJson, null, 2));
+    await writeFile(networkFile, JSON.stringify(fullNetworksJson, null, 2));
 
     console.log(`Saved networks file: ${networkFile}`);
   }

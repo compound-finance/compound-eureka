@@ -35,3 +35,9 @@ Uniswap#uniswap [uniswap] {
 WETH#weth [weth] {
   address: "0xc778417e063141139fce010982780140aa0cd5ab"
 }
+
+CrowdProposalFactory [cap] {
+  comp: #comp
+  governor: #gov
+  stake_amount: 100.0e18
+}
