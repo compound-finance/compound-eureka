@@ -1797,5 +1797,32 @@
       "contract": "SimplePriceOracle"
     },
     "verified": true
+  },
+  "CrowdProposalFactory": {
+    "contract": "CrowdProposalFactory",
+    "version": "cap",
+    "properties": {
+      "stake_amount": {
+        "type": "number",
+        "base": 1000,
+        "exp": 17
+      },
+      "governor": {
+        "type": "ref",
+        "ref": "gov"
+      },
+      "comp": {
+        "type": "ref",
+        "ref": "comp"
+      }
+    },
+    "address": "0x2e81FB8221aa973B356cc6ecED967e329b671e7e",
+    "definition": "CrowdProposalFactory",
+    "deployment": {
+      "block": 8619371,
+      "constructorData": "0000000000000000000000001fe16de955718cfab7a44605458ab023838c279300000000000000000000000093acba9ecacec21bfa09b0c4650be3596713d7470000000000000000000000000000000000000000000000056bc75e2d63100000",
+      "contract": "CrowdProposalFactory"
+    },
+    "verified": true
   }
 }
