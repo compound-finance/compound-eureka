@@ -28686,7 +28686,7 @@
       "type": "function"
     }
   ],
-  "open_oracle": [
+  "PriceFeed": [
     {
       "inputs": [
         {
@@ -29491,7 +29491,7 @@
       "type": "function"
     }
   ],
-  "PriceFeed": [
+  "PriceOracleProxy,PriceOracle": [
     {
       "anonymous": false,
       "inputs": [

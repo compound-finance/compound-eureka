@@ -1,0 +1,13 @@
+{
+  "Contracts": {
+    "TemporaryComptroller": "0x4cc3cc0b761b4f5581af978dd3b2269a784ec03a"
+  },
+  "TemporaryComptroller": {
+    "address": "0x4cc3cc0b761b4f5581af978dd3b2269a784ec03a",
+    "contract": "Comptroller",
+    "description": "Comptroller That snuck in"
+  },
+  "Constructors": {
+    "TemporaryComptroller": "0x"
+  }
+}

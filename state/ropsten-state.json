@@ -1816,10 +1816,10 @@
         "ref": "comp"
       }
     },
-    "address": "0x2e81FB8221aa973B356cc6ecED967e329b671e7e",
+    "address": "0x4056d7f28929eaDB45BC6f4335e380FEFeB99408",
     "definition": "CrowdProposalFactory",
     "deployment": {
-      "block": 8619371,
+      "block": 8620528,
       "constructorData": "0000000000000000000000001fe16de955718cfab7a44605458ab023838c279300000000000000000000000093acba9ecacec21bfa09b0c4650be3596713d7470000000000000000000000000000000000000000000000056bc75e2d63100000",
       "contract": "CrowdProposalFactory"
     },

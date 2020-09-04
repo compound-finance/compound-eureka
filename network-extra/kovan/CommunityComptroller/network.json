@@ -1,0 +1,16 @@
+{
+  "Contracts": {
+    "CommunityComptroller": "0xA06058e40d6a6Dd0D5Dc4c6C394864BCA74d3002"
+  },
+  "Blocks": {
+    "CommunityComptroller": 19552094
+  },
+  "CommunityComptroller": {
+    "address": "0xA06058e40d6a6Dd0D5Dc4c6C394864BCA74d3002",
+    "contract": "ComptrollerKovan",
+    "description": "Comptroller Description"
+  },
+  "Constructors": {
+    "CommunityComptroller": "0x"
+  }
+}

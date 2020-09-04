@@ -2,7 +2,7 @@
   "fauceteer": "Fauceteer",
   "zrx": "ZRX",
   "cUSDC": "cUSDC",
-  "oracle": "PriceFeed",
+  "oracle": ["PriceOracleProxy", "PriceOracle"],
   "max": "Maximillion",
   "cDAI": "cDAI",
   "lens": "CompoundLens",
@@ -46,5 +46,6 @@
   "rep_eth": "Pair_REP_ETH",
   "bat_eth": "Pair_BAT_ETH",
   "eth_usdc": "Pair_ETH_USDC",
-  "price_data": "PriceData"
+  "price_data": "PriceData",
+  "open_oracle": "PriceFeed"
 }
