@@ -1,4 +1,28 @@
 
+async function loadExtraABI(network) {
+  let baseDir = path.join('./network-extra', network);
+  let extras;
+  try {
+    extras = await fs.promises.readdir(baseDir);
+  } catch (e) {
+    extras = [];
+  }
+
+  return await extras.reduce(async (acc, extra) => {
+    try {
+      let contents = await fs.promises.readFile(path.join(baseDir, extra, 'abi.json'), 'utf-8');
+      let json = JSON.parse(contents);
+      return {
+        ...await acc,
+        [extra]: json
+      };
+    } catch (e) {
+      // console.log(`Error loading extra: ${extra}`, e);
+      return await acc;
+    }
+  }, {});
+}
+
 hook('state.save', async (state) => {
   // We wrap this in a try since if it fails, we can always re-run with `refresh` command
   try {
@@ -70,15 +94,20 @@ hook('state.save', async (state) => {
       };
     }, {});
 
-    // Comptroller is special
-    let comptrollerImpl = refMap[state.comptroller.properties.implementation.ref];
-    abis.Comptroller = [
-      ...abis.Unitroller,
-      ...abis[comptrollerImpl] // Note: handle non-G3
+    let fullAbis = {
+      ...abis,
+      ...await loadExtraABI(network)
+    };
+
+    // Comptroller is special, use a hack right now
+    let comptrollerImpl = refMap[network] || refMap[state.comptroller.properties.implementation.ref];
+    fullAbis.Comptroller = [
+      ...fullAbis.Unitroller,
+      ...fullAbis[comptrollerImpl] // Note: handle non-G3
     ];
 
     let networkAbiFile = path.join(process.cwd(), 'networks', `${network}-abi.json`);
-    await writeFile(networkAbiFile, JSON.stringify(abis, null, 2));
+    await writeFile(networkAbiFile, JSON.stringify(fullAbis, null, 2));
 
     console.log(`Saved networks ABI file: ${networkAbiFile}`);
   } catch (e) {

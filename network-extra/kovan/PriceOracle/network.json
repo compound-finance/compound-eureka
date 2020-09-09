@@ -1,0 +1,12 @@
+{
+  "Contracts": {
+    "PriceOracle": "0x37ac0cb24b5DA520B653A5D94cFF26EB08d4Dc02"
+  },
+  "Blocks": {
+    "PriceOracle": 18751077
+  },
+  "PriceOracle": {
+    "description": "SimplePriceOracle",
+    "address": "0x37ac0cb24b5DA520B653A5D94cFF26EB08d4Dc02"
+  }
+}
