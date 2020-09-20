@@ -62,20 +62,21 @@ yarn eureka apply -n kovan -b ./.build -c config/*.js -e eureka/{compound,testne
 Ropsten Deploy:
 
 ```sh
-yarn eureka apply -n ropsten -b ./.build -c config/*.js -e eureka/{compound,testnet,testnet-gov,ropsten}.eureka
+yarn eureka apply -n ropsten -b ./.build -c config/*.js -e eureka/{compound,testnet-gov,ropsten,oracle-simple}.eureka
 ```
 
 Followed by a Second Eureka Change for G2:
 
 ```sh
-yarn eureka apply -n ropsten -b ./.build -c config/*.js -e eureka/{compound,testnet,testnet-gov,ropsten,2_ropsten,open-oracle}.eureka
+yarn eureka apply -n ropsten -b ./.build -c config/*.js -e eureka/{compound,testnet-gov,ropsten,2_ropsten,oracle-simple}.eureka
 ```
 
 Followed by a Governance Change:
 
 ```sh
-yarn eureka apply -n ropsten -b ./.build -c config/*.js -e eureka/{compound,testnet,testnet-gov,ropsten,4_ropsten,open-oracle,admin-timelock}.eureka
+yarn eureka apply -n ropsten -b ./.build -c config/*.js -e eureka/{compound,testnet-gov,ropsten,4_ropsten,oracle-simple,admin-timelock}.eureka
 ```
+
 
 Note: to verify a contract, e.g.
 

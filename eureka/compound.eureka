@@ -108,6 +108,26 @@ Erc20#knc [kyber] {
   }
 }
 
+// Main-net https://etherscan.io/token/0x1f9840a85d5af5bf1d1762f925bdaddc4201f984
+Erc20#uni [uni] {
+  type: "uni"
+  balances: {
+    #fauceteer: 1023179e18
+  }
+}
+
+// Main-net https://etherscan.io/token/0x1f9840a85d5af5bf1d1762f925bdaddc4201f984
+// Note: we're using a simple Erc-20 for Uni (specified otherwise by network)
+Erc20#uni [compound-test] {
+  name: "Uniswap"
+  symbol: "UNI"
+  decimals: 18
+  total_supply: 96866285e18
+  balances: {
+    #fauceteer: 1023179e18
+  }
+}
+
 // CToken Delegate
 CErc20Delegate#cErc20Delegate [b73e68c] {}
 
@@ -124,7 +144,6 @@ CToken#cBAT [b73e68c] {
   admin: $admin
 }
 
-// Note: we are not using real Dai here-- see dai.eureka for MCD
 CToken#cDAI [b73e68c] {
   type: "delegator"
   symbol: "cDAI"
@@ -219,6 +238,18 @@ CToken#cZRX [b73e68c] {
   admin: $admin
 }
 
+CToken#cUNI [b73e68c] {
+  type: "immutable"
+  symbol: "cUNI"
+  name: "Compound UNI"
+  underlying: #uni
+  initial_exchange_rate: 0.02e28
+  comptroller: #comptroller
+  delegate: #cErc20Delegate
+  interest_rate_model: #Base200bps_Slope3000bps
+  admin: $admin
+}
+
 // Maximillion
 Maximillion#max [b73e68c] {
   cEther: #cETH
@@ -246,7 +277,8 @@ Unitroller#comptroller [b73e68c] {
     #cUSDC,
     #cUSDT,
     #cWBTC,
-    #cZRX
+    #cZRX,
+    #cUNI
   ]
 
   collateral_factors: {

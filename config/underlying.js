@@ -331,3 +331,20 @@ define('Erc20', {
     return deployed;
   }
 });
+
+define('Erc20', {
+  contract: 'Uni',
+  match: {
+    properties: {
+      'uni': true
+    }
+  },
+  properties: {
+    uni: 'bool',
+    address: 'address',
+    name: 'string',
+    decimals: 'number',
+    symbol: 'string'
+  },
+  build: async ({existing}, contract, {address}) => existing(contract, address)
+});
