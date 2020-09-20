@@ -15,15 +15,6 @@ Erc20#dai [dai] ! {
   // Note: we need to manually send dai to Fauceteer
 }
 
-Erc20#uni [uni] ! {
-  uni: true
-  address: '0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984'
-  name: "Uniswap"
-  symbol: "UNI"
-  decimals: 18
-  // Note: we need to manually send dai to Fauceteer
-}
-
 // Build a G3 Comptroller
 Comptroller#g3 [compound-test-f9901f4] {
   network: 'ropsten'
