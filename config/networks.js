@@ -275,7 +275,7 @@ hook('state.save', async (state, {ethereum}) => {
     let tokensJson = mapContracts(
       state,
       (contract) => contract.properties.symbol,
-      ['Erc20', 'CToken', 'Comp'],
+      ['Erc20', 'CToken', 'Comp', 'Uni'],
       (contract) => tokenProperties(contract, state, accounts)
     );
     tokensJson.ETH = {
