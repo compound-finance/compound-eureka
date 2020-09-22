@@ -109,7 +109,8 @@ Erc20#knc [kyber] {
 }
 
 // Main-net https://etherscan.io/token/0x1f9840a85d5af5bf1d1762f925bdaddc4201f984
-Uni#uni [uni] {
+Erc20#uni [uni] {
+  type: "uni"
   name: "Uniswap"
   symbol: "UNI"
   decimals: 18
@@ -126,6 +127,9 @@ Uni#uni [uni] {
 
 // CToken Delegate
 CErc20Delegate#cErc20Delegate [b73e68c] {}
+
+// CToken Delegate
+CCompLikeDelegate#cCompLikeDelegate [429c9cd6] {}
 
 // CTokens
 CToken#cBAT [b73e68c] {
@@ -235,13 +239,13 @@ CToken#cZRX [b73e68c] {
 }
 
 CToken#cUNI [b73e68c] {
-  type: "immutable"
+  type: "delegator"
   symbol: "cUNI"
   name: "Compound UNI"
   underlying: #uni
   initial_exchange_rate: 0.02e28
   comptroller: #comptroller
-  delegate: #cErc20Delegate
+  delegate: #cCompLikeDelegate
   interest_rate_model: #Base200bps_Slope3000bps
   admin: $admin
 }

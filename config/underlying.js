@@ -333,8 +333,9 @@ define('Erc20', {
 });
 
 // Build UNI Token
-define('Uni', {
+define('Erc20', {
   match: {
+    type: 'uni',
     default: true
   },
   contract: 'Uni',
@@ -414,8 +415,9 @@ define('Uni', {
   }
 });
 
-define('Uni', {
+define('Erc20', {
   match: {
+    type: 'uni',
     has_properties: ['address']
   },
   contract: 'Uni',

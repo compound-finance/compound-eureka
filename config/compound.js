@@ -166,6 +166,11 @@ define('CErc20Delegate', {
   build: async ({deploy}, contract, props) => deploy(contract)
 });
 
+define('CCompLikeDelegate', {
+  contract: 'CCompLikeDelegate',
+  build: async ({deploy}, contract, props) => deploy(contract)
+});
+
 define('CToken', {
   match: {
     properties: {
