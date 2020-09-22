@@ -47,5 +47,6 @@
   "eth_usdc": "Pair_ETH_USDC",
   "price_data": "PriceData",
   "open_oracle": "PriceFeed",
-  "kovan": "CommunityComptroller"
+  "kovan": "CommunityComptroller",
+  "uni": "UNI"
 }
