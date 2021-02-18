@@ -11,9 +11,15 @@ backend({
 
 // Set a provider to use to talk to an Ethereum node
 // TODO: Handle other networks here
-let defaultProvider = () =>
-  network === 'development' ? 'http://localhost:8545'
-    : `https://${network}-eth.compound.finance`;
+let defaultProvider = () => {
+  if (network === 'development') {
+    return 'http://localhost:8545';
+  } else if (network === 'custom' && jsonrpc.length > 0) {
+    return jsonrpc;
+  } else {
+    return `https://${network}-eth.compound.finance`;
+  }
+}
 
 let defaultPk = () =>
   network === 'development' ? { unlocked: 0 }
