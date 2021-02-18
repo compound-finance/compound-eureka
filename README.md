@@ -93,6 +93,10 @@ etherscan=$ETHERSCAN_API_KEY provider=https://ropsten-eth.compound.finance pk=$e
 
 For `ropsten.eureka`, we override Dai's underlying with a token from the test-net itself.
 
+## Private Network Deployment
+
+The network flag can be set to `custom` for users that are trying to deploy to a private test network. When using a custom network, also use the `-jsonrpc` command or `-j` and provide the JSON RPC endpoint of the private network. Be sure to create a `custom` file in the `.ethereum` folder of the user's home folder. Eureka will look for the user's private keys there, similarly to the Saddle commands in the [Compound Protocol repository](https://github.com/compound-finance/compound-protocol).
+
 ## Debugging
 
 There's lots of bugs in Eureka still. The focus, as yet, is to make sure the ideas are sound before pushing the code to a higher-quality state. Be prepared to need patches.
