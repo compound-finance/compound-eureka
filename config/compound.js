@@ -33,7 +33,7 @@ provider(env('provider', defaultProvider), {
     gas: 6600000,
     gasPrice
   },
-  verificationOpts: network !== 'development' && env('etherscan') ? {
+  verificationOpts: network !== 'development' && network !== 'custom' && env('etherscan') ? {
     verify: true,
     etherscanApiKey: env('etherscan'),
     raiseOnError: false
