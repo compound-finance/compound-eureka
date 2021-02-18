@@ -10,7 +10,6 @@ backend({
 });
 
 // Set a provider to use to talk to an Ethereum node
-// TODO: Handle other networks here
 let defaultProvider = () => {
   if (network === 'development') {
     return 'http://localhost:8545';
