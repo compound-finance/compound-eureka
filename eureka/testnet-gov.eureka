@@ -16,9 +16,13 @@ Comp#comp [b73e68c] {
   decimals: 18
 
   balances: {
-    #fauceteer: 1.0e24, // 1MM tokens to Fauceteer
-    #reservoir: 4.0e24 // 4MM tokens to reservoir
-    // Rest (5MM) stay with $sender
+    0xB61C5971d9c0472befceFfbE662555B78284c307: 1.0e24,
+    0x3709fBb4eEAD497aD318874410Bf7bB8B34aFeAe: 1.0e24,
+    0x88FB3D509fC49B515BFEb04e23f53ba339563981: 1.0e24,
+    0xB819706e897eaCf235CdB5048962bD65873202C4: 1.0e24,
+    0x668b0C8cd61aF00d02a1b3543902b10bD19B18F4: 1.0e24,
+    #comptroller: 0.5e24,
+    // Rest (4.5MM) stay with $sender
   }
 
   delegates: {

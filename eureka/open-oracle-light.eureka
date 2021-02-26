@@ -57,17 +57,6 @@ UniswapPair#dai_eth [open-oracle] {
   price1Cumulative: 7896238934233498614134104494916528966463034n
 }
 
-UniswapPair#link_eth [open-oracle] {
-  mock: true
-  token0: #link
-  token1: #weth
-  reserve0: 169056878301840714797699n
-  reserve1: 3843029380153917989823n
-  blockTimestampLast: 1595963221n
-  price0Cumulative: 698206420907790342681419649298326511405n
-  price1Cumulative: 1525787102092508663102735066381109593673832n
-}
-
 UniswapPair#comp_eth [open-oracle] {
   mock: true
   token0: #comp
@@ -77,17 +66,6 @@ UniswapPair#comp_eth [open-oracle] {
   blockTimestampLast: 1595963228n
   price0Cumulative: 14918178478054531407143642319213849455623n
   price1Cumulative: 27956971240633323817491382420749936127829n
-}
-
-UniswapPair#eth_knc [open-oracle] {
-  mock: true
-  token0: #weth
-  token1: #knc
-  reserve0: 1843808162347109757100n
-  reserve1: 395982341371266838566135n
-  blockTimestampLast: 1595963221n
-  price0Cumulative: 7011640340623149057984615873832997580673784n
-  price1Cumulative: 160191544109398272936742310589015789817n
 }
 
 UniswapPair#eth_zrx [open-oracle] {
@@ -161,22 +139,6 @@ OpenOracle#open_oracle [open-oracle] {
      uniswapMarket: #eth_zrx,
      isUniswapReversed: true
     },
-     {
-     symbol: "LINK",
-     price_source: "REPORTER",
-     base_unit: 1e18,
-     underlying: #link,
-     uniswapMarket: #link_eth,
-     isUniswapReversed: false
-    },
-    {
-     symbol: "KNC",
-     price_source: "REPORTER",
-     base_unit: 1e18,
-     underlying: #knc,
-     uniswapMarket: #eth_knc,
-     isUniswapReversed: true
-    },
     {
      symbol: "COMP",
      price_source: "REPORTER",
@@ -210,8 +172,4 @@ OpenOracle#open_oracle [open-oracle] {
      fixed_price: 1.0e6
     }
   ]
-}
-
-Unitroller#comptroller [b73e68c] {
-  oracle: #open_oracle
 }

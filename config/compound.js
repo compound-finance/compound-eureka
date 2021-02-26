@@ -24,7 +24,7 @@ let defaultPk = () =>
   network === 'development' ? { unlocked: 0 }
     : { pk: fs.readFileSync(path.join(os.homedir(), '.ethereum', network), 'utf8') };
 
-let gasPrice = Math.floor(env('gas_price', 1.0) * 1000000000 /* 1 gwei */);
+let gasPrice = Math.floor(env('gas_price', 2.0) * 1000000000 /* 2 gwei */);
 
 provider(env('provider', defaultProvider), {
   sendOpts: {
@@ -437,6 +437,12 @@ define("Unitroller", {
           case 'g4':
             actions.push([comptroller, '_become(Unitroller unitroller)', { unitroller }, { canonical: '_become(address)' }]);
             break;
+          case 'g5':
+            actions.push([comptroller, '_become(Unitroller unitroller)', { unitroller }, { canonical: '_become(address)' }]);
+            break;
+          case 'g6':
+            actions.push([comptroller, '_become(Unitroller unitroller)', { unitroller }, { canonical: '_become(address)' }]);
+            break;
           default:
             throw new Error(`Unknown generation: \`${generation}\` for _become`);
         }
@@ -515,6 +521,34 @@ define("Unitroller", {
         } else {
           await gov(actor, unitroller, '_addCompMarkets(address[])', [newMarkets]);
         }
+      }
+    },
+    comp_speeds: {
+      order: 2,
+      dictionary: {
+        key: 'ref',
+        value: 'number'
+      },
+      deferred: true,
+      setter: async (actor, unitroller, compSpeeds) => {
+        let {read, show, trx, bn} = actor;
+        return await Object.entries(compSpeeds).reduce(async (acc, [market, compSpeed]) => {
+          await acc; // Force ordering
+
+          // TODO: Better handle proxy
+          let compSpeedCurr = await read(unitroller, 'compSpeeds', [market], { proxy: 'Comptroller' });
+
+          // TODO: How do we compare these numbers? These base/exp numbers are getting in the way of being helpful...
+          // Since now we really have 3-4 ways to represent numbers
+
+          let current = bn(compSpeedCurr);
+          let expected = bn(compSpeed);
+          if (!current.eq(expected)) {
+            return await gov(actor, unitroller, '_setCompSpeed(address,uint)', [market, expected], { proxy: 'Comptroller' });
+          } else {
+            console.log(`Market ${show(market)} already has correct comp speed`);
+          }
+        }, Promise.resolve(null));
       }
     },
     admin: {

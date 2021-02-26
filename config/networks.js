@@ -98,6 +98,8 @@ function mapContracts(state, refMap, filter, map, singleton=false, allowMissing=
     return [r, map(contract, ref)];
   }).filter(([k, v]) => v !== null);
 
+  console.log({mappedEntries})
+
   if (singleton) {
     if (mappedEntries.length !== 1) {
       if (allowMissing && mappedEntries.length === 0) {
@@ -133,6 +135,7 @@ hook('state.save', async (state, {ethereum}) => {
     // TODO: Handle imports like test-net DAI
     let contractsJson = mapContracts(state, refMap, null, ({address}) => address, false, false, true);
     contractsJson.Comptroller = contractsJson.Unitroller; // Comptroller is special
+    contractsJson.PriceOracleProxy = contractsJson.PriceFeed; // PriceFeed is special
     contractsJson = {
       ...contractsJson,
       ...fixed

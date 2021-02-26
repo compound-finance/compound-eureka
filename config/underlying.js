@@ -43,6 +43,10 @@ define('Erc20', {
     symbol: {
       type: 'string',
       getter: ({read}, contract, props) => read(contract, 'symbol')
+    },
+    decimals: {
+      type: 'string',
+      getter: ({read}, contract, props) => read(contract, 'decimals')
     }
   },
   build: async ({existing}, contract, props) => existing(contract, props.address)

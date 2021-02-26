@@ -62,7 +62,7 @@ yarn eureka apply -n kovan -b ./.build -c config/*.js -e eureka/{compound,testne
 Ropsten Deploy:
 
 ```sh
-yarn eureka apply -n ropsten -b ./.build -c config/*.js -e eureka/{compound,testnet,testnet-gov,ropsten}.eureka
+yarn eureka apply -n ropsten -b ./.build -c config/*.js -e eureka/{compound,testnet,testnet-gov,open-oracle-light,ropsten}.eureka
 ```
 
 Followed by a Second Eureka Change for G2:

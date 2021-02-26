@@ -1,29 +1,89 @@
 
 Governor#gov [compound-test] {
   harness: true
-  fast: true
   comp: #comp
   timelock: #timelock
 }
 
-// Build a G3 Comptroller
-Comptroller#g3 [compound-test-f9901f4] {
+Comptroller#g4 [compound-test-96370c1] {
   network: 'ropsten'
 }
 
-Unitroller#comptroller [b73e68c] {
-  implementation: #g1
-  generation: "g1"
+// Use G6 Comptroller
+Comptroller#g6 [compound-g6] {
+  network: 'ropsten'
 }
 
-// Offical Comp on Ropsten
-Comp#comp [b73e68c] ! {
-  name: "Comp"
-  symbol: "COMP"
-  decimals: 18
+// Represents the on-chain state change to G7
+Unitroller#comptroller [compound-g6] {
+  implementation: #g6
+  generation: "g6"
 
-  address: "0x1fe16de955718cfab7a44605458ab023838c2793"
-  block: 7404113
+  supported_markets: [
+    #cBAT,
+    #cDAI,
+    #cREP,
+    #cSAI,
+    #cETH,
+    #cUSDC,
+    #cUSDT,
+    #cWBTC,
+    #cZRX,
+    #cCOMP,
+    #cUNI
+  ]
+
+  comp_speeds: {
+    #cBAT: 0.0001e18,
+    #cDAI: 0.01e18,
+    #cREP: 0,
+    #cSAI: 0,
+    #cETH: 0.01e18,
+    #cUSDC: 0.01e18,
+    #cUSDT: 0.01e18,
+    #cWBTC: 0.01e18,
+    #cZRX: 0.0001e18,
+    #cCOMP: 0.01e18,
+    #cUNI: 0.0001e18
+  }
+}
+
+Erc20#bat [compound-test] ! {
+  address: "0x50390975d942e83d661d4bde43bf73b0ef27b426"
+  decimals: 18
+  symbol: "BAT"
+  name: "Basic Attention Token"
+}
+
+Erc20#uni [compound-test] ! {
+  address: "0xc8f88977e21630cf93c02d02d9e8812ff0dfc37a"
+  decimals: 18
+  symbol: "UNI"
+  name: "Uniswap"
+}
+
+Erc20#usdc [compound-test] ! {
+  address: "0x07865c6e87b9f70255377e024ace6630c1eaa37f"
+  decimals: 6
+  symbol: "USDC"
+  name: "USD Coin"
+}
+
+Erc20#zrx [compound-test] ! {
+  address: "0xc0e2d7d9279846b80eacdea57220ab2333bc049d"
+  decimals: 18
+  symbol: "ZRX"
+  name: "0x Protocol"
+}
+
+// Addresses from here: https://changelog.makerdao.com/
+Erc20#dai [dai] ! {
+  dai: true
+  address: '0x31F42841c2db5173425b5223809CF3A38FEde360'
+  name: "Dai Stablecoin"
+  symbol: "DAI"
+  decimals: 18
+  // Note: we need to manually send dai to Fauceteer
 }
 
 Uniswap#uniswap [uniswap] {
@@ -34,4 +94,28 @@ Uniswap#uniswap [uniswap] {
 
 WETH#weth [weth] {
   address: "0xc778417e063141139fce010982780140aa0cd5ab"
+}
+
+CToken#cCOMP [b73e68c] {
+  type: "delegator"
+  symbol: "cCOMP"
+  name: "Compound COMP"
+  underlying: #comp
+  initial_exchange_rate: 0.02e28
+  comptroller: #comptroller
+  delegate: #cErc20Delegate
+  interest_rate_model: #Base200bps_Slope3000bps
+  admin: $admin
+}
+
+CToken#cUNI [b73e68c] {
+  type: "delegator"
+  symbol: "cUNI"
+  name: "Compound Uniswap"
+  underlying: #uni
+  initial_exchange_rate: 0.02e28
+  comptroller: #comptroller
+  delegate: #cErc20Delegate
+  interest_rate_model: #Base200bps_Slope3000bps
+  admin: $admin
 }

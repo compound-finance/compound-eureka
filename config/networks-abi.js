@@ -55,6 +55,10 @@ hook('state.save', async (state) => {
         return acc; // Nothing to do here if we don't have a deployment
       }
 
+      if (deployedContract === 'Erc20') {
+        deployedContract = 'ERC20';
+      }
+
       let abi = version[deployedContract];
       if (!abi) {
         if (deployedContract === 'UniswapV2Pair') {
